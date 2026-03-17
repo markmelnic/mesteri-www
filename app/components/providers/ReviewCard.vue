@@ -12,7 +12,7 @@
     </div>
     <p class="text-sm text-gray-600 leading-relaxed">{{ review.text }}</p>
     <div v-if="review.reply" class="mt-3 pl-4 border-l-2 border-blue-200">
-      <p class="text-xs font-medium text-blue-600 mb-1">Răspuns meșter:</p>
+      <p class="text-xs font-medium text-blue-600 mb-1">{{ $t('reviews.providerReply') }}</p>
       <p class="text-sm text-gray-600">{{ review.reply }}</p>
     </div>
   </div>
@@ -23,7 +23,10 @@ import type { Review } from '~/data/reviews'
 
 defineProps<{ review: Review }>()
 
+const { locale } = useI18n()
+
 function formatDate(date: string) {
-  return new Date(date).toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' })
+  const loc = locale.value === 'ru' ? 'ru-RU' : locale.value === 'en' ? 'en-US' : 'ro-RO'
+  return new Date(date).toLocaleDateString(loc, { day: 'numeric', month: 'long', year: 'numeric' })
 }
 </script>

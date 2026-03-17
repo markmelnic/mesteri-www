@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="flex items-center justify-between mb-6">
-      <h1 class="text-2xl font-bold text-gray-900" style="font-family: 'Plus Jakarta Sans', sans-serif;">Cererile mele</h1>
-      <UButton to="/cerere-noua" color="primary" icon="i-heroicons-plus">Cerere nouă</UButton>
+      <h1 class="text-2xl font-bold text-gray-900">{{ $t('clientRequests.title') }}</h1>
+      <UButton to="/cerere-noua" color="primary" icon="i-heroicons-plus">{{ $t('clientRequests.newRequest') }}</UButton>
     </div>
 
     <div v-if="myRequests.length > 0" class="space-y-4">
@@ -37,7 +37,7 @@
 
         <!-- Offers -->
         <div v-if="req.offers.length > 0" class="mt-4 pt-4 border-t border-gray-100">
-          <p class="text-sm font-medium text-gray-700 mb-3">{{ req.offers.length }} ofertă(e) primită(e):</p>
+          <p class="text-sm font-medium text-gray-700 mb-3">{{ req.offers.length }} {{ $t('clientRequests.offersReceived') }}</p>
           <div class="space-y-2">
             <div v-for="offer in req.offers" :key="offer.id" class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
               <div>
@@ -46,7 +46,7 @@
               </div>
               <div class="text-right">
                 <p class="font-semibold text-gray-900">{{ offer.price }} MDL</p>
-                <p class="text-xs text-gray-500">~{{ offer.estimatedDays }} zile</p>
+                <p class="text-xs text-gray-500">~{{ offer.estimatedDays }} {{ $t('clientRequests.days') }}</p>
               </div>
             </div>
           </div>
@@ -57,9 +57,9 @@
     <SharedEmptyState
       v-else
       icon="i-heroicons-clipboard-document-list"
-      title="Nu ai cereri încă"
-      description="Creează prima ta cerere și primește oferte de la meșteri."
-      action-label="Cerere nouă"
+      :title="$t('clientRequests.noRequests')"
+      :description="$t('clientRequests.noRequestsDesc')"
+      :action-label="$t('clientRequests.newRequest')"
       action-to="/cerere-noua"
     />
   </div>
@@ -68,8 +68,9 @@
 <script setup lang="ts">
 import { categories } from '~/data/categories'
 
+const { t, locale } = useI18n()
 definePageMeta({ layout: 'dashboard', middleware: ['role'] })
-useHead({ title: 'Cererile mele — mesteri.md' })
+useHead({ title: t('clientRequests.pageTitle') })
 
 const { user } = useAuth()
 const { getMyRequests } = useRequests()
@@ -82,10 +83,10 @@ function getCategoryName(slug: string) {
 
 function statusLabel(status: string) {
   const map: Record<string, string> = {
-    new: 'Nouă',
-    offers_received: 'Oferte primite',
-    in_progress: 'În lucru',
-    completed: 'Finalizată'
+    new: t('clientRequests.statusNew'),
+    offers_received: t('clientRequests.statusOffers'),
+    in_progress: t('clientRequests.statusInProgress'),
+    completed: t('clientRequests.statusCompleted')
   }
   return map[status] || status
 }
@@ -101,6 +102,7 @@ function statusColor(status: string) {
 }
 
 function formatDate(date: string) {
-  return new Date(date).toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' })
+  const loc = locale.value === 'ru' ? 'ru-RU' : locale.value === 'en' ? 'en-US' : 'ro-RO'
+  return new Date(date).toLocaleDateString(loc, { day: 'numeric', month: 'long', year: 'numeric' })
 }
 </script>

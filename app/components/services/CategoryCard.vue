@@ -4,7 +4,7 @@
       <div class="text-4xl mb-3">{{ category.icon }}</div>
       <h3 class="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors mb-1">{{ category.name }}</h3>
       <p v-if="showDescription" class="text-sm text-gray-500 mb-2 line-clamp-2">{{ category.description }}</p>
-      <p class="text-xs text-gray-400">{{ category.providerCount }} meșteri</p>
+      <p class="text-xs text-gray-400">{{ category.providerCount }} {{ $t('categories.providers') }}</p>
     </div>
   </NuxtLink>
 </template>

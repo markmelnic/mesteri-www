@@ -9,6 +9,7 @@
 </template>
 
 <script setup lang="ts">
+const { t } = useI18n()
 const props = defineProps<{ providerId: string }>()
 
 const { toggleFavorite, isFavorite } = useFavorites()
@@ -19,7 +20,7 @@ const isFav = computed(() => isFavorite(props.providerId))
 function toggle() {
   toggleFavorite(props.providerId)
   toast.add({
-    title: isFav.value ? 'Adăugat la favorite' : 'Eliminat din favorite',
+    title: isFav.value ? t('favorites.added') : t('favorites.removed'),
     icon: isFav.value ? 'i-heroicons-heart-solid' : 'i-heroicons-heart',
     color: isFav.value ? 'error' : 'neutral'
   })

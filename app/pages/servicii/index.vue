@@ -1,16 +1,16 @@
 <template>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-    <UBreadcrumb :items="[{ label: 'Acasă', to: '/' }, { label: 'Servicii' }]" class="mb-6" />
+    <UBreadcrumb :items="[{ label: $t('breadcrumb.home'), to: '/' }, { label: $t('breadcrumb.services') }]" class="mb-6" />
 
-    <h1 class="text-3xl font-bold text-gray-900 mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">
-      Toate categoriile de servicii
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">
+      {{ $t('servicesPage.title') }}
     </h1>
-    <p class="text-gray-500 mb-8">Găsește categoria de servicii de care ai nevoie</p>
+    <p class="text-gray-500 mb-8">{{ $t('servicesPage.subtitle') }}</p>
 
     <div class="mb-8">
       <UInput
         v-model="search"
-        placeholder="Caută o categorie..."
+        :placeholder="$t('search.searchCategory')"
         icon="i-heroicons-magnifying-glass"
         size="lg"
         class="max-w-md"
@@ -29,8 +29,8 @@
     <SharedEmptyState
       v-if="filtered.length === 0"
       icon="i-heroicons-magnifying-glass"
-      title="Nicio categorie găsită"
-      description="Încearcă un alt termen de căutare."
+      :title="$t('categories.notFound')"
+      :description="$t('categories.notFoundDesc')"
     />
 
     <SharedBackToTop />
@@ -40,7 +40,8 @@
 <script setup lang="ts">
 import { categories } from '~/data/categories'
 
-useHead({ title: 'Categorii de servicii — mesteri.md' })
+const { t } = useI18n()
+useHead({ title: `${t('servicesPage.title')} — mesteri.md` })
 
 const route = useRoute()
 const search = ref((route.query.q as string) || '')

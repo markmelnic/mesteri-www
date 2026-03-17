@@ -1,8 +1,8 @@
 <template>
   <section class="py-16 lg:py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-8" style="font-family: 'Plus Jakarta Sans', sans-serif;">
-        Categorii populare
+      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">
+        {{ $t('categories.title') }}
       </h2>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         <ServicesCategoryCard
@@ -13,7 +13,7 @@
       </div>
       <div class="text-center mt-8">
         <UButton to="/servicii" variant="ghost" color="primary" trailing-icon="i-heroicons-arrow-right">
-          Vezi toate categoriile
+          {{ $t('categories.viewAll') }}
         </UButton>
       </div>
     </div>

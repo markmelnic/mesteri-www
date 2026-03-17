@@ -1,8 +1,8 @@
 <template>
   <section class="py-16 lg:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-12" style="font-family: 'Plus Jakarta Sans', sans-serif;">
-        Cum funcționează?
+      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-12">
+        {{ $t('howItWorks.title') }}
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
         <div v-for="(step, i) in steps" :key="i" class="text-center">
@@ -21,21 +21,23 @@
 </template>
 
 <script setup lang="ts">
-const steps = [
+const { t } = useI18n()
+
+const steps = computed(() => [
   {
     icon: 'i-heroicons-clipboard-document-list',
-    title: 'Descrie lucrarea',
-    description: 'Spune-ne ce lucrare ai nevoie și vom găsi meșterii potriviți pentru tine.'
+    title: t('howItWorks.step1Title'),
+    description: t('howItWorks.step1Desc')
   },
   {
     icon: 'i-heroicons-inbox',
-    title: 'Primește oferte',
-    description: 'Meșterii verificați îți vor trimite oferte personalizate cu prețuri și termene.'
+    title: t('howItWorks.step2Title'),
+    description: t('howItWorks.step2Desc')
   },
   {
     icon: 'i-heroicons-star',
-    title: 'Alege meșterul',
-    description: 'Compară ofertele, citește recenziile și alege meșterul care ți se potrivește cel mai bine.'
+    title: t('howItWorks.step3Title'),
+    description: t('howItWorks.step3Desc')
   }
-]
+])
 </script>

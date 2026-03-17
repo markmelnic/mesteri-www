@@ -1,14 +1,14 @@
 <template>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-    <UBreadcrumb :items="[{ label: 'Acasă', to: '/' }, { label: 'Despre noi' }]" class="mb-6" />
+    <UBreadcrumb :items="[{ label: $t('breadcrumb.home'), to: '/' }, { label: $t('breadcrumb.about') }]" class="mb-6" />
 
     <!-- Hero -->
     <div class="text-center py-12">
-      <h1 class="text-4xl font-bold text-gray-900 mb-4" style="font-family: 'Plus Jakarta Sans', sans-serif;">
-        Despre mesteri.md
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">
+        {{ $t('about.title') }}
       </h1>
       <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-        Misiunea noastră este să conectăm proprietarii de case din Moldova cu cei mai buni meșteri și profesioniști în servicii pentru locuințe.
+        {{ $t('about.subtitle') }}
       </p>
     </div>
 
@@ -25,8 +25,8 @@
 
     <!-- Team -->
     <div class="text-center mb-16">
-      <h2 class="text-2xl font-bold text-gray-900 mb-8" style="font-family: 'Plus Jakarta Sans', sans-serif;">
-        Echipa noastră
+      <h2 class="text-2xl font-bold text-gray-900 mb-8">
+        {{ $t('about.teamTitle') }}
       </h2>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
         <div v-for="member in team" :key="member.name" class="text-center">
@@ -40,18 +40,19 @@
 </template>
 
 <script setup lang="ts">
-useHead({ title: 'Despre noi — mesteri.md' })
+const { t } = useI18n()
+useHead({ title: t('about.pageTitle') })
 
-const values = [
-  { icon: 'i-heroicons-shield-check', title: 'Meșteri verificați', description: 'Fiecare meșter trece printr-un proces de verificare riguros.' },
-  { icon: 'i-heroicons-currency-dollar', title: 'Prețuri transparente', description: 'Prețuri clare și corecte, fără costuri ascunse.' },
-  { icon: 'i-heroicons-star', title: 'Recenzii reale', description: 'Recenzii autentice de la clienți verificați.' },
-  { icon: 'i-heroicons-bolt', title: 'Răspuns rapid', description: 'Primești oferte de la meșteri în mai puțin de 24 de ore.' }
-]
+const values = computed(() => [
+  { icon: 'i-heroicons-shield-check', title: t('about.verifiedProviders'), description: t('about.verifiedProvidersDesc') },
+  { icon: 'i-heroicons-currency-dollar', title: t('about.transparentPricing'), description: t('about.transparentPricingDesc') },
+  { icon: 'i-heroicons-star', title: t('about.realReviews'), description: t('about.realReviewsDesc') },
+  { icon: 'i-heroicons-bolt', title: t('about.fastResponse'), description: t('about.fastResponseDesc') }
+])
 
-const team = [
-  { name: 'Andrei Lungu', role: 'Fondator & CEO', avatar: 'https://i.pravatar.cc/150?img=55' },
-  { name: 'Elena Moraru', role: 'Director Operațiuni', avatar: 'https://i.pravatar.cc/150?img=56' },
-  { name: 'Victor Cebotari', role: 'Director Tehnologie', avatar: 'https://i.pravatar.cc/150?img=57' }
-]
+const team = computed(() => [
+  { name: 'Andrei Lungu', role: t('about.role1'), avatar: 'https://i.pravatar.cc/150?img=55' },
+  { name: 'Elena Moraru', role: t('about.role2'), avatar: 'https://i.pravatar.cc/150?img=56' },
+  { name: 'Victor Cebotari', role: t('about.role3'), avatar: 'https://i.pravatar.cc/150?img=57' }
+])
 </script>

@@ -24,7 +24,7 @@
       <p class="text-sm text-gray-600 line-clamp-2">{{ provider.bio }}</p>
       <div class="mt-4 pt-4 border-t border-gray-50 flex items-center justify-between">
         <span class="text-sm font-medium text-gray-700">{{ provider.priceRange }}</span>
-        <span class="text-sm text-blue-600 font-medium group-hover:underline">Vezi profil →</span>
+        <span class="text-sm text-blue-600 font-medium group-hover:underline">{{ $t('providerCard.viewProfile') }}</span>
       </div>
     </div>
   </NuxtLink>

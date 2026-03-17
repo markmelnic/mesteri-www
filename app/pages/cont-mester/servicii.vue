@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="flex items-center justify-between mb-6">
-      <h1 class="text-2xl font-bold text-gray-900" style="font-family: 'Plus Jakarta Sans', sans-serif;">Serviciile mele</h1>
-      <UButton color="primary" icon="i-heroicons-plus" @click="modalOpen = true">Adaugă serviciu</UButton>
+      <h1 class="text-2xl font-bold text-gray-900">{{ $t('providerDashboard.servicesTitle') }}</h1>
+      <UButton color="primary" icon="i-heroicons-plus" @click="modalOpen = true">{{ $t('providerDashboard.addService') }}</UButton>
     </div>
 
     <div v-if="services.length > 0" class="space-y-4">
@@ -16,7 +16,7 @@
             </p>
           </div>
           <div class="flex items-center gap-2">
-            <UBadge color="success" variant="subtle">Activ</UBadge>
+            <UBadge color="success" variant="subtle">{{ $t('providerDashboard.active') }}</UBadge>
             <UButton variant="ghost" size="xs" icon="i-heroicons-pencil-square" />
             <UButton variant="ghost" size="xs" icon="i-heroicons-trash" color="error" />
           </div>
@@ -27,33 +27,33 @@
     <SharedEmptyState
       v-else
       icon="i-heroicons-wrench-screwdriver"
-      title="Nu ai servicii adăugate"
-      description="Adaugă serviciile pe care le oferi pentru a fi vizibil pentru clienți."
+      :title="$t('providerDashboard.noServices')"
+      :description="$t('providerDashboard.noServicesDesc')"
     />
 
     <!-- Add Service Modal -->
     <UModal v-model:open="modalOpen">
       <template #content>
         <div class="p-6">
-          <h3 class="text-lg font-semibold text-gray-900 mb-4">Adaugă serviciu nou</h3>
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ $t('providerDashboard.addServiceModal') }}</h3>
           <form class="space-y-4" @submit.prevent="addService">
-            <UFormField label="Nume serviciu">
-              <UInput v-model="newService.name" placeholder="Ex: Montaj aer condiționat" />
+            <UFormField :label="$t('providerDashboard.serviceName')">
+              <UInput v-model="newService.name" :placeholder="$t('providerDashboard.serviceNamePlaceholder')" />
             </UFormField>
-            <UFormField label="Descriere">
-              <UTextarea v-model="newService.description" placeholder="Descrie serviciul..." :rows="3" />
+            <UFormField :label="$t('providerDashboard.description')">
+              <UTextarea v-model="newService.description" :placeholder="$t('providerDashboard.descriptionPlaceholder')" :rows="3" />
             </UFormField>
             <div class="grid grid-cols-2 gap-4">
-              <UFormField label="Preț de la (MDL)">
+              <UFormField :label="$t('providerDashboard.priceFrom')">
                 <UInput v-model.number="newService.priceFrom" type="number" />
               </UFormField>
-              <UFormField label="Preț până la (MDL)">
+              <UFormField :label="$t('providerDashboard.priceTo')">
                 <UInput v-model.number="newService.priceTo" type="number" />
               </UFormField>
             </div>
             <div class="flex justify-end gap-3">
-              <UButton variant="ghost" color="neutral" @click="modalOpen = false">Anulează</UButton>
-              <UButton type="submit" color="primary">Adaugă</UButton>
+              <UButton variant="ghost" color="neutral" @click="modalOpen = false">{{ $t('providerDashboard.cancel') }}</UButton>
+              <UButton type="submit" color="primary">{{ $t('providerDashboard.add') }}</UButton>
             </div>
           </form>
         </div>
@@ -66,8 +66,9 @@
 import { providers } from '~/data/providers'
 import type { Service } from '~/data/providers'
 
+const { t } = useI18n()
 definePageMeta({ layout: 'dashboard', middleware: ['role'] })
-useHead({ title: 'Serviciile mele — mesteri.md' })
+useHead({ title: t('providerDashboard.servicesPageTitle') })
 
 const { user } = useAuth()
 const toast = useToast()
@@ -88,6 +89,6 @@ function addService() {
   })
   modalOpen.value = false
   Object.assign(newService, { name: '', description: '', priceFrom: 0, priceTo: 0 })
-  toast.add({ title: 'Serviciu adăugat!', icon: 'i-heroicons-check-circle', color: 'success' })
+  toast.add({ title: t('providerDashboard.serviceAdded'), icon: 'i-heroicons-check-circle', color: 'success' })
 }
 </script>

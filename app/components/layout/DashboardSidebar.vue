@@ -7,7 +7,7 @@
           <UAvatar :src="user?.avatar" :alt="user?.name" size="lg" />
           <div>
             <p class="font-semibold text-gray-900">{{ user?.name }}</p>
-            <p class="text-sm text-gray-500">{{ isProvider ? 'Meșter' : 'Client' }}</p>
+            <p class="text-sm text-gray-500">{{ isProvider ? $t('dashboard.provider') : $t('dashboard.client') }}</p>
           </div>
         </div>
         <nav class="space-y-1">
@@ -25,7 +25,7 @@
       </div>
       <div class="mt-auto p-6 border-t border-gray-100">
         <UButton variant="ghost" color="neutral" block class="justify-start" icon="i-heroicons-arrow-right-on-rectangle" @click="handleLogout">
-          Deconectare
+          {{ $t('nav.logout') }}
         </UButton>
       </div>
     </aside>
@@ -49,25 +49,26 @@
 </template>
 
 <script setup lang="ts">
+const { t } = useI18n()
 const { user, isProvider, logout } = useAuth()
 const router = useRouter()
 
-const clientMenu = [
-  { label: 'Profil', shortLabel: 'Profil', to: '/cont/profil', icon: 'i-heroicons-user-circle' },
-  { label: 'Cererile mele', shortLabel: 'Cereri', to: '/cont/cereri', icon: 'i-heroicons-clipboard-document-list' },
-  { label: 'Favorite', shortLabel: 'Favorite', to: '/cont/favorite', icon: 'i-heroicons-heart' },
-  { label: 'Recenzii', shortLabel: 'Recenzii', to: '/cont/recenzii', icon: 'i-heroicons-star' }
-]
+const clientMenu = computed(() => [
+  { label: t('dashboard.profile'), shortLabel: t('dashboard.profile'), to: '/cont/profil', icon: 'i-heroicons-user-circle' },
+  { label: t('dashboard.myRequests'), shortLabel: t('dashboard.requests'), to: '/cont/cereri', icon: 'i-heroicons-clipboard-document-list' },
+  { label: t('dashboard.favorites'), shortLabel: t('dashboard.favorites'), to: '/cont/favorite', icon: 'i-heroicons-heart' },
+  { label: t('dashboard.myReviews'), shortLabel: t('dashboard.myReviews'), to: '/cont/recenzii', icon: 'i-heroicons-star' }
+])
 
-const providerMenu = [
-  { label: 'Profil', shortLabel: 'Profil', to: '/cont-mester/profil', icon: 'i-heroicons-user-circle' },
-  { label: 'Servicii', shortLabel: 'Servicii', to: '/cont-mester/servicii', icon: 'i-heroicons-wrench-screwdriver' },
-  { label: 'Cereri', shortLabel: 'Cereri', to: '/cont-mester/cereri', icon: 'i-heroicons-inbox' },
-  { label: 'Portofoliu', shortLabel: 'Portofoliu', to: '/cont-mester/portofoliu', icon: 'i-heroicons-photo' },
-  { label: 'Recenzii', shortLabel: 'Recenzii', to: '/cont-mester/recenzii', icon: 'i-heroicons-star' }
-]
+const providerMenu = computed(() => [
+  { label: t('dashboard.profile'), shortLabel: t('dashboard.profile'), to: '/cont-mester/profil', icon: 'i-heroicons-user-circle' },
+  { label: t('dashboard.services'), shortLabel: t('dashboard.services'), to: '/cont-mester/servicii', icon: 'i-heroicons-wrench-screwdriver' },
+  { label: t('dashboard.requests'), shortLabel: t('dashboard.requests'), to: '/cont-mester/cereri', icon: 'i-heroicons-inbox' },
+  { label: t('dashboard.portfolio'), shortLabel: t('dashboard.portfolio'), to: '/cont-mester/portofoliu', icon: 'i-heroicons-photo' },
+  { label: t('dashboard.myReviews'), shortLabel: t('dashboard.myReviews'), to: '/cont-mester/recenzii', icon: 'i-heroicons-star' }
+])
 
-const menuItems = computed(() => isProvider.value ? providerMenu : clientMenu)
+const menuItems = computed(() => isProvider.value ? providerMenu.value : clientMenu.value)
 
 function handleLogout() {
   logout()

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-2xl font-bold text-gray-900 mb-6" style="font-family: 'Plus Jakarta Sans', sans-serif;">Meșteri favoriți</h1>
+    <h1 class="text-2xl font-bold text-gray-900 mb-6">{{ $t('clientFavorites.title') }}</h1>
 
     <div v-if="favoriteProviders.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <ProvidersProviderCard
@@ -13,9 +13,9 @@
     <SharedEmptyState
       v-else
       icon="i-heroicons-heart"
-      title="Nu ai meșteri favoriți încă"
-      description="Explorează categoriile și adaugă meșteri la favorite pentru a-i găsi mai ușor."
-      action-label="Explorează categoriile"
+      :title="$t('clientFavorites.noFavorites')"
+      :description="$t('clientFavorites.noFavoritesDesc')"
+      :action-label="$t('clientFavorites.exploreCategories')"
       action-to="/servicii"
     />
   </div>
@@ -24,8 +24,9 @@
 <script setup lang="ts">
 import { providers } from '~/data/providers'
 
+const { t } = useI18n()
 definePageMeta({ layout: 'dashboard', middleware: ['role'] })
-useHead({ title: 'Favorite — mesteri.md' })
+useHead({ title: t('clientFavorites.pageTitle') })
 
 const { favorites } = useFavorites()
 

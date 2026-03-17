@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="flex items-center justify-between mb-6">
-      <h1 class="text-2xl font-bold text-gray-900" style="font-family: 'Plus Jakarta Sans', sans-serif;">Portofoliu</h1>
-      <UButton color="primary" icon="i-heroicons-plus" @click="modalOpen = true">Adaugă proiect</UButton>
+      <h1 class="text-2xl font-bold text-gray-900">{{ $t('providerDashboard.portfolioTitle') }}</h1>
+      <UButton color="primary" icon="i-heroicons-plus" @click="modalOpen = true">{{ $t('providerDashboard.addProject') }}</UButton>
     </div>
 
     <div v-if="portfolioItems.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -23,29 +23,29 @@
     <SharedEmptyState
       v-else
       icon="i-heroicons-photo"
-      title="Portofoliul tău este gol"
-      description="Adaugă proiecte finalizate pentru a atrage mai mulți clienți."
+      :title="$t('providerDashboard.emptyPortfolio')"
+      :description="$t('providerDashboard.emptyPortfolioDesc')"
     />
 
     <UModal v-model:open="modalOpen">
       <template #content>
         <div class="p-6">
-          <h3 class="text-lg font-semibold text-gray-900 mb-4">Adaugă proiect</h3>
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ $t('providerDashboard.addProjectModal') }}</h3>
           <form class="space-y-4" @submit.prevent="addProject">
             <div class="border-2 border-dashed border-gray-200 rounded-lg p-8 text-center">
               <UIcon name="i-heroicons-photo" class="w-8 h-8 text-gray-400 mx-auto mb-2" />
-              <p class="text-sm text-gray-500">Încarcă o fotografie</p>
-              <p class="text-xs text-gray-400 mt-1">Funcționalitate demo</p>
+              <p class="text-sm text-gray-500">{{ $t('providerDashboard.uploadPhoto') }}</p>
+              <p class="text-xs text-gray-400 mt-1">{{ $t('providerDashboard.demoFeature') }}</p>
             </div>
-            <UFormField label="Descriere">
-              <UInput v-model="newProject.caption" placeholder="Descrie proiectul..." />
+            <UFormField :label="$t('providerDashboard.projectCaption')">
+              <UInput v-model="newProject.caption" :placeholder="$t('providerDashboard.captionPlaceholder')" />
             </UFormField>
-            <UFormField label="Categorie">
-              <UInput v-model="newProject.category" placeholder="Ex: Renovări" />
+            <UFormField :label="$t('providerDashboard.projectCategory')">
+              <UInput v-model="newProject.category" :placeholder="$t('providerDashboard.categoryPlaceholder')" />
             </UFormField>
             <div class="flex justify-end gap-3">
-              <UButton variant="ghost" color="neutral" @click="modalOpen = false">Anulează</UButton>
-              <UButton type="submit" color="primary">Adaugă</UButton>
+              <UButton variant="ghost" color="neutral" @click="modalOpen = false">{{ $t('providerDashboard.cancel') }}</UButton>
+              <UButton type="submit" color="primary">{{ $t('providerDashboard.add') }}</UButton>
             </div>
           </form>
         </div>
@@ -58,8 +58,9 @@
 import { providers } from '~/data/providers'
 import type { PortfolioItem } from '~/data/providers'
 
+const { t } = useI18n()
 definePageMeta({ layout: 'dashboard', middleware: ['role'] })
-useHead({ title: 'Portofoliu — mesteri.md' })
+useHead({ title: t('providerDashboard.portfolioPageTitle') })
 
 const { user } = useAuth()
 const toast = useToast()
@@ -79,6 +80,6 @@ function addProject() {
   })
   modalOpen.value = false
   Object.assign(newProject, { caption: '', category: '' })
-  toast.add({ title: 'Proiect adăugat!', icon: 'i-heroicons-check-circle', color: 'success' })
+  toast.add({ title: t('providerDashboard.projectAdded'), icon: 'i-heroicons-check-circle', color: 'success' })
 }
 </script>

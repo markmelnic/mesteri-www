@@ -1,11 +1,11 @@
 <template>
   <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-    <UBreadcrumb :items="[{ label: 'Acasă', to: '/' }, { label: 'Cerere nouă' }]" class="mb-6" />
+    <UBreadcrumb :items="[{ label: $t('breadcrumb.home'), to: '/' }, { label: $t('breadcrumb.newRequest') }]" class="mb-6" />
 
-    <h1 class="text-3xl font-bold text-gray-900 mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">
-      Solicită o ofertă
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">
+      {{ $t('newRequest.title') }}
     </h1>
-    <p class="text-gray-500 mb-8">Descrie lucrarea și primește oferte de la meșteri verificați</p>
+    <p class="text-gray-500 mb-8">{{ $t('newRequest.subtitle') }}</p>
 
     <!-- Progress -->
     <div class="flex items-center gap-2 mb-8">
@@ -23,8 +23,8 @@
     <div class="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
       <!-- Step 1: Category -->
       <div v-if="step === 1">
-        <h2 class="text-lg font-semibold text-gray-900 mb-4">Alege categoria</h2>
-        <UInput v-model="catSearch" placeholder="Caută o categorie..." icon="i-heroicons-magnifying-glass" class="mb-4" />
+        <h2 class="text-lg font-semibold text-gray-900 mb-4">{{ $t('newRequest.chooseCategory') }}</h2>
+        <UInput v-model="catSearch" :placeholder="$t('newRequest.searchCategory')" icon="i-heroicons-magnifying-glass" class="mb-4" />
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-96 overflow-y-auto">
           <button
             v-for="cat in filteredCategories"
@@ -41,33 +41,33 @@
 
       <!-- Step 2: Description -->
       <div v-if="step === 2">
-        <h2 class="text-lg font-semibold text-gray-900 mb-4">Descrie lucrarea</h2>
+        <h2 class="text-lg font-semibold text-gray-900 mb-4">{{ $t('newRequest.describeWork') }}</h2>
         <div class="space-y-4">
-          <UFormField label="Titlu">
-            <UInput v-model="form.title" placeholder="Ex: Montaj aer condiționat" size="lg" />
+          <UFormField :label="$t('newRequest.workTitle')">
+            <UInput v-model="form.title" :placeholder="$t('newRequest.workTitlePlaceholder')" size="lg" />
           </UFormField>
-          <UFormField label="Descriere detaliată">
-            <UTextarea v-model="form.description" placeholder="Descrie în detaliu ce lucrare ai nevoie..." :rows="5" />
+          <UFormField :label="$t('newRequest.detailedDescription')">
+            <UTextarea v-model="form.description" :placeholder="$t('newRequest.detailedDescPlaceholder')" :rows="5" />
           </UFormField>
           <div class="border-2 border-dashed border-gray-200 rounded-lg p-8 text-center">
             <UIcon name="i-heroicons-photo" class="w-8 h-8 text-gray-400 mx-auto mb-2" />
-            <p class="text-sm text-gray-500">Adaugă fotografii (opțional)</p>
-            <p class="text-xs text-gray-400 mt-1">Funcționalitate disponibilă în versiunea completă</p>
+            <p class="text-sm text-gray-500">{{ $t('newRequest.addPhotos') }}</p>
+            <p class="text-xs text-gray-400 mt-1">{{ $t('newRequest.demoFeature') }}</p>
           </div>
         </div>
       </div>
 
       <!-- Step 3: Location & Timing -->
       <div v-if="step === 3">
-        <h2 class="text-lg font-semibold text-gray-900 mb-4">Locație și termen</h2>
+        <h2 class="text-lg font-semibold text-gray-900 mb-4">{{ $t('newRequest.locationTiming') }}</h2>
         <div class="space-y-4">
-          <UFormField label="Oraș">
-            <USelect v-model="form.city" :items="cities" placeholder="Alege orașul" size="lg" />
+          <UFormField :label="$t('auth.city')">
+            <USelect v-model="form.city" :items="cities" :placeholder="$t('auth.cityPlaceholder')" size="lg" />
           </UFormField>
-          <UFormField label="Adresă (opțional)">
-            <UInput v-model="form.address" placeholder="Strada, număr, bloc, apartament" />
+          <UFormField :label="$t('newRequest.addressOptional')">
+            <UInput v-model="form.address" :placeholder="$t('newRequest.addressPlaceholder')" />
           </UFormField>
-          <UFormField label="Urgență">
+          <UFormField :label="$t('newRequest.urgency')">
             <div class="flex flex-col sm:flex-row gap-3">
               <button
                 v-for="opt in urgencyOptions"
@@ -85,18 +85,18 @@
 
       <!-- Step 4: Budget -->
       <div v-if="step === 4">
-        <h2 class="text-lg font-semibold text-gray-900 mb-4">Buget orientativ</h2>
+        <h2 class="text-lg font-semibold text-gray-900 mb-4">{{ $t('newRequest.budget') }}</h2>
         <div class="space-y-4">
           <label class="flex items-center gap-2 text-sm text-gray-600 mb-4">
             <input v-model="form.noBudget" type="checkbox" class="rounded border-gray-300 text-blue-600" />
-            Nu sunt sigur de buget
+            {{ $t('newRequest.noBudget') }}
           </label>
           <template v-if="!form.noBudget">
             <div class="grid grid-cols-2 gap-4">
-              <UFormField label="Minim (MDL)">
+              <UFormField :label="$t('newRequest.budgetMin')">
                 <UInput v-model.number="form.budgetMin" type="number" placeholder="500" />
               </UFormField>
-              <UFormField label="Maxim (MDL)">
+              <UFormField :label="$t('newRequest.budgetMax')">
                 <UInput v-model.number="form.budgetMax" type="number" placeholder="2000" />
               </UFormField>
             </div>
@@ -106,44 +106,44 @@
 
       <!-- Step 5: Review -->
       <div v-if="step === 5">
-        <h2 class="text-lg font-semibold text-gray-900 mb-4">Verifică și trimite</h2>
+        <h2 class="text-lg font-semibold text-gray-900 mb-4">{{ $t('newRequest.reviewSubmit') }}</h2>
         <div class="space-y-4">
           <div class="p-4 bg-gray-50 rounded-lg">
             <div class="flex justify-between items-start">
               <div>
-                <p class="text-sm text-gray-500">Categorie</p>
+                <p class="text-sm text-gray-500">{{ $t('newRequest.categoryLabel') }}</p>
                 <p class="font-medium text-gray-900">{{ selectedCategoryName }}</p>
               </div>
-              <UButton variant="ghost" size="xs" @click="step = 1">Editează</UButton>
+              <UButton variant="ghost" size="xs" @click="step = 1">{{ $t('newRequest.edit') }}</UButton>
             </div>
           </div>
           <div class="p-4 bg-gray-50 rounded-lg">
             <div class="flex justify-between items-start">
               <div>
-                <p class="text-sm text-gray-500">Lucrare</p>
+                <p class="text-sm text-gray-500">{{ $t('newRequest.workLabel') }}</p>
                 <p class="font-medium text-gray-900">{{ form.title }}</p>
                 <p class="text-sm text-gray-600 mt-1">{{ form.description }}</p>
               </div>
-              <UButton variant="ghost" size="xs" @click="step = 2">Editează</UButton>
+              <UButton variant="ghost" size="xs" @click="step = 2">{{ $t('newRequest.edit') }}</UButton>
             </div>
           </div>
           <div class="p-4 bg-gray-50 rounded-lg">
             <div class="flex justify-between items-start">
               <div>
-                <p class="text-sm text-gray-500">Locație & Termen</p>
+                <p class="text-sm text-gray-500">{{ $t('newRequest.locationTimingLabel') }}</p>
                 <p class="font-medium text-gray-900">{{ form.city }}</p>
                 <p class="text-sm text-gray-600">{{ urgencyLabel }}</p>
               </div>
-              <UButton variant="ghost" size="xs" @click="step = 3">Editează</UButton>
+              <UButton variant="ghost" size="xs" @click="step = 3">{{ $t('newRequest.edit') }}</UButton>
             </div>
           </div>
           <div class="p-4 bg-gray-50 rounded-lg">
             <div class="flex justify-between items-start">
               <div>
-                <p class="text-sm text-gray-500">Buget</p>
+                <p class="text-sm text-gray-500">{{ $t('newRequest.budgetLabel') }}</p>
                 <p class="font-medium text-gray-900">{{ budgetDisplay }}</p>
               </div>
-              <UButton variant="ghost" size="xs" @click="step = 4">Editează</UButton>
+              <UButton variant="ghost" size="xs" @click="step = 4">{{ $t('newRequest.edit') }}</UButton>
             </div>
           </div>
         </div>
@@ -154,25 +154,25 @@
         <div class="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
           <UIcon name="i-heroicons-check" class="w-8 h-8 text-emerald-600" />
         </div>
-        <h2 class="text-xl font-bold text-gray-900 mb-2">Cererea ta a fost trimisă!</h2>
-        <p class="text-gray-500 mb-6">Vei primi oferte de la meșteri în curând.</p>
+        <h2 class="text-xl font-bold text-gray-900 mb-2">{{ $t('newRequest.confirmation') }}</h2>
+        <p class="text-gray-500 mb-6">{{ $t('newRequest.confirmationDesc') }}</p>
         <div class="flex gap-3 justify-center">
-          <UButton to="/" variant="outline" color="neutral">Acasă</UButton>
-          <UButton to="/cont/cereri" color="primary">Cererile mele</UButton>
+          <UButton to="/" variant="outline" color="neutral">{{ $t('newRequest.home') }}</UButton>
+          <UButton to="/cont/cereri" color="primary">{{ $t('newRequest.myRequests') }}</UButton>
         </div>
       </div>
 
       <!-- Navigation -->
       <div v-if="step <= 5" class="flex justify-between mt-8 pt-6 border-t border-gray-100">
         <UButton v-if="step > 1" variant="ghost" color="neutral" @click="step--">
-          Înapoi
+          {{ $t('newRequest.back') }}
         </UButton>
         <div v-else />
         <UButton v-if="step < 5" color="primary" :disabled="!canProceed" @click="step++">
-          Continuă
+          {{ $t('newRequest.continue') }}
         </UButton>
         <UButton v-else color="primary" @click="submitRequest">
-          Trimite cererea
+          {{ $t('newRequest.submitRequest') }}
         </UButton>
       </div>
     </div>
@@ -182,8 +182,9 @@
 <script setup lang="ts">
 import { categories } from '~/data/categories'
 
+const { t } = useI18n()
 definePageMeta({ middleware: ['auth'] })
-useHead({ title: 'Cerere nouă — mesteri.md' })
+useHead({ title: t('newRequest.pageTitle') })
 
 const { user } = useAuth()
 const { createRequest } = useRequests()
@@ -206,11 +207,11 @@ const form = reactive({
 
 const cities = ['Chișinău', 'Bălți', 'Cahul', 'Comrat', 'Orhei', 'Soroca', 'Ungheni', 'Edineț', 'Hîncești', 'Strășeni']
 
-const urgencyOptions = [
-  { value: 'urgent' as const, label: 'Urgent' },
-  { value: 'this_week' as const, label: 'Săptămâna aceasta' },
-  { value: 'flexible' as const, label: 'Flexibil' }
-]
+const urgencyOptions = computed(() => [
+  { value: 'urgent' as const, label: t('newRequest.urgent') },
+  { value: 'this_week' as const, label: t('newRequest.thisWeek') },
+  { value: 'flexible' as const, label: t('newRequest.flexible') }
+])
 
 const filteredCategories = computed(() => {
   if (!catSearch.value) return categories
@@ -223,14 +224,14 @@ const selectedCategoryName = computed(() =>
 )
 
 const urgencyLabel = computed(() =>
-  urgencyOptions.find(o => o.value === form.urgency)?.label || ''
+  urgencyOptions.value.find(o => o.value === form.urgency)?.label || ''
 )
 
 const budgetDisplay = computed(() => {
-  if (form.noBudget) return 'Nu sunt sigur'
+  if (form.noBudget) return t('newRequest.notSure')
   if (form.budgetMin && form.budgetMax) return `${form.budgetMin} - ${form.budgetMax} MDL`
-  if (form.budgetMin) return `de la ${form.budgetMin} MDL`
-  return 'Nespecificat'
+  if (form.budgetMin) return `${t('newRequest.fromBudget')} ${form.budgetMin} MDL`
+  return t('newRequest.notSpecified')
 })
 
 const canProceed = computed(() => {
@@ -251,7 +252,7 @@ function submitRequest() {
     budgetMin: form.noBudget ? undefined : form.budgetMin,
     budgetMax: form.noBudget ? undefined : form.budgetMax
   })
-  toast.add({ title: 'Cererea a fost creată!', icon: 'i-heroicons-check-circle', color: 'success' })
+  toast.add({ title: t('newRequest.requestCreated'), icon: 'i-heroicons-check-circle', color: 'success' })
   step.value = 6
 }
 </script>

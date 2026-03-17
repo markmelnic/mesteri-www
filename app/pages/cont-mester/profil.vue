@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="flex items-center justify-between mb-6">
-      <h1 class="text-2xl font-bold text-gray-900" style="font-family: 'Plus Jakarta Sans', sans-serif;">Profilul meșterului</h1>
+      <h1 class="text-2xl font-bold text-gray-900">{{ $t('providerDashboard.profileTitle') }}</h1>
       <UButton v-if="provider" :to="`/mesteri/${provider.id}`" variant="outline" color="neutral" icon="i-heroicons-eye">
-        Previzualizare profil
+        {{ $t('providerDashboard.previewProfile') }}
       </UButton>
     </div>
 
@@ -18,22 +18,22 @@
       </div>
 
       <form class="space-y-4" @submit.prevent="saveProfile">
-        <UFormField label="Nume">
+        <UFormField :label="$t('providerDashboard.name')">
           <UInput v-model="form.name" />
         </UFormField>
-        <UFormField label="Specialitate">
+        <UFormField :label="$t('providerDashboard.specialty')">
           <UInput v-model="form.specialty" />
         </UFormField>
-        <UFormField label="Oraș">
+        <UFormField :label="$t('providerDashboard.city')">
           <USelect v-model="form.city" :items="cities" />
         </UFormField>
-        <UFormField label="Telefon">
+        <UFormField :label="$t('providerDashboard.phone')">
           <UInput v-model="form.phone" type="tel" />
         </UFormField>
-        <UFormField label="Despre mine">
+        <UFormField :label="$t('providerDashboard.aboutMe')">
           <UTextarea v-model="form.bio" :rows="5" />
         </UFormField>
-        <UButton type="submit" color="primary">Salvează modificările</UButton>
+        <UButton type="submit" color="primary">{{ $t('providerDashboard.save') }}</UButton>
       </form>
     </div>
   </div>
@@ -42,8 +42,9 @@
 <script setup lang="ts">
 import { providers } from '~/data/providers'
 
+const { t } = useI18n()
 definePageMeta({ layout: 'dashboard', middleware: ['role'] })
-useHead({ title: 'Profil meșter — mesteri.md' })
+useHead({ title: t('providerDashboard.profilePageTitle') })
 
 const { user } = useAuth()
 const toast = useToast()
@@ -61,6 +62,6 @@ const form = reactive({
 const cities = ['Chișinău', 'Bălți', 'Cahul', 'Comrat', 'Orhei', 'Soroca', 'Ungheni']
 
 function saveProfile() {
-  toast.add({ title: 'Profil actualizat!', icon: 'i-heroicons-check-circle', color: 'success' })
+  toast.add({ title: t('providerDashboard.saved'), icon: 'i-heroicons-check-circle', color: 'success' })
 }
 </script>

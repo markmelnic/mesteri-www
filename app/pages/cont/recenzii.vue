@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-2xl font-bold text-gray-900 mb-6" style="font-family: 'Plus Jakarta Sans', sans-serif;">Recenziile mele</h1>
+    <h1 class="text-2xl font-bold text-gray-900 mb-6">{{ $t('clientReviews.title') }}</h1>
 
     <div v-if="myReviews.length > 0" class="space-y-4">
       <div v-for="review in myReviews" :key="review.id" class="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
@@ -11,7 +11,7 @@
           </div>
           <div class="flex items-center gap-2">
             <span class="text-sm text-gray-400">{{ formatDate(review.date) }}</span>
-            <UButton variant="ghost" size="xs" icon="i-heroicons-pencil-square">Editează</UButton>
+            <UButton variant="ghost" size="xs" icon="i-heroicons-pencil-square">{{ $t('clientReviews.editReview') }}</UButton>
           </div>
         </div>
         <p class="text-sm text-gray-600">{{ review.text }}</p>
@@ -21,8 +21,8 @@
     <SharedEmptyState
       v-else
       icon="i-heroicons-star"
-      title="Nu ai scris recenzii încă"
-      description="După finalizarea unei lucrări, poți lăsa o recenzie meșterului."
+      :title="$t('clientReviews.noReviews')"
+      :description="$t('clientReviews.noReviewsDesc')"
     />
   </div>
 </template>
@@ -31,17 +31,18 @@
 import { reviews } from '~/data/reviews'
 import { providers } from '~/data/providers'
 
+const { t, locale } = useI18n()
 definePageMeta({ layout: 'dashboard', middleware: ['role'] })
-useHead({ title: 'Recenziile mele — mesteri.md' })
+useHead({ title: t('clientReviews.pageTitle') })
 
-// Mock: show first 3 reviews as if written by current user
 const myReviews = reviews.slice(0, 3)
 
 function getProviderName(providerId: string) {
-  return providers.find(p => p.id === providerId)?.name || 'Meșter'
+  return providers.find(p => p.id === providerId)?.name || t('dashboard.provider')
 }
 
 function formatDate(date: string) {
-  return new Date(date).toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' })
+  const loc = locale.value === 'ru' ? 'ru-RU' : locale.value === 'en' ? 'en-US' : 'ro-RO'
+  return new Date(date).toLocaleDateString(loc, { day: 'numeric', month: 'long', year: 'numeric' })
 }
 </script>

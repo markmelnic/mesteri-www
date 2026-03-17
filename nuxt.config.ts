@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  modules: ['@nuxt/ui'],
+  modules: ['@nuxt/ui', '@nuxtjs/i18n'],
 
   ui: {
     colorMode: false
@@ -11,24 +11,34 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'mesteri.md — Găsește meșterul perfect pentru casa ta',
       meta: [
         { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Conectăm proprietarii de case cu cei mai buni meșteri și companii de servicii din Moldova' }
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' }
       ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap' }
       ]
     },
     pageTransition: { name: 'page', mode: 'out-in' }
   },
 
-  fonts: {
-    families: [
-      { name: 'Plus Jakarta Sans', provider: 'google', weights: [500, 600, 700] },
-      { name: 'DM Sans', provider: 'google', weights: [400, 500] }
-    ]
+  i18n: {
+    locales: [
+      { code: 'ro', name: 'Română', file: 'ro.json' },
+      { code: 'en', name: 'English', file: 'en.json' },
+      { code: 'ru', name: 'Русский', file: 'ru.json' }
+    ],
+    defaultLocale: 'ro',
+    langDir: '../i18n/locales/',
+    strategy: 'prefix_except_default',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root'
+    }
   },
 
   icon: {

@@ -14,17 +14,19 @@
       v-if="showLocation"
       v-model="city"
       :items="cities"
-      placeholder="Oraș"
+      :placeholder="$t('search.cityPlaceholder')"
       size="lg"
       class="w-full sm:w-44"
     />
     <UButton color="primary" size="lg" @click="$emit('search', query, city)">
-      Caută
+      {{ $t('search.button') }}
     </UButton>
   </div>
 </template>
 
 <script setup lang="ts">
+const { t } = useI18n()
+
 defineProps<{
   placeholder?: string
   showLocation?: boolean
@@ -37,8 +39,8 @@ defineEmits<{
 const query = defineModel<string>('modelValue', { default: '' })
 const city = ref('')
 
-const cities = [
-  'Toate orașele',
+const cities = computed(() => [
+  t('search.allCities'),
   'Chișinău',
   'Bălți',
   'Cahul',
@@ -49,5 +51,5 @@ const cities = [
   'Edineț',
   'Hîncești',
   'Strășeni'
-]
+])
 </script>

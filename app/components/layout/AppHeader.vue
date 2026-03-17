@@ -4,14 +4,14 @@
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
         <NuxtLink to="/" class="flex items-center gap-2">
-          <span class="text-2xl font-bold text-blue-600" style="font-family: 'Plus Jakarta Sans', sans-serif;">mesteri.md</span>
+          <SharedAppLogo />
         </NuxtLink>
 
         <!-- Desktop Nav -->
         <nav class="hidden md:flex items-center gap-1">
           <NuxtLink
             v-for="item in navItems"
-            :key="item.to"
+            :key="item.key"
             :to="item.to"
             class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 rounded-lg transition-colors duration-200"
             active-class="text-blue-600 bg-blue-50"
@@ -20,8 +20,9 @@
           </NuxtLink>
         </nav>
 
-        <!-- Auth / User -->
+        <!-- Auth / User + Language -->
         <div class="hidden md:flex items-center gap-3">
+          <SharedLanguageSwitcher />
           <template v-if="isAuthenticated">
             <UDropdownMenu :items="userMenuItems">
               <UButton variant="ghost" color="neutral" class="flex items-center gap-2">
@@ -33,10 +34,10 @@
           </template>
           <template v-else>
             <UButton to="/autentificare" variant="ghost" color="neutral" size="sm">
-              Autentificare
+              {{ $t('nav.login') }}
             </UButton>
             <UButton to="/inregistrare" color="primary" size="sm">
-              Înregistrare
+              {{ $t('nav.register') }}
             </UButton>
           </template>
         </div>
@@ -65,7 +66,7 @@
         <nav class="px-4 pt-3 space-y-1">
           <NuxtLink
             v-for="item in navItems"
-            :key="item.to"
+            :key="item.key"
             :to="item.to"
             class="block px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg"
             active-class="text-blue-600 bg-blue-50"
@@ -74,21 +75,24 @@
             {{ item.label }}
           </NuxtLink>
         </nav>
+        <div class="px-4 pt-3">
+          <SharedLanguageSwitcher />
+        </div>
         <div class="px-4 pt-3 flex flex-col gap-2">
           <template v-if="isAuthenticated">
             <UButton :to="dashboardLink" color="primary" block @click="mobileOpen = false">
-              Contul meu
+              {{ $t('nav.myAccount') }}
             </UButton>
             <UButton variant="ghost" color="neutral" block @click="handleLogout">
-              Deconectare
+              {{ $t('nav.logout') }}
             </UButton>
           </template>
           <template v-else>
             <UButton to="/autentificare" color="primary" block @click="mobileOpen = false">
-              Autentificare
+              {{ $t('nav.login') }}
             </UButton>
             <UButton to="/inregistrare" variant="outline" color="neutral" block @click="mobileOpen = false">
-              Înregistrare
+              {{ $t('nav.register') }}
             </UButton>
           </template>
         </div>
@@ -98,16 +102,17 @@
 </template>
 
 <script setup lang="ts">
+const { t } = useI18n()
 const { user, isAuthenticated, isProvider, logout } = useAuth()
 const router = useRouter()
 const mobileOpen = ref(false)
 
-const navItems = [
-  { label: 'Servicii', to: '/servicii' },
-  { label: 'Meșteri', to: '/mesteri' },
-  { label: 'Cum funcționează', to: '/cum-functioneaza' },
-  { label: 'Despre', to: '/despre' }
-]
+const navItems = computed(() => [
+  { key: 'services', label: t('nav.services'), to: '/servicii' },
+  { key: 'providers', label: t('nav.providers'), to: '/mesteri' },
+  { key: 'howItWorks', label: t('nav.howItWorks'), to: '/cum-functioneaza' },
+  { key: 'about', label: t('nav.about'), to: '/despre' }
+])
 
 const dashboardLink = computed(() =>
   isProvider.value ? '/cont-mester/profil' : '/cont/profil'
@@ -115,12 +120,12 @@ const dashboardLink = computed(() =>
 
 const userMenuItems = computed(() => [
   [{
-    label: 'Contul meu',
+    label: t('nav.myAccount'),
     icon: 'i-heroicons-user-circle',
     to: dashboardLink.value
   }],
   [{
-    label: 'Deconectare',
+    label: t('nav.logout'),
     icon: 'i-heroicons-arrow-right-on-rectangle',
     click: handleLogout
   }]
