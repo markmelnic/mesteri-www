@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+:root {
+  --font-heading: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  color: #111827;
+  background-color: #FAFAFA;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.2s ease-out;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+}

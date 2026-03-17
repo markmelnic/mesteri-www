@@ -1,0 +1,90 @@
+<template>
+  <div class="min-h-[calc(100vh-200px)] flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-md">
+      <div class="text-center mb-8">
+        <NuxtLink to="/" class="text-3xl font-bold text-blue-600" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+          mesteri.md
+        </NuxtLink>
+        <p class="text-gray-500 mt-2">Autentifică-te în contul tău</p>
+      </div>
+
+      <div class="bg-white rounded-xl border border-gray-100 p-8 shadow-sm">
+        <form class="space-y-5" @submit.prevent="handleLogin">
+          <UFormField label="Email">
+            <UInput v-model="email" type="email" placeholder="email@exemplu.md" size="lg" icon="i-heroicons-envelope" />
+          </UFormField>
+          <UFormField label="Parolă">
+            <UInput v-model="password" type="password" placeholder="Parola ta" size="lg" icon="i-heroicons-lock-closed" />
+          </UFormField>
+
+          <div class="flex items-center justify-between">
+            <label class="flex items-center gap-2 text-sm text-gray-600">
+              <input type="checkbox" class="rounded border-gray-300 text-blue-600" />
+              Ține-mă minte
+            </label>
+            <a href="#" class="text-sm text-blue-600 hover:text-blue-700">Ai uitat parola?</a>
+          </div>
+
+          <UButton type="submit" color="primary" block size="lg" :loading="loading">
+            Autentificare
+          </UButton>
+        </form>
+
+        <div class="relative my-6">
+          <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-200" /></div>
+          <div class="relative flex justify-center"><span class="px-3 bg-white text-sm text-gray-400">sau</span></div>
+        </div>
+
+        <div class="space-y-3">
+          <UButton variant="outline" color="neutral" block size="lg" icon="i-lucide-chrome" disabled>
+            Continuă cu Google
+          </UButton>
+          <UButton variant="outline" color="neutral" block size="lg" icon="i-lucide-facebook" disabled>
+            Continuă cu Facebook
+          </UButton>
+        </div>
+
+        <p class="text-center text-sm text-gray-500 mt-6">
+          Nu ai cont?
+          <NuxtLink to="/inregistrare" class="text-blue-600 font-medium hover:text-blue-700">Înregistrează-te →</NuxtLink>
+        </p>
+      </div>
+
+      <!-- Demo credentials hint -->
+      <div class="mt-4 p-4 bg-blue-50 rounded-xl text-sm text-blue-700">
+        <p class="font-medium mb-1">Conturi demo:</p>
+        <p>Client: client@mesteri.md / client123</p>
+        <p>Meșter: mester@mesteri.md / mester123</p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+definePageMeta({ layout: 'default' })
+useHead({ title: 'Autentificare — mesteri.md' })
+
+const { login, isProvider } = useAuth()
+const router = useRouter()
+const toast = useToast()
+
+const email = ref('')
+const password = ref('')
+const loading = ref(false)
+
+async function handleLogin() {
+  loading.value = true
+  await new Promise(r => setTimeout(r, 300))
+
+  const result = login(email.value, password.value)
+
+  if (result.success) {
+    toast.add({ title: 'Autentificare reușită!', icon: 'i-heroicons-check-circle', color: 'success' })
+    router.push(isProvider.value ? '/cont-mester/profil' : '/cont/profil')
+  } else {
+    toast.add({ title: result.error!, icon: 'i-heroicons-exclamation-circle', color: 'error' })
+  }
+
+  loading.value = false
+}
+</script>
