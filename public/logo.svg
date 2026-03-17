@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 40" fill="none">
+  <!-- M monogram icon -->
+  <rect x="1" y="7" width="4" height="26" rx="2" fill="#2563EB"/>
+  <rect x="27" y="7" width="4" height="26" rx="2" fill="#2563EB"/>
+  <path d="M5 10L16 22.5L27 10" stroke="#2563EB" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Wordmark -->
+  <text x="38" y="28" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="700" font-size="22" fill="#111827" letter-spacing="-0.5">mesteri</text>
+  <text x="131" y="28" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="700" font-size="22" fill="#2563EB" letter-spacing="-0.5">.md</text>
+</svg>

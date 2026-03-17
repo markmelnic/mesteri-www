@@ -1,12 +1,12 @@
 <template>
   <svg :width="width" :height="height" viewBox="0 0 180 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- House icon mark -->
-    <path d="M10 8L3 14.5V28H17V14.5L10 8Z" :stroke="iconColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-    <path d="M8 28V21H12V28" :stroke="iconColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-    <circle cx="10" cy="16.5" r="1.5" :fill="iconColor" />
+    <!-- M monogram icon -->
+    <rect x="1" y="7" width="4" height="26" rx="2" :fill="iconColor" />
+    <rect x="27" y="7" width="4" height="26" rx="2" :fill="iconColor" />
+    <path d="M5 10L16 22.5L27 10" :stroke="iconColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
     <!-- Wordmark -->
-    <text x="24" y="27" :fill="textColor" font-family="'Inter', sans-serif" font-weight="700" font-size="20" letter-spacing="-0.5">mesteri</text>
-    <text x="117" y="27" :fill="accentColor" font-family="'Inter', sans-serif" font-weight="700" font-size="20" letter-spacing="-0.5">.md</text>
+    <text x="38" y="28" :fill="textColor" font-family="'Inter', sans-serif" font-weight="700" font-size="22" letter-spacing="-0.5">mesteri</text>
+    <text x="131" y="28" :fill="accentColor" font-family="'Inter', sans-serif" font-weight="700" font-size="22" letter-spacing="-0.5">.md</text>
   </svg>
 </template>
 

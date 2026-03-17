@@ -7,6 +7,23 @@
   color-scheme: light only;
 }
 
+/* Force light theme on all elements — prevent Nuxt UI dark mode leaking through */
+:root,
+:root.dark,
+.dark,
+[data-theme="dark"] {
+  --ui-bg: var(--color-white);
+  --ui-foreground: var(--color-gray-900);
+  --ui-border: var(--color-gray-200);
+  --ui-bg-elevated: var(--color-white);
+  --ui-bg-accented: var(--color-gray-50);
+  --ui-bg-inverted: var(--color-gray-900);
+  --ui-text-dimmed: var(--color-gray-400);
+  --ui-text-muted: var(--color-gray-500);
+  --ui-text-toned: var(--color-gray-600);
+  --ui-text-highlighted: var(--color-gray-900);
+}
+
 body {
   font-family: var(--font-body);
   color: #111827;
@@ -14,6 +31,63 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+/* Comprehensive light-mode fix for all form elements */
+input,
+select,
+textarea,
+[role="combobox"],
+[role="listbox"],
+[data-part="input"],
+[data-part="control"],
+[data-part="trigger"] {
+  color-scheme: light !important;
+}
+
+/* Nuxt UI form components — force white backgrounds */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="submit"]):not([type="button"]),
+select,
+textarea,
+[class*="UInput"] input,
+[class*="USelect"] button,
+[class*="UTextarea"] textarea {
+  background-color: var(--color-white, #ffffff) !important;
+  color: var(--color-gray-900, #111827) !important;
+  border-color: var(--color-gray-300, #d1d5db) !important;
+}
+
+/* Placeholder text */
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-gray-400, #9ca3af) !important;
+}
+
+/* Select dropdown options */
+[role="listbox"],
+[role="option"],
+[data-part="content"],
+[data-part="item"] {
+  background-color: var(--color-white, #ffffff) !important;
+  color: var(--color-gray-900, #111827) !important;
+}
+
+/* Focus states — keep blue ring visible */
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--color-blue-500, #3b82f6) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: light only;
+    --ui-bg: var(--color-white);
+    --ui-foreground: var(--color-gray-900);
+    --ui-border: var(--color-gray-200);
+    --ui-bg-elevated: var(--color-white);
+    --ui-bg-accented: var(--color-gray-50);
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
