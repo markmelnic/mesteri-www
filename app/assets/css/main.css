@@ -4,6 +4,7 @@
 :root {
   --font-heading: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
   --font-body: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  color-scheme: light only;
 }
 
 body {

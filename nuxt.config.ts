@@ -1,8 +1,8 @@
 export default defineNuxtConfig({
   modules: ['@nuxt/ui'],
 
-  colorMode: {
-    preference: 'light'
+  ui: {
+    colorMode: false
   },
 
   srcDir: 'app/',
