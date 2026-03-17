@@ -1,6 +1,10 @@
 export default defineNuxtConfig({
   modules: ['@nuxt/ui'],
 
+  colorMode: {
+    preference: 'light'
+  },
+
   srcDir: 'app/',
 
   css: ['~/assets/css/main.css'],
