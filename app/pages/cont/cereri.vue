@@ -1,51 +1,54 @@
 <template>
   <div>
     <div class="flex items-center justify-between mb-8">
-      <h1 class="text-2xl font-extrabold text-gray-900 tracking-tight">{{ $t('clientRequests.title') }}</h1>
-      <UButton to="/cerere-noua" color="primary" icon="i-heroicons-plus" class="font-semibold bg-indigo-600 hover:bg-indigo-700">{{ $t('clientRequests.newRequest') }}</UButton>
+      <h1 class="text-2xl font-bold text-white tracking-tight">{{ $t('clientRequests.title') }}</h1>
+      <NuxtLink to="/cerere-noua" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-[#0D9373] hover:bg-[#0FAA84] rounded-lg transition-colors duration-150">
+        <UIcon name="i-heroicons-plus" class="w-4 h-4" />
+        {{ $t('clientRequests.newRequest') }}
+      </NuxtLink>
     </div>
 
     <div v-if="myRequests.length > 0" class="space-y-4">
       <div
         v-for="req in myRequests"
         :key="req.id"
-        class="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200"
+        class="p-6 rounded-xl bg-[#141416] border border-white/[0.06] hover:border-white/[0.12] transition-all duration-150"
       >
         <div class="flex items-start justify-between mb-3">
           <div>
-            <h3 class="font-bold text-gray-900">{{ req.title }}</h3>
-            <p class="text-sm text-gray-500 mt-1">{{ req.description }}</p>
+            <h3 class="font-semibold text-white">{{ req.title }}</h3>
+            <p class="text-sm text-[#A1A1AA] mt-1">{{ req.description }}</p>
           </div>
           <UBadge :color="statusColor(req.status)" variant="subtle" class="flex-shrink-0">
             {{ statusLabel(req.status) }}
           </UBadge>
         </div>
-        <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500">
+        <div class="flex flex-wrap items-center gap-4 text-sm text-[#A1A1AA]">
           <span class="flex items-center gap-1.5">
-            <UIcon name="i-heroicons-tag" class="w-4 h-4 text-gray-400" />
+            <UIcon name="i-heroicons-tag" class="w-4 h-4 text-[#63636E]" />
             {{ getCategoryName(req.category) }}
           </span>
           <span class="flex items-center gap-1.5">
-            <UIcon name="i-heroicons-map-pin" class="w-4 h-4 text-gray-400" />
+            <UIcon name="i-heroicons-map-pin" class="w-4 h-4 text-[#63636E]" />
             {{ req.city }}
           </span>
           <span class="flex items-center gap-1.5">
-            <UIcon name="i-heroicons-calendar" class="w-4 h-4 text-gray-400" />
+            <UIcon name="i-heroicons-calendar" class="w-4 h-4 text-[#63636E]" />
             {{ formatDate(req.createdAt) }}
           </span>
         </div>
 
-        <div v-if="req.offers.length > 0" class="mt-5 pt-5 border-t border-gray-100">
-          <p class="text-sm font-semibold text-gray-700 mb-3">{{ req.offers.length }} {{ $t('clientRequests.offersReceived') }}</p>
+        <div v-if="req.offers.length > 0" class="mt-5 pt-5 border-t border-white/[0.06]">
+          <p class="text-sm font-semibold text-white mb-3">{{ req.offers.length }} {{ $t('clientRequests.offersReceived') }}</p>
           <div class="space-y-2">
-            <div v-for="offer in req.offers" :key="offer.id" class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+            <div v-for="offer in req.offers" :key="offer.id" class="flex items-center justify-between p-3 bg-white/[0.02] rounded-lg border border-white/[0.04]">
               <div>
-                <p class="text-sm font-medium text-gray-900">{{ offer.providerName }}</p>
-                <p class="text-xs text-gray-500">{{ offer.message }}</p>
+                <p class="text-sm font-medium text-white">{{ offer.providerName }}</p>
+                <p class="text-xs text-[#A1A1AA]">{{ offer.message }}</p>
               </div>
               <div class="text-right">
-                <p class="font-bold text-gray-900">{{ offer.price }} MDL</p>
-                <p class="text-xs text-gray-500">~{{ offer.estimatedDays }} {{ $t('clientRequests.days') }}</p>
+                <p class="font-bold text-white">{{ offer.price }} MDL</p>
+                <p class="text-xs text-[#63636E]">~{{ offer.estimatedDays }} {{ $t('clientRequests.days') }}</p>
               </div>
             </div>
           </div>

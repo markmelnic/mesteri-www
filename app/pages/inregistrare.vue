@@ -1,17 +1,14 @@
 <template>
-  <div class="min-h-[calc(100vh-64px)] flex items-center justify-center py-12 px-4" style="background: var(--gradient-hero)">
-    <!-- Gradient orbs -->
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <div class="absolute top-1/3 right-1/3 w-[400px] h-[400px] rounded-full bg-violet-600/15 blur-[120px]" />
-      <div class="absolute bottom-1/3 left-1/4 w-[300px] h-[300px] rounded-full bg-indigo-600/15 blur-[100px]" />
-    </div>
+  <div class="min-h-[calc(100vh-64px)] flex items-center justify-center py-12 px-4 bg-[#0A0A0A] relative">
+    <!-- Accent glow -->
+    <div class="absolute top-1/3 right-1/3 w-[400px] h-[300px] bg-[#0D9373]/[0.06] rounded-full blur-[140px] pointer-events-none" />
 
     <div class="relative w-full max-w-lg animate-fade-up">
-      <div class="p-8 rounded-2xl bg-white/95 backdrop-blur-xl border border-white/50 shadow-2xl">
+      <div class="p-8 rounded-xl bg-[#141416] border border-white/[0.06]">
         <!-- Logo -->
         <div class="text-center mb-8">
           <SharedAppLogo :width="150" :height="34" class="mx-auto" />
-          <p class="text-sm text-gray-500 mt-3">{{ $t('auth.registerSubtitle') }}</p>
+          <p class="text-sm text-[#A1A1AA] mt-3">{{ $t('auth.registerSubtitle') }}</p>
         </div>
 
         <!-- Form -->
@@ -39,42 +36,39 @@
             <div class="grid grid-cols-2 gap-3">
               <button
                 type="button"
-                class="p-4 rounded-xl border-2 text-center transition-all duration-200"
-                :class="form.role === 'client' ? 'border-indigo-500 bg-indigo-50' : 'border-gray-200 hover:border-gray-300'"
+                class="p-4 rounded-lg border text-center transition-all duration-150"
+                :class="form.role === 'client' ? 'border-[#0D9373] bg-[#0D9373]/10' : 'border-white/[0.06] hover:border-white/[0.12]'"
                 @click="form.role = 'client'"
               >
-                <UIcon name="i-heroicons-user" class="w-6 h-6 mx-auto mb-2" :class="form.role === 'client' ? 'text-indigo-600' : 'text-gray-400'" />
-                <p class="text-sm font-semibold" :class="form.role === 'client' ? 'text-indigo-600' : 'text-gray-700'">{{ $t('auth.clientRole') }}</p>
-                <p class="text-xs text-gray-500 mt-1">{{ $t('auth.clientDesc') }}</p>
+                <UIcon name="i-heroicons-user" class="w-5 h-5 mx-auto mb-2" :class="form.role === 'client' ? 'text-[#0D9373]' : 'text-[#63636E]'" />
+                <p class="text-sm font-semibold" :class="form.role === 'client' ? 'text-[#2AB673]' : 'text-white'">{{ $t('auth.clientRole') }}</p>
+                <p class="text-xs text-[#63636E] mt-1">{{ $t('auth.clientDesc') }}</p>
               </button>
               <button
                 type="button"
-                class="p-4 rounded-xl border-2 text-center transition-all duration-200"
-                :class="form.role === 'provider' ? 'border-indigo-500 bg-indigo-50' : 'border-gray-200 hover:border-gray-300'"
+                class="p-4 rounded-lg border text-center transition-all duration-150"
+                :class="form.role === 'provider' ? 'border-[#0D9373] bg-[#0D9373]/10' : 'border-white/[0.06] hover:border-white/[0.12]'"
                 @click="form.role = 'provider'"
               >
-                <UIcon name="i-heroicons-wrench-screwdriver" class="w-6 h-6 mx-auto mb-2" :class="form.role === 'provider' ? 'text-indigo-600' : 'text-gray-400'" />
-                <p class="text-sm font-semibold" :class="form.role === 'provider' ? 'text-indigo-600' : 'text-gray-700'">{{ $t('auth.providerRole') }}</p>
-                <p class="text-xs text-gray-500 mt-1">{{ $t('auth.providerDesc') }}</p>
+                <UIcon name="i-heroicons-wrench-screwdriver" class="w-5 h-5 mx-auto mb-2" :class="form.role === 'provider' ? 'text-[#0D9373]' : 'text-[#63636E]'" />
+                <p class="text-sm font-semibold" :class="form.role === 'provider' ? 'text-[#2AB673]' : 'text-white'">{{ $t('auth.providerRole') }}</p>
+                <p class="text-xs text-[#63636E] mt-1">{{ $t('auth.providerDesc') }}</p>
               </button>
             </div>
           </UFormField>
 
-          <UButton
+          <button
             type="submit"
-            color="primary"
-            block
-            size="lg"
-            class="font-semibold bg-indigo-600 hover:bg-indigo-700 shadow-md shadow-indigo-500/20"
+            class="w-full px-4 py-3 text-sm font-semibold text-white bg-[#0D9373] hover:bg-[#0FAA84] rounded-lg transition-colors duration-150"
           >
             {{ $t('auth.registerButton') }}
-          </UButton>
+          </button>
         </form>
 
         <!-- Login link -->
-        <p class="text-center text-sm text-gray-500 mt-6">
+        <p class="text-center text-sm text-[#A1A1AA] mt-6">
           {{ $t('auth.hasAccount') }}
-          <NuxtLink to="/autentificare" class="text-indigo-600 font-semibold hover:text-indigo-700">
+          <NuxtLink to="/autentificare" class="text-[#0D9373] font-semibold hover:text-[#2AB673]">
             {{ $t('auth.loginLink') }}
           </NuxtLink>
         </p>

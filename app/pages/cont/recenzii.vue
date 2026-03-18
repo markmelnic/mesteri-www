@@ -1,20 +1,20 @@
 <template>
   <div>
-    <h1 class="text-2xl font-extrabold text-gray-900 tracking-tight mb-8">{{ $t('clientReviews.title') }}</h1>
+    <h1 class="text-2xl font-bold text-white tracking-tight mb-8">{{ $t('clientReviews.title') }}</h1>
 
     <div v-if="myReviews.length > 0" class="space-y-4">
-      <div v-for="review in myReviews" :key="review.id" class="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm">
+      <div v-for="review in myReviews" :key="review.id" class="p-6 rounded-xl bg-[#141416] border border-white/[0.06]">
         <div class="flex items-start justify-between mb-3">
           <div>
-            <p class="font-bold text-gray-900">{{ getProviderName(review.providerId) }}</p>
+            <p class="font-semibold text-white">{{ getProviderName(review.providerId) }}</p>
             <SharedRatingStars :rating="review.rating" class="mt-1" />
           </div>
           <div class="flex items-center gap-3">
-            <span class="text-sm text-gray-400">{{ formatDate(review.date) }}</span>
-            <UButton variant="ghost" size="xs" icon="i-heroicons-pencil-square" class="text-indigo-600">{{ $t('clientReviews.editReview') }}</UButton>
+            <span class="text-sm text-[#63636E]">{{ formatDate(review.date) }}</span>
+            <UButton variant="ghost" size="xs" icon="i-heroicons-pencil-square" class="text-[#0D9373]">{{ $t('clientReviews.editReview') }}</UButton>
           </div>
         </div>
-        <p class="text-sm text-gray-600 leading-relaxed">{{ review.text }}</p>
+        <p class="text-sm text-[#A1A1AA] leading-relaxed">{{ review.text }}</p>
       </div>
     </div>
 

@@ -1,17 +1,20 @@
 <template>
   <div>
     <div class="flex items-center justify-between mb-8">
-      <h1 class="text-2xl font-extrabold text-gray-900 tracking-tight">{{ $t('providerDashboard.servicesTitle') }}</h1>
-      <UButton color="primary" icon="i-heroicons-plus" class="font-semibold bg-indigo-600 hover:bg-indigo-700" @click="modalOpen = true">{{ $t('providerDashboard.addService') }}</UButton>
+      <h1 class="text-2xl font-bold text-white tracking-tight">{{ $t('providerDashboard.servicesTitle') }}</h1>
+      <button class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-[#0D9373] hover:bg-[#0FAA84] rounded-lg transition-colors duration-150" @click="modalOpen = true">
+        <UIcon name="i-heroicons-plus" class="w-4 h-4" />
+        {{ $t('providerDashboard.addService') }}
+      </button>
     </div>
 
     <div v-if="services.length > 0" class="space-y-4">
-      <div v-for="(service, i) in services" :key="i" class="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200">
+      <div v-for="(service, i) in services" :key="i" class="p-6 rounded-xl bg-[#141416] border border-white/[0.06] hover:border-white/[0.12] transition-all duration-150">
         <div class="flex items-start justify-between">
           <div>
-            <h3 class="font-bold text-gray-900">{{ service.name }}</h3>
-            <p class="text-sm text-gray-500 mt-1">{{ service.description }}</p>
-            <p class="text-sm font-semibold text-indigo-600 mt-3">
+            <h3 class="font-semibold text-white">{{ service.name }}</h3>
+            <p class="text-sm text-[#A1A1AA] mt-1">{{ service.description }}</p>
+            <p class="text-sm font-semibold text-[#0D9373] mt-3">
               {{ service.priceFrom }} - {{ service.priceTo || '...' }} {{ service.currency }}
             </p>
           </div>
@@ -34,7 +37,7 @@
     <UModal v-model:open="modalOpen">
       <template #content>
         <div class="p-6">
-          <h3 class="text-lg font-bold text-gray-900 mb-6">{{ $t('providerDashboard.addServiceModal') }}</h3>
+          <h3 class="text-lg font-semibold text-white mb-6">{{ $t('providerDashboard.addServiceModal') }}</h3>
           <form class="space-y-4" @submit.prevent="addService">
             <UFormField :label="$t('providerDashboard.serviceName')">
               <UInput v-model="newService.name" :placeholder="$t('providerDashboard.serviceNamePlaceholder')" />
@@ -52,7 +55,9 @@
             </div>
             <div class="flex justify-end gap-3 pt-2">
               <UButton variant="ghost" color="neutral" @click="modalOpen = false">{{ $t('providerDashboard.cancel') }}</UButton>
-              <UButton type="submit" color="primary" class="bg-indigo-600 hover:bg-indigo-700">{{ $t('providerDashboard.add') }}</UButton>
+              <button type="submit" class="px-4 py-2 text-sm font-semibold text-white bg-[#0D9373] hover:bg-[#0FAA84] rounded-lg transition-colors duration-150">
+                {{ $t('providerDashboard.add') }}
+              </button>
             </div>
           </form>
         </div>

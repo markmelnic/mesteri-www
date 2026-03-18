@@ -1,23 +1,20 @@
 <template>
   <div>
     <!-- Hero -->
-    <section class="relative overflow-hidden py-12 lg:py-16" style="background: var(--gradient-dark-section)">
-      <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-0 left-1/2 w-[400px] h-[300px] bg-indigo-600/10 rounded-full blur-[120px]" />
-      </div>
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="animate-fade-up text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-3">
+    <section class="relative overflow-hidden py-12 lg:py-16 bg-[#0A0A0A]">
+      <div class="absolute top-0 left-1/2 w-[400px] h-[200px] bg-[#0D9373]/[0.06] rounded-full blur-[120px] pointer-events-none" />
+      <div class="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="animate-fade-up text-[30px] sm:text-[36px] font-bold text-white tracking-tight mb-3">
           {{ $t('newRequest.title') }}
         </h1>
-        <p class="animate-fade-up delay-100 text-indigo-200/60">{{ $t('newRequest.subtitle') }}</p>
+        <p class="animate-fade-up delay-100 text-[#A1A1AA]">{{ $t('newRequest.subtitle') }}</p>
       </div>
     </section>
 
     <!-- Form -->
     <section class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-      <div class="animate-fade-up p-8 rounded-2xl bg-white border border-gray-100 shadow-sm">
+      <div class="animate-fade-up p-8 rounded-xl bg-[#141416] border border-white/[0.06]">
         <form class="space-y-6" @submit.prevent="submitRequest">
-          <!-- Category -->
           <UFormField :label="$t('newRequest.category')">
             <USelect
               v-model="form.category"
@@ -27,38 +24,33 @@
             />
           </UFormField>
 
-          <!-- Title -->
           <UFormField :label="$t('newRequest.requestTitle')">
             <UInput v-model="form.title" :placeholder="$t('newRequest.titlePlaceholder')" size="lg" />
           </UFormField>
 
-          <!-- Description -->
           <UFormField :label="$t('newRequest.description')">
             <UTextarea v-model="form.description" :rows="4" :placeholder="$t('newRequest.descriptionPlaceholder')" />
           </UFormField>
 
-          <!-- City -->
           <UFormField :label="$t('newRequest.city')">
             <USelect v-model="form.city" :items="cities" :placeholder="$t('newRequest.cityPlaceholder')" size="lg" />
           </UFormField>
 
-          <!-- Urgency -->
           <UFormField :label="$t('newRequest.urgency')">
             <div class="grid grid-cols-3 gap-3">
               <button
                 v-for="option in urgencyOptions"
                 :key="option.value"
                 type="button"
-                class="p-3 rounded-xl border-2 text-center transition-all duration-200"
-                :class="form.urgency === option.value ? 'border-indigo-500 bg-indigo-50' : 'border-gray-200 hover:border-gray-300'"
+                class="p-3 rounded-lg border text-center transition-all duration-150"
+                :class="form.urgency === option.value ? 'border-[#0D9373] bg-[#0D9373]/10' : 'border-white/[0.06] hover:border-white/[0.12]'"
                 @click="form.urgency = option.value"
               >
-                <p class="text-sm font-semibold" :class="form.urgency === option.value ? 'text-indigo-600' : 'text-gray-700'">{{ option.label }}</p>
+                <p class="text-sm font-semibold" :class="form.urgency === option.value ? 'text-[#2AB673]' : 'text-white'">{{ option.label }}</p>
               </button>
             </div>
           </UFormField>
 
-          <!-- Budget -->
           <div class="grid grid-cols-2 gap-4">
             <UFormField :label="$t('newRequest.budgetMin')">
               <UInput v-model.number="form.budgetMin" type="number" placeholder="500" />
@@ -68,16 +60,13 @@
             </UFormField>
           </div>
 
-          <UButton
+          <button
             type="submit"
-            color="primary"
-            block
-            size="lg"
-            class="font-semibold bg-indigo-600 hover:bg-indigo-700 shadow-md shadow-indigo-500/20"
-            trailing-icon="i-heroicons-paper-airplane"
+            class="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold text-white bg-[#0D9373] hover:bg-[#0FAA84] rounded-lg transition-colors duration-150"
           >
             {{ $t('newRequest.submit') }}
-          </UButton>
+            <UIcon name="i-heroicons-paper-airplane" class="w-4 h-4" />
+          </button>
         </form>
       </div>
     </section>

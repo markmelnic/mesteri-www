@@ -1,27 +1,25 @@
 <template>
   <div>
     <!-- Hero -->
-    <section class="relative overflow-hidden py-16 lg:py-20" style="background: var(--gradient-dark-section)">
-      <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-0 right-1/4 w-[400px] h-[300px] bg-violet-600/10 rounded-full blur-[120px]" />
-      </div>
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="animate-fade-up text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
+    <section class="relative overflow-hidden py-16 lg:py-20 bg-[#0A0A0A]">
+      <div class="absolute top-0 right-1/4 w-[400px] h-[300px] bg-[#0D9373]/[0.06] rounded-full blur-[140px] pointer-events-none" />
+      <div class="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="animate-fade-up text-[32px] sm:text-[40px] lg:text-[48px] font-bold text-white tracking-tight mb-4">
           {{ $t('contact.title') }}
         </h1>
-        <p class="animate-fade-up delay-100 text-lg text-indigo-200/60 max-w-xl mx-auto">
+        <p class="animate-fade-up delay-100 text-lg text-[#A1A1AA] max-w-xl mx-auto">
           {{ $t('contact.subtitle') }}
         </p>
       </div>
     </section>
 
     <!-- Content -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <!-- Form -->
         <div class="lg:col-span-2">
-          <div class="animate-fade-up p-8 rounded-2xl bg-white border border-gray-100 shadow-sm">
-            <h2 class="text-xl font-bold text-gray-900 mb-6">{{ $t('contact.formTitle') }}</h2>
+          <div class="animate-fade-up p-8 rounded-xl bg-[#141416] border border-white/[0.06]">
+            <h2 class="text-xl font-semibold text-white mb-6">{{ $t('contact.formTitle') }}</h2>
             <form class="space-y-5" @submit.prevent="submitForm">
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <UFormField :label="$t('contact.name')">
@@ -37,9 +35,13 @@
               <UFormField :label="$t('contact.message')">
                 <UTextarea v-model="form.message" :rows="5" :placeholder="$t('contact.messagePlaceholder')" />
               </UFormField>
-              <UButton type="submit" color="primary" size="lg" class="font-semibold bg-indigo-600 hover:bg-indigo-700" trailing-icon="i-heroicons-paper-airplane">
+              <button
+                type="submit"
+                class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-[#0D9373] hover:bg-[#0FAA84] rounded-lg transition-colors duration-150"
+              >
                 {{ $t('contact.send') }}
-              </UButton>
+                <UIcon name="i-heroicons-paper-airplane" class="w-4 h-4" />
+              </button>
             </form>
           </div>
         </div>
@@ -49,14 +51,14 @@
           <div
             v-for="(info, i) in contactInfo"
             :key="i"
-            class="animate-fade-up p-6 rounded-2xl bg-white border border-gray-100 shadow-sm"
+            class="animate-fade-up p-6 rounded-xl bg-[#141416] border border-white/[0.06]"
             :style="{ animationDelay: `${i * 0.1}s` }"
           >
-            <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-4">
-              <UIcon :name="info.icon" class="w-5 h-5" />
+            <div class="w-9 h-9 rounded-lg bg-[#0D9373]/10 text-[#0D9373] flex items-center justify-center mb-4">
+              <UIcon :name="info.icon" class="w-4 h-4" />
             </div>
-            <h3 class="font-bold text-gray-900 text-sm mb-1">{{ info.title }}</h3>
-            <p class="text-sm text-gray-500">{{ info.value }}</p>
+            <h3 class="font-semibold text-white text-sm mb-1">{{ info.title }}</h3>
+            <p class="text-sm text-[#A1A1AA]">{{ info.value }}</p>
           </div>
         </div>
       </div>

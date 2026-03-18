@@ -1,39 +1,52 @@
 <template>
-  <section class="relative overflow-hidden min-h-[90vh] flex items-center" style="background: var(--gradient-hero)">
-    <!-- Animated gradient orbs -->
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <div class="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-indigo-600/20 blur-[128px] animate-float" />
-      <div class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-violet-600/20 blur-[128px] animate-float" style="animation-delay: -3s" />
-      <div class="absolute top-1/2 left-1/2 w-[300px] h-[300px] rounded-full bg-cyan-500/10 blur-[96px] animate-float" style="animation-delay: -1.5s" />
-    </div>
+  <section class="relative overflow-hidden min-h-[90vh] flex items-center bg-[#0A0A0A]">
+    <!-- Accent glow behind hero -->
+    <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#0D9373]/[0.08] rounded-full blur-[150px] pointer-events-none" />
 
     <!-- Dot pattern overlay -->
     <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 32px 32px;" />
 
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 w-full">
-      <div class="text-center max-w-4xl mx-auto">
+    <div class="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 w-full">
+      <div class="text-center max-w-3xl mx-auto">
         <!-- Badge -->
-        <div class="animate-fade-up inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-indigo-200 text-sm font-medium mb-8">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+        <div class="animate-fade-up inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.06] text-[#A1A1AA] text-sm font-medium mb-8">
+          <span class="w-2 h-2 rounded-full bg-[#0D9373]" />
           {{ $t('hero.badge') || '500+ mesteri verificati' }}
         </div>
 
         <!-- Headline -->
-        <h1 class="animate-fade-up delay-100 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] mb-6 tracking-tight">
+        <h1 class="animate-fade-up delay-100 text-[40px] sm:text-[48px] md:text-[56px] font-bold text-white leading-[1.1] mb-6" style="letter-spacing: -0.03em;">
           {{ $t('hero.title') }}
-          <span class="block mt-1 bg-gradient-to-r from-indigo-300 via-violet-300 to-cyan-300 bg-clip-text text-transparent">
+          <span class="block mt-1 text-[#0D9373]">
             {{ $t('hero.titleLine2') }}
           </span>
         </h1>
 
         <!-- Subtitle -->
-        <p class="animate-fade-up delay-200 text-lg sm:text-xl text-indigo-200/80 max-w-2xl mx-auto mb-12 leading-relaxed font-light">
+        <p class="animate-fade-up delay-200 text-lg sm:text-xl text-[#A1A1AA] max-w-2xl mx-auto mb-10 leading-relaxed">
           {{ $t('hero.subtitle') }}
         </p>
 
+        <!-- CTA Buttons -->
+        <div class="animate-fade-up delay-300 flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          <NuxtLink
+            to="/cerere-noua"
+            class="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-[#0D9373] hover:bg-[#0FAA84] rounded-[10px] transition-colors duration-150"
+          >
+            {{ $t('cta.button') }}
+            <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
+          </NuxtLink>
+          <NuxtLink
+            to="/cum-functioneaza"
+            class="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-[#A1A1AA] border border-white/[0.06] hover:border-white/[0.12] hover:text-white rounded-[10px] transition-all duration-150"
+          >
+            {{ $t('cta.learnMore') || 'Afla mai multe' }}
+          </NuxtLink>
+        </div>
+
         <!-- Search bar -->
-        <div class="animate-fade-up delay-300 flex justify-center">
-          <div class="w-full max-w-2xl bg-white/10 backdrop-blur-xl rounded-2xl p-2 border border-white/10">
+        <div class="animate-fade-up delay-400 flex justify-center">
+          <div class="w-full max-w-2xl bg-[#141416] rounded-xl p-2 border border-white/[0.06]">
             <SharedSearchBar
               v-model="searchQuery"
               :placeholder="$t('hero.searchPlaceholder')"
@@ -44,25 +57,22 @@
         </div>
 
         <!-- Trust indicators -->
-        <div class="animate-fade-up delay-400 mt-12 flex flex-wrap items-center justify-center gap-8 text-sm text-indigo-300/60">
+        <div class="animate-fade-up delay-500 mt-10 flex flex-wrap items-center justify-center gap-8 text-sm text-[#63636E]">
           <div class="flex items-center gap-2">
-            <UIcon name="i-heroicons-shield-check-solid" class="w-5 h-5 text-emerald-400/70" />
+            <UIcon name="i-heroicons-shield-check-solid" class="w-4 h-4 text-[#0D9373]/70" />
             <span>{{ $t('hero.verified') || 'Mesteri verificati' }}</span>
           </div>
           <div class="flex items-center gap-2">
-            <UIcon name="i-heroicons-star-solid" class="w-5 h-5 text-amber-400/70" />
+            <UIcon name="i-heroicons-star-solid" class="w-4 h-4 text-[#0D9373]/70" />
             <span>{{ $t('hero.avgRating') || '4.8 rating mediu' }}</span>
           </div>
           <div class="flex items-center gap-2">
-            <UIcon name="i-heroicons-bolt-solid" class="w-5 h-5 text-indigo-400/70" />
+            <UIcon name="i-heroicons-bolt-solid" class="w-4 h-4 text-[#0D9373]/70" />
             <span>{{ $t('hero.fast') || 'Raspuns rapid' }}</span>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Bottom fade -->
-    <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#fafbfc] to-transparent" />
   </section>
 </template>
 

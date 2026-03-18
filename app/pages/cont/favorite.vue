@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-2xl font-extrabold text-gray-900 tracking-tight mb-8">{{ $t('clientFavorites.title') }}</h1>
+    <h1 class="text-2xl font-bold text-white tracking-tight mb-8">{{ $t('clientFavorites.title') }}</h1>
 
     <div v-if="favoriteProviders.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <ProvidersProviderCard

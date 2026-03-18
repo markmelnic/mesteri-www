@@ -1,30 +1,32 @@
 <template>
   <div>
-    <h1 class="text-2xl font-extrabold text-gray-900 tracking-tight mb-8">{{ $t('providerDashboard.reviewsTitle') }}</h1>
+    <h1 class="text-2xl font-bold text-white tracking-tight mb-8">{{ $t('providerDashboard.reviewsTitle') }}</h1>
 
     <!-- Average Rating -->
-    <div v-if="providerReviews.length > 0" class="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm mb-8">
+    <div v-if="providerReviews.length > 0" class="p-6 rounded-xl bg-[#141416] border border-white/[0.06] mb-8">
       <div class="flex items-center gap-6">
         <div class="text-center">
-          <p class="text-5xl font-extrabold tracking-tight gradient-text">{{ provider?.rating.toFixed(1) }}</p>
+          <p class="text-[44px] font-bold text-[#0D9373] tracking-tight">{{ provider?.rating.toFixed(1) }}</p>
           <SharedRatingStars :rating="provider?.rating || 0" class="mt-2 justify-center" />
-          <p class="text-sm text-gray-500 mt-2">{{ providerReviews.length }} {{ $t('providerDashboard.reviews') }}</p>
+          <p class="text-sm text-[#63636E] mt-2">{{ providerReviews.length }} {{ $t('providerDashboard.reviews') }}</p>
         </div>
       </div>
     </div>
 
     <div v-if="providerReviews.length > 0" class="space-y-4">
-      <div v-for="review in providerReviews" :key="review.id" class="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm">
+      <div v-for="review in providerReviews" :key="review.id" class="p-6 rounded-xl bg-[#141416] border border-white/[0.06]">
         <ProvidersReviewCard :review="review" />
-        <div v-if="!review.reply" class="mt-5 pt-5 border-t border-gray-100">
+        <div v-if="!review.reply" class="mt-5 pt-5 border-t border-white/[0.06]">
           <div v-if="replyingTo === review.id" class="flex gap-3">
             <UTextarea v-model="replyText" :placeholder="$t('providerDashboard.replyPlaceholder')" :rows="2" class="flex-1" />
             <div class="flex flex-col gap-2">
-              <UButton size="sm" color="primary" class="bg-indigo-600 hover:bg-indigo-700" @click="submitReply(review.id)">{{ $t('providerDashboard.sendReply') }}</UButton>
-              <UButton size="sm" variant="ghost" color="neutral" @click="replyingTo = ''">{{ $t('providerDashboard.cancelReply') }}</UButton>
+              <button class="px-3 py-2 text-sm font-semibold text-white bg-[#0D9373] hover:bg-[#0FAA84] rounded-lg transition-colors duration-150" @click="submitReply(review.id)">
+                {{ $t('providerDashboard.sendReply') }}
+              </button>
+              <UButton size="sm" variant="ghost" color="neutral" class="text-[#A1A1AA]" @click="replyingTo = ''">{{ $t('providerDashboard.cancelReply') }}</UButton>
             </div>
           </div>
-          <UButton v-else variant="ghost" size="sm" icon="i-heroicons-chat-bubble-left" class="text-indigo-600" @click="replyingTo = review.id">
+          <UButton v-else variant="ghost" size="sm" icon="i-heroicons-chat-bubble-left" class="text-[#0D9373]" @click="replyingTo = review.id">
             {{ $t('providerDashboard.reply') }}
           </UButton>
         </div>

@@ -1,16 +1,15 @@
 <template>
-  <section class="relative py-20 lg:py-28 overflow-hidden bg-gray-50/50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="relative py-20 lg:py-28 bg-[#111113]">
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section header -->
       <div class="text-center max-w-2xl mx-auto mb-14">
-        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-600 text-xs font-semibold uppercase tracking-wider mb-4">
-          <UIcon name="i-heroicons-star-solid" class="w-3.5 h-3.5" />
+        <p class="text-sm font-semibold text-[#0D9373] uppercase tracking-wider mb-4">
           {{ $t('reviews.badge') || 'Recenzii' }}
-        </span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight mb-4">
+        </p>
+        <h2 class="text-[30px] sm:text-[36px] font-bold text-white tracking-tight mb-4">
           {{ $t('reviews.title') }}
         </h2>
-        <p class="text-lg text-gray-500 leading-relaxed">
+        <p class="text-[#A1A1AA] leading-relaxed">
           {{ $t('reviews.subtitle') || 'Ce spun clientii nostri despre mesteri.' }}
         </p>
       </div>
@@ -23,27 +22,30 @@
           class="animate-fade-up"
           :style="{ animationDelay: `${i * 0.1}s` }"
         >
-          <div class="h-full p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
+          <div class="relative h-full p-6 rounded-xl bg-[#141416] border border-white/[0.06] hover:border-white/[0.12] transition-all duration-150">
+            <!-- Decorative quote mark -->
+            <div class="absolute top-4 right-4 text-[48px] font-serif text-white/[0.04] leading-none pointer-events-none">"</div>
+
             <!-- Stars -->
             <div class="flex items-center gap-1 mb-4">
               <UIcon v-for="s in 5" :key="s" name="i-heroicons-star-solid" class="w-4 h-4 text-amber-400" />
             </div>
 
             <!-- Quote -->
-            <p class="text-gray-600 leading-relaxed mb-6 text-sm">
+            <p class="text-[#EDEDEF] leading-relaxed mb-6 text-sm">
               "{{ review.text }}"
             </p>
 
             <!-- Author -->
-            <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+            <div class="flex items-center gap-3 pt-4 border-t border-white/[0.06]">
               <img
                 :src="review.reviewerAvatar"
                 :alt="review.reviewerName"
-                class="w-10 h-10 rounded-full object-cover ring-2 ring-gray-100"
+                class="w-10 h-10 rounded-full object-cover"
               />
               <div>
-                <p class="text-sm font-semibold text-gray-900">{{ review.reviewerName }}</p>
-                <p class="text-xs text-gray-500">{{ getCategoryName(review.category) }}</p>
+                <p class="text-sm font-semibold text-white">{{ review.reviewerName }}</p>
+                <p class="text-xs text-[#63636E]">{{ getCategoryName(review.category) }}</p>
               </div>
             </div>
           </div>

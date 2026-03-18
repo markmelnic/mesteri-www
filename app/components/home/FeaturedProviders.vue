@@ -1,29 +1,23 @@
 <template>
-  <section class="relative py-20 lg:py-28 overflow-hidden">
-    <!-- Subtle glow -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-indigo-500/5 rounded-full blur-[120px] pointer-events-none" />
-
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="relative py-20 lg:py-28 bg-[#0A0A0A] overflow-hidden">
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section header -->
       <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
         <div>
-          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-semibold uppercase tracking-wider mb-4">
-            <UIcon name="i-heroicons-check-badge-solid" class="w-3.5 h-3.5" />
+          <p class="text-sm font-semibold text-[#0D9373] uppercase tracking-wider mb-4">
             {{ $t('featuredProviders.badge') || 'Top mesteri' }}
-          </span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
+          </p>
+          <h2 class="text-[30px] sm:text-[36px] font-bold text-white tracking-tight">
             {{ $t('featuredProviders.title') }}
           </h2>
         </div>
-        <UButton
+        <NuxtLink
           to="/mesteri"
-          variant="outline"
-          color="neutral"
-          trailing-icon="i-heroicons-arrow-right"
-          class="hidden sm:flex font-semibold"
+          class="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#A1A1AA] border border-white/[0.06] hover:border-white/[0.12] hover:text-white rounded-lg transition-all duration-150"
         >
           {{ $t('featuredProviders.viewAll') }}
-        </UButton>
+          <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
+        </NuxtLink>
       </div>
 
       <!-- Provider cards horizontal scroll -->
@@ -32,16 +26,20 @@
           v-for="(provider, i) in featuredProviders"
           :key="provider.id"
           class="min-w-[300px] max-w-[340px] snap-start flex-shrink-0 animate-fade-up"
-          :style="{ animationDelay: `${i * 0.1}s` }"
+          :style="{ animationDelay: `${i * 0.08}s` }"
         >
           <ProvidersProviderCard :provider="provider" />
         </div>
       </div>
 
       <div class="text-center mt-8 sm:hidden">
-        <UButton to="/mesteri" variant="outline" color="neutral" trailing-icon="i-heroicons-arrow-right" class="font-semibold">
+        <NuxtLink
+          to="/mesteri"
+          class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#A1A1AA] border border-white/[0.06] hover:border-white/[0.12] hover:text-white rounded-lg transition-all duration-150"
+        >
           {{ $t('featuredProviders.viewAll') }}
-        </UButton>
+          <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
+        </NuxtLink>
       </div>
     </div>
   </section>

@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex flex-col bg-[#FAFAFA]">
+  <div class="min-h-screen flex flex-col bg-[#0A0A0A]">
     <LayoutAppHeader />
     <div class="flex flex-1">
       <LayoutDashboardSidebar />

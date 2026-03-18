@@ -2,50 +2,63 @@
 @import "@nuxt/ui";
 
 /* ============================================================
-   mesteri.md — Premium Design System
-   Inspired by Stripe / Linear / Vercel
+   mesteri.md — Mintlify-Inspired Dark Design System
+   Dark-mode-first, luminous, precise
    ============================================================ */
 
 :root {
   --font-heading: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-body: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  color-scheme: light only;
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  color-scheme: dark;
 
-  /* Brand palette */
-  --brand-primary: #6366f1;
-  --brand-primary-light: #818cf8;
-  --brand-primary-dark: #4f46e5;
-  --brand-accent: #06b6d4;
-  --brand-surface: #ffffff;
+  /* Dark surfaces */
+  --surface-0: #0A0A0A;
+  --surface-1: #111113;
+  --surface-2: #141416;
+  --surface-3: #1A1A1E;
+  --surface-4: #222228;
 
-  /* Gradients */
-  --gradient-hero: linear-gradient(135deg, #0f0b2e 0%, #1e1055 30%, #2d1b69 50%, #1a1145 70%, #0a0620 100%);
-  --gradient-accent: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
-  --gradient-dark-section: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
-  --gradient-cta: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #2563eb 100%);
+  /* Text */
+  --text-primary: #FFFFFF;
+  --text-secondary: #EDEDEF;
+  --text-muted: #A1A1AA;
+  --text-dimmed: #63636E;
+
+  /* Accent — Emerald/Teal */
+  --accent: #0D9373;
+  --accent-light: #2AB673;
+  --accent-hover: #0FAA84;
+  --accent-glow: rgba(13, 147, 115, 0.08);
+  --accent-glow-strong: rgba(13, 147, 115, 0.12);
+
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(255, 255, 255, 0.12);
+  --border-accent: rgba(13, 147, 115, 0.3);
 }
 
-/* Force light theme */
+/* Force dark theme across Nuxt UI */
 :root,
 :root.dark,
 .dark,
 [data-theme="dark"] {
-  --ui-bg: var(--color-white);
-  --ui-foreground: var(--color-gray-900);
-  --ui-border: var(--color-gray-200);
-  --ui-bg-elevated: var(--color-white);
-  --ui-bg-accented: var(--color-gray-50);
-  --ui-bg-inverted: var(--color-gray-900);
-  --ui-text-dimmed: var(--color-gray-400);
-  --ui-text-muted: var(--color-gray-500);
-  --ui-text-toned: var(--color-gray-600);
-  --ui-text-highlighted: var(--color-gray-900);
+  --ui-bg: var(--surface-0);
+  --ui-foreground: var(--text-secondary);
+  --ui-border: var(--border-subtle);
+  --ui-bg-elevated: var(--surface-2);
+  --ui-bg-accented: var(--surface-3);
+  --ui-bg-inverted: var(--text-primary);
+  --ui-text-dimmed: var(--text-dimmed);
+  --ui-text-muted: var(--text-muted);
+  --ui-text-toned: var(--text-secondary);
+  --ui-text-highlighted: var(--text-primary);
 }
 
 body {
   font-family: var(--font-body);
-  color: #0f172a;
-  background-color: #fafbfc;
+  color: var(--text-secondary);
+  background-color: var(--surface-0);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
@@ -60,55 +73,60 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   letter-spacing: -0.03em;
   font-weight: 700;
+  color: var(--text-primary);
 }
 
 h1 { letter-spacing: -0.04em; }
 p { line-height: 1.7; }
 
 /* ============================================================
-   Glassmorphism & Card System
+   Dark Card System
    ============================================================ */
 
-.glass-card {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.03),
-    0 2px 4px rgba(0, 0, 0, 0.04),
-    0 12px 24px rgba(0, 0, 0, 0.04);
+.dark-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
-.glass-card-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.dark-card:hover {
+  border-color: var(--border-hover);
 }
 
-.glass-card-hover:hover {
-  box-shadow:
-    0 0 0 1px rgba(99, 102, 241, 0.1),
-    0 4px 8px rgba(0, 0, 0, 0.06),
-    0 20px 40px rgba(0, 0, 0, 0.08);
-  transform: translateY(-2px);
+.dark-card-glow:hover {
+  border-color: var(--border-accent);
+  box-shadow: 0 0 20px var(--accent-glow);
 }
 
-.premium-card {
-  background: white;
-  border-radius: 16px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.03),
-    0 2px 4px rgba(0, 0, 0, 0.02),
-    0 8px 16px rgba(0, 0, 0, 0.04);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+/* ============================================================
+   Accent Glows
+   ============================================================ */
+
+.glow-accent {
+  position: relative;
 }
 
-.premium-card:hover {
-  box-shadow:
-    0 0 0 1px rgba(99, 102, 241, 0.08),
-    0 4px 8px rgba(0, 0, 0, 0.04),
-    0 24px 48px rgba(0, 0, 0, 0.08);
-  transform: translateY(-4px);
+.glow-accent::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--accent-glow-strong) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================================
+   Dot Pattern (subtle texture)
+   ============================================================ */
+
+.dot-pattern {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
 /* ============================================================
@@ -116,7 +134,7 @@ p { line-height: 1.7; }
    ============================================================ */
 
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(24px); }
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -125,26 +143,12 @@ p { line-height: 1.7; }
   to { opacity: 1; }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
-}
-
 .animate-fade-up {
-  animation: fade-up 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation: fade-up 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 .animate-fade-in {
-  animation: fade-in 0.5s ease both;
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
+  animation: fade-in 0.4s ease both;
 }
 
 .delay-100 { animation-delay: 0.1s; }
@@ -152,35 +156,9 @@ p { line-height: 1.7; }
 .delay-300 { animation-delay: 0.3s; }
 .delay-400 { animation-delay: 0.4s; }
 .delay-500 { animation-delay: 0.5s; }
-.delay-600 { animation-delay: 0.6s; }
 
 /* ============================================================
-   Gradient text
-   ============================================================ */
-
-.gradient-text {
-  background: var(--gradient-accent);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ============================================================
-   Section patterns
-   ============================================================ */
-
-.section-dark {
-  background: var(--gradient-dark-section);
-  color: white;
-}
-
-.dot-pattern {
-  background-image: radial-gradient(circle, rgba(99, 102, 241, 0.12) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
-/* ============================================================
-   Form elements — force light mode
+   Form Elements — Dark Mode
    ============================================================ */
 
 input,
@@ -191,7 +169,7 @@ textarea,
 [data-part="input"],
 [data-part="control"],
 [data-part="trigger"] {
-  color-scheme: light !important;
+  color-scheme: dark !important;
 }
 
 input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="submit"]):not([type="button"]),
@@ -200,62 +178,144 @@ textarea,
 [class*="UInput"] input,
 [class*="USelect"] button,
 [class*="UTextarea"] textarea {
-  background-color: var(--color-white, #ffffff) !important;
-  color: var(--color-gray-900, #111827) !important;
-  border-color: var(--color-gray-200, #e5e7eb) !important;
+  background-color: var(--surface-2) !important;
+  color: var(--text-secondary) !important;
+  border-color: var(--border-subtle) !important;
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: var(--color-gray-400, #9ca3af) !important;
+  color: var(--text-dimmed) !important;
 }
 
 [role="listbox"],
 [role="option"],
 [data-part="content"],
 [data-part="item"] {
-  background-color: var(--color-white, #ffffff) !important;
-  color: var(--color-gray-900, #111827) !important;
+  background-color: var(--surface-3) !important;
+  color: var(--text-secondary) !important;
+}
+
+[role="option"]:hover,
+[data-part="item"]:hover,
+[data-highlighted] {
+  background-color: var(--surface-4) !important;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: var(--brand-primary) !important;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px var(--accent-glow) !important;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    color-scheme: light only;
-    --ui-bg: var(--color-white);
-    --ui-foreground: var(--color-gray-900);
-    --ui-border: var(--color-gray-200);
-    --ui-bg-elevated: var(--color-white);
-    --ui-bg-accented: var(--color-gray-50);
+    color-scheme: dark;
+    --ui-bg: var(--surface-0);
+    --ui-foreground: var(--text-secondary);
+    --ui-border: var(--border-subtle);
+    --ui-bg-elevated: var(--surface-2);
+    --ui-bg-accented: var(--surface-3);
   }
 }
 
 /* ============================================================
-   Page transitions
+   Page Transitions
    ============================================================ */
 
 .page-enter-active,
 .page-leave-active {
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 .page-enter-from {
   opacity: 0;
-  transform: translateY(8px);
+  transform: translateY(6px);
 }
 .page-leave-to {
   opacity: 0;
-  transform: translateY(-8px);
+  transform: translateY(-6px);
 }
 
 /* ============================================================
-   Scrollbar & Utilities
+   Scrollbar
    ============================================================ */
 
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Custom dark scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface-0);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface-4);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-dimmed);
+}
+
+/* ============================================================
+   Nuxt UI Overrides for Dark Theme
+   ============================================================ */
+
+/* Breadcrumb */
+.ui-breadcrumb a {
+  color: var(--text-dimmed) !important;
+}
+.ui-breadcrumb a:hover {
+  color: var(--text-muted) !important;
+}
+
+/* Modal */
+[data-part="backdrop"] {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  backdrop-filter: blur(4px);
+}
+
+[data-part="positioner"] [data-part="content"],
+.ui-modal [data-part="content"] {
+  background-color: var(--surface-2) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--text-secondary) !important;
+}
+
+/* Accordion */
+[data-part="item-trigger"] {
+  color: var(--text-primary) !important;
+}
+[data-part="item-content"] {
+  color: var(--text-muted) !important;
+}
+
+/* Badge */
+.badge-accent {
+  background-color: rgba(13, 147, 115, 0.1);
+  color: var(--accent-light);
+  border: 1px solid rgba(13, 147, 115, 0.2);
+}
+
+/* Toast overrides */
+[data-sonner-toast] {
+  background-color: var(--surface-3) !important;
+  border-color: var(--border-subtle) !important;
+  color: var(--text-secondary) !important;
+}
+
+/* Dropdown menu */
+[role="menu"] {
+  background-color: var(--surface-3) !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+
+[role="menuitem"] {
+  color: var(--text-secondary) !important;
+}
+
+[role="menuitem"]:hover {
+  background-color: var(--surface-4) !important;
+}

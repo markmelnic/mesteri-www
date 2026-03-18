@@ -21,7 +21,7 @@ const props = withDefaults(defineProps<{
   variant: 'default'
 })
 
-const iconColor = computed(() => props.variant === 'white' ? '#ffffff' : '#6366f1')
-const textColor = computed(() => props.variant === 'white' ? '#ffffff' : '#0f172a')
-const accentColor = computed(() => props.variant === 'white' ? '#a5b4fc' : '#6366f1')
+const iconColor = computed(() => '#0D9373')
+const textColor = computed(() => props.variant === 'white' ? '#ffffff' : '#EDEDEF')
+const accentColor = computed(() => '#0D9373')
 </script>

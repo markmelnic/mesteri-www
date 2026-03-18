@@ -1,21 +1,21 @@
 <template>
   <div>
     <!-- Hero -->
-    <section class="relative overflow-hidden py-12 lg:py-16" style="background: var(--gradient-dark-section)">
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="animate-fade-up text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-3">
+    <section class="relative overflow-hidden py-12 lg:py-16 bg-[#0A0A0A]">
+      <div class="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="animate-fade-up text-[30px] sm:text-[36px] font-bold text-white tracking-tight mb-3">
           {{ $t('terms.title') }}
         </h1>
-        <p class="animate-fade-up delay-100 text-sm text-indigo-200/50">{{ $t('terms.lastUpdated') }}</p>
+        <p class="animate-fade-up delay-100 text-sm text-[#63636E]">{{ $t('terms.lastUpdated') }}</p>
       </div>
     </section>
 
     <!-- Content -->
     <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-      <div class="animate-fade-up p-8 lg:p-10 rounded-2xl bg-white border border-gray-100 shadow-sm prose prose-gray max-w-none">
+      <div class="animate-fade-up p-8 lg:p-10 rounded-xl bg-[#141416] border border-white/[0.06]">
         <div v-for="(section, i) in sections" :key="i" class="mb-8 last:mb-0">
-          <h2 class="text-lg font-bold text-gray-900 mb-3">{{ section.title }}</h2>
-          <p class="text-sm text-gray-600 leading-relaxed whitespace-pre-line">{{ section.content }}</p>
+          <h2 class="text-lg font-semibold text-white mb-3">{{ section.title }}</h2>
+          <p class="text-sm text-[#A1A1AA] leading-relaxed whitespace-pre-line">{{ section.content }}</p>
         </div>
       </div>
     </section>

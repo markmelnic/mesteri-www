@@ -1,6 +1,9 @@
 <template>
-  <header class="sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-gray-200/50 transition-all duration-300" :class="{ '!bg-white/95 shadow-sm': scrolled }">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <header
+    class="sticky top-0 z-50 transition-all duration-200"
+    :class="scrolled ? 'bg-[#0A0A0A]/80 backdrop-blur-xl border-b border-white/[0.06]' : 'bg-transparent'"
+  >
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
         <NuxtLink to="/" class="flex items-center gap-2 group">
@@ -13,8 +16,8 @@
             v-for="item in navItems"
             :key="item.key"
             :to="item.to"
-            class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 rounded-lg transition-all duration-200 hover:bg-gray-50"
-            active-class="!text-indigo-600 !bg-indigo-50"
+            class="px-3.5 py-2 text-sm font-medium text-[#A1A1AA] hover:text-white rounded-lg transition-all duration-150 hover:bg-white/[0.06]"
+            active-class="!text-white !bg-white/[0.06]"
           >
             {{ item.label }}
           </NuxtLink>
@@ -25,7 +28,7 @@
           <SharedLanguageSwitcher />
           <template v-if="isAuthenticated">
             <UDropdownMenu :items="userMenuItems">
-              <UButton variant="ghost" color="neutral" class="flex items-center gap-2">
+              <UButton variant="ghost" color="neutral" class="flex items-center gap-2 text-[#A1A1AA] hover:text-white">
                 <UAvatar :src="user?.avatar" :alt="user?.name" size="xs" />
                 <span class="text-sm font-medium">{{ user?.name }}</span>
                 <UIcon name="i-heroicons-chevron-down-20-solid" class="w-4 h-4" />
@@ -33,12 +36,15 @@
             </UDropdownMenu>
           </template>
           <template v-else>
-            <UButton to="/autentificare" variant="ghost" color="neutral" size="sm" class="font-medium">
+            <UButton to="/autentificare" variant="ghost" color="neutral" size="sm" class="font-medium text-[#A1A1AA] hover:text-white">
               {{ $t('nav.login') }}
             </UButton>
-            <UButton to="/inregistrare" color="primary" size="sm" class="font-semibold bg-indigo-600 hover:bg-indigo-700">
+            <NuxtLink
+              to="/inregistrare"
+              class="inline-flex items-center px-4 py-2 text-sm font-semibold text-white bg-[#0D9373] hover:bg-[#0FAA84] rounded-lg transition-colors duration-150"
+            >
               {{ $t('nav.register') }}
-            </UButton>
+            </NuxtLink>
           </template>
         </div>
 
@@ -62,14 +68,14 @@
       leave-from-class="opacity-100 translate-y-0"
       leave-to-class="opacity-0 -translate-y-2"
     >
-      <div v-if="mobileOpen" class="md:hidden border-t border-gray-100 bg-white/95 backdrop-blur-xl pb-4">
+      <div v-if="mobileOpen" class="md:hidden border-t border-white/[0.06] bg-[#0A0A0A]/95 backdrop-blur-xl pb-4">
         <nav class="px-4 pt-3 space-y-1">
           <NuxtLink
             v-for="item in navItems"
             :key="item.key"
             :to="item.to"
-            class="block px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg"
-            active-class="!text-indigo-600 !bg-indigo-50"
+            class="block px-4 py-2.5 text-sm font-medium text-[#A1A1AA] hover:text-white hover:bg-white/[0.06] rounded-lg"
+            active-class="!text-white !bg-white/[0.06]"
             @click="mobileOpen = false"
           >
             {{ item.label }}
@@ -80,20 +86,32 @@
         </div>
         <div class="px-4 pt-3 flex flex-col gap-2">
           <template v-if="isAuthenticated">
-            <UButton :to="dashboardLink" color="primary" block class="bg-indigo-600" @click="mobileOpen = false">
+            <NuxtLink
+              :to="dashboardLink"
+              class="block w-full text-center px-4 py-2.5 text-sm font-semibold text-white bg-[#0D9373] hover:bg-[#0FAA84] rounded-lg transition-colors"
+              @click="mobileOpen = false"
+            >
               {{ $t('nav.myAccount') }}
-            </UButton>
+            </NuxtLink>
             <UButton variant="ghost" color="neutral" block @click="handleLogout">
               {{ $t('nav.logout') }}
             </UButton>
           </template>
           <template v-else>
-            <UButton to="/autentificare" color="primary" block class="bg-indigo-600" @click="mobileOpen = false">
+            <NuxtLink
+              to="/autentificare"
+              class="block w-full text-center px-4 py-2.5 text-sm font-semibold text-white bg-[#0D9373] hover:bg-[#0FAA84] rounded-lg transition-colors"
+              @click="mobileOpen = false"
+            >
               {{ $t('nav.login') }}
-            </UButton>
-            <UButton to="/inregistrare" variant="outline" color="neutral" block @click="mobileOpen = false">
+            </NuxtLink>
+            <NuxtLink
+              to="/inregistrare"
+              class="block w-full text-center px-4 py-2.5 text-sm font-medium text-[#A1A1AA] border border-white/[0.06] hover:border-white/[0.12] rounded-lg transition-colors"
+              @click="mobileOpen = false"
+            >
               {{ $t('nav.register') }}
-            </UButton>
+            </NuxtLink>
           </template>
         </div>
       </div>

@@ -1,18 +1,19 @@
 <template>
   <div>
     <div class="flex items-center justify-between mb-8">
-      <h1 class="text-2xl font-extrabold text-gray-900 tracking-tight">{{ $t('providerDashboard.profileTitle') }}</h1>
-      <UButton v-if="provider" :to="`/mesteri/${provider.id}`" variant="outline" color="neutral" icon="i-heroicons-eye" class="font-medium">
+      <h1 class="text-2xl font-bold text-white tracking-tight">{{ $t('providerDashboard.profileTitle') }}</h1>
+      <NuxtLink v-if="provider" :to="`/mesteri/${provider.id}`" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#A1A1AA] border border-white/[0.06] hover:border-white/[0.12] hover:text-white rounded-lg transition-all duration-150">
+        <UIcon name="i-heroicons-eye" class="w-4 h-4" />
         {{ $t('providerDashboard.previewProfile') }}
-      </UButton>
+      </NuxtLink>
     </div>
 
-    <div v-if="provider" class="p-6 lg:p-8 rounded-2xl bg-white border border-gray-100 shadow-sm max-w-2xl">
-      <div class="flex items-center gap-4 mb-8 pb-6 border-b border-gray-100">
-        <UAvatar :src="provider.avatar" :alt="provider.name" size="3xl" class="ring-4 ring-indigo-50" />
+    <div v-if="provider" class="p-6 lg:p-8 rounded-xl bg-[#141416] border border-white/[0.06] max-w-2xl">
+      <div class="flex items-center gap-4 mb-8 pb-6 border-b border-white/[0.06]">
+        <UAvatar :src="provider.avatar" :alt="provider.name" size="3xl" />
         <div>
-          <p class="font-bold text-gray-900 text-lg">{{ provider.name }}</p>
-          <p class="text-sm text-gray-500">{{ provider.specialty }}</p>
+          <p class="font-semibold text-white text-lg">{{ provider.name }}</p>
+          <p class="text-sm text-[#A1A1AA]">{{ provider.specialty }}</p>
           <SharedVerifiedBadge v-if="provider.verified" class="mt-2" />
         </div>
       </div>
@@ -33,7 +34,9 @@
         <UFormField :label="$t('providerDashboard.aboutMe')">
           <UTextarea v-model="form.bio" :rows="5" />
         </UFormField>
-        <UButton type="submit" color="primary" class="font-semibold bg-indigo-600 hover:bg-indigo-700">{{ $t('providerDashboard.save') }}</UButton>
+        <button type="submit" class="px-5 py-2.5 text-sm font-semibold text-white bg-[#0D9373] hover:bg-[#0FAA84] rounded-lg transition-colors duration-150">
+          {{ $t('providerDashboard.save') }}
+        </button>
       </form>
     </div>
   </div>

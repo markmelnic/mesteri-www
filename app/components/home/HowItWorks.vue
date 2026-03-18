@@ -1,22 +1,18 @@
 <template>
-  <section class="relative py-20 lg:py-28 section-dark overflow-hidden">
-    <!-- Glow effects -->
-    <div class="absolute inset-0 pointer-events-none overflow-hidden">
-      <div class="absolute top-0 left-1/4 w-[400px] h-[400px] bg-indigo-600/10 rounded-full blur-[120px]" />
-      <div class="absolute bottom-0 right-1/4 w-[300px] h-[300px] bg-violet-600/10 rounded-full blur-[100px]" />
-    </div>
+  <section class="relative py-20 lg:py-28 bg-[#111113] overflow-hidden">
+    <!-- Subtle accent glow -->
+    <div class="absolute top-0 left-1/3 w-[400px] h-[300px] bg-[#0D9373]/[0.06] rounded-full blur-[140px] pointer-events-none" />
 
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section header -->
       <div class="text-center max-w-2xl mx-auto mb-16">
-        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/10 text-indigo-300 text-xs font-semibold uppercase tracking-wider mb-4">
-          <UIcon name="i-heroicons-sparkles-solid" class="w-3.5 h-3.5" />
+        <p class="text-sm font-semibold text-[#0D9373] uppercase tracking-wider mb-4">
           {{ $t('howItWorks.badge') || 'Simplu' }}
-        </span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
+        </p>
+        <h2 class="text-[30px] sm:text-[36px] font-bold text-white tracking-tight mb-4">
           {{ $t('howItWorks.title') }}
         </h2>
-        <p class="text-lg text-indigo-200/60 leading-relaxed">
+        <p class="text-[#A1A1AA] leading-relaxed">
           {{ $t('howItWorks.subtitle') || 'Trei pasi simpli pentru a gasi mesterul perfect.' }}
         </p>
       </div>
@@ -26,23 +22,20 @@
         <div
           v-for="(step, i) in steps"
           :key="i"
-          class="animate-fade-up relative group"
-          :style="{ animationDelay: `${i * 0.15}s` }"
+          class="animate-fade-up relative"
+          :style="{ animationDelay: `${i * 0.12}s` }"
         >
           <!-- Connector line (desktop) -->
-          <div v-if="i < 2" class="hidden md:block absolute top-12 left-[calc(50%+48px)] w-[calc(100%-96px)] h-px bg-gradient-to-r from-indigo-500/30 to-transparent" />
+          <div v-if="i < 2" class="hidden md:block absolute top-8 left-[calc(50%+40px)] w-[calc(100%-80px)] h-px border-t border-dashed border-white/[0.08]" />
 
-          <div class="relative p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm text-center hover:bg-white/[0.08] transition-colors duration-300">
+          <div class="relative p-8 rounded-xl bg-white/[0.02] border border-white/[0.06] text-center hover:border-white/[0.12] transition-all duration-150">
             <!-- Step number -->
-            <div class="relative inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white mb-6 shadow-lg shadow-indigo-500/20">
-              <UIcon :name="step.icon" class="w-7 h-7" />
-              <span class="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-white text-indigo-600 text-xs font-bold flex items-center justify-center shadow-md">
-                {{ i + 1 }}
-              </span>
+            <div class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#0D9373]/10 text-[#0D9373] text-sm font-bold mb-5 border border-[#0D9373]/20">
+              {{ i + 1 }}
             </div>
 
-            <h3 class="text-lg font-bold text-white mb-3">{{ step.title }}</h3>
-            <p class="text-sm text-indigo-200/60 leading-relaxed">{{ step.description }}</p>
+            <h3 class="text-lg font-semibold text-white mb-3">{{ step.title }}</h3>
+            <p class="text-sm text-[#A1A1AA] leading-relaxed">{{ step.description }}</p>
           </div>
         </div>
       </div>

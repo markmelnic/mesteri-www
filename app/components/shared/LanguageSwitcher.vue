@@ -1,6 +1,6 @@
 <template>
   <UDropdownMenu :items="localeItems">
-    <UButton variant="ghost" color="neutral" size="sm" class="gap-1.5">
+    <UButton variant="ghost" color="neutral" size="sm" class="gap-1.5 text-[#A1A1AA] hover:text-white">
       <span class="text-sm">{{ currentFlag }}</span>
       <span class="text-xs font-medium uppercase">{{ locale }}</span>
     </UButton>
