@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- M monogram icon 512x512 -->
+  <rect width="512" height="512" rx="96" fill="#2563EB"/>
+  <rect x="80" y="100" width="52" height="312" rx="26" fill="white"/>
+  <rect x="380" y="100" width="52" height="312" rx="26" fill="white"/>
+  <path d="M132 140L256 296L380 140" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>
