@@ -1,35 +1,39 @@
 <template>
   <div>
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <div
-        v-for="(item, index) in items"
+        v-for="item in items"
         :key="item.id"
-        class="relative group cursor-pointer rounded-xl overflow-hidden aspect-[3/2]"
-        @click="openIndex = index"
+        class="group relative aspect-[3/2] rounded-xl overflow-hidden cursor-pointer"
+        @click="selectedItem = item"
       >
         <img
           :src="item.image"
           :alt="item.caption"
-          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         />
-        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-200 flex items-end">
-          <p class="text-white text-sm font-medium p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-            {{ item.caption }}
-          </p>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div class="absolute bottom-0 left-0 right-0 p-4">
+            <p class="text-sm font-medium text-white">{{ item.caption }}</p>
+            <span class="text-xs text-white/60">{{ item.category }}</span>
+          </div>
         </div>
       </div>
     </div>
 
+    <!-- Lightbox Modal -->
     <UModal v-model:open="modalOpen">
       <template #content>
-        <div class="p-2">
+        <div v-if="selectedItem" class="p-2">
           <img
-            v-if="currentItem"
-            :src="currentItem.image"
-            :alt="currentItem.caption"
-            class="w-full rounded-lg"
+            :src="selectedItem.image"
+            :alt="selectedItem.caption"
+            class="w-full rounded-xl"
           />
-          <p v-if="currentItem" class="text-sm text-gray-600 mt-3 px-2 pb-2">{{ currentItem.caption }}</p>
+          <div class="p-4">
+            <p class="font-semibold text-gray-900">{{ selectedItem.caption }}</p>
+            <p class="text-sm text-gray-500 mt-1">{{ selectedItem.category }}</p>
+          </div>
         </div>
       </template>
     </UModal>
@@ -39,12 +43,14 @@
 <script setup lang="ts">
 import type { PortfolioItem } from '~/data/providers'
 
-const props = defineProps<{ items: PortfolioItem[] }>()
+defineProps<{
+  items: PortfolioItem[]
+}>()
 
-const openIndex = ref(-1)
+const selectedItem = ref<PortfolioItem | null>(null)
+
 const modalOpen = computed({
-  get: () => openIndex.value >= 0,
-  set: (v) => { if (!v) openIndex.value = -1 }
+  get: () => !!selectedItem.value,
+  set: (val: boolean) => { if (!val) selectedItem.value = null }
 })
-const currentItem = computed(() => openIndex.value >= 0 ? props.items[openIndex.value] : null)
 </script>

@@ -16,7 +16,7 @@ export default defineNuxtConfig({
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'description', content: 'Găsește meșteri verificați pentru orice serviciu de care ai nevoie. Platforma ta de servicii profesionale din Moldova.' },
-        { name: 'theme-color', content: '#2563EB' },
+        { name: 'theme-color', content: '#6366f1' },
         { property: 'og:type', content: 'website' },
         { property: 'og:title', content: 'mesteri.md — Platforma ta de servicii profesionale' },
         { property: 'og:description', content: 'Găsește meșteri verificați pentru orice serviciu de care ai nevoie.' },
@@ -36,7 +36,7 @@ export default defineNuxtConfig({
         { rel: 'manifest', href: '/site.webmanifest' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap' }
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap' }
       ]
     },
     pageTransition: { name: 'page', mode: 'out-in' }

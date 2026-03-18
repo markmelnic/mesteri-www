@@ -18,7 +18,12 @@
       size="lg"
       class="w-full sm:w-44"
     />
-    <UButton color="primary" size="lg" @click="$emit('search', query, city)">
+    <UButton
+      color="primary"
+      size="lg"
+      class="font-semibold bg-indigo-600 hover:bg-indigo-700 shadow-md shadow-indigo-500/20 hover:shadow-lg hover:shadow-indigo-500/30 transition-all duration-200"
+      @click="$emit('search', query, city)"
+    >
       {{ $t('search.button') }}
     </UButton>
   </div>

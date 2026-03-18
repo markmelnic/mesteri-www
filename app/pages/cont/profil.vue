@@ -1,17 +1,17 @@
 <template>
   <div>
-    <h1 class="text-2xl font-bold text-gray-900 mb-6">{{ $t('clientProfile.title') }}</h1>
+    <h1 class="text-2xl font-extrabold text-gray-900 tracking-tight mb-8">{{ $t('clientProfile.title') }}</h1>
 
-    <div class="bg-white rounded-xl border border-gray-100 p-6 shadow-sm max-w-2xl">
-      <div class="flex items-center gap-4 mb-6">
-        <UAvatar :src="user?.avatar" :alt="user?.name" size="3xl" />
+    <div class="p-6 lg:p-8 rounded-2xl bg-white border border-gray-100 shadow-sm max-w-2xl">
+      <div class="flex items-center gap-4 mb-8 pb-6 border-b border-gray-100">
+        <UAvatar :src="user?.avatar" :alt="user?.name" size="3xl" class="ring-4 ring-indigo-50" />
         <div>
-          <p class="font-semibold text-gray-900">{{ user?.name }}</p>
+          <p class="font-bold text-gray-900 text-lg">{{ user?.name }}</p>
           <p class="text-sm text-gray-500">{{ user?.email }}</p>
         </div>
       </div>
 
-      <form class="space-y-4" @submit.prevent="saveProfile">
+      <form class="space-y-5" @submit.prevent="saveProfile">
         <UFormField :label="$t('clientProfile.fullName')">
           <UInput v-model="form.name" />
         </UFormField>
@@ -24,7 +24,7 @@
         <UFormField :label="$t('clientProfile.city')">
           <USelect v-model="form.city" :items="cities" />
         </UFormField>
-        <UButton type="submit" color="primary">{{ $t('clientProfile.save') }}</UButton>
+        <UButton type="submit" color="primary" class="font-semibold bg-indigo-600 hover:bg-indigo-700">{{ $t('clientProfile.save') }}</UButton>
       </form>
     </div>
   </div>

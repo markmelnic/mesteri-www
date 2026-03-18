@@ -1,21 +1,21 @@
 <template>
   <div>
-    <div class="flex items-center justify-between mb-6">
-      <h1 class="text-2xl font-bold text-gray-900">{{ $t('providerDashboard.servicesTitle') }}</h1>
-      <UButton color="primary" icon="i-heroicons-plus" @click="modalOpen = true">{{ $t('providerDashboard.addService') }}</UButton>
+    <div class="flex items-center justify-between mb-8">
+      <h1 class="text-2xl font-extrabold text-gray-900 tracking-tight">{{ $t('providerDashboard.servicesTitle') }}</h1>
+      <UButton color="primary" icon="i-heroicons-plus" class="font-semibold bg-indigo-600 hover:bg-indigo-700" @click="modalOpen = true">{{ $t('providerDashboard.addService') }}</UButton>
     </div>
 
     <div v-if="services.length > 0" class="space-y-4">
-      <div v-for="(service, i) in services" :key="i" class="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
+      <div v-for="(service, i) in services" :key="i" class="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200">
         <div class="flex items-start justify-between">
           <div>
-            <h3 class="font-semibold text-gray-900">{{ service.name }}</h3>
+            <h3 class="font-bold text-gray-900">{{ service.name }}</h3>
             <p class="text-sm text-gray-500 mt-1">{{ service.description }}</p>
-            <p class="text-sm font-medium text-gray-700 mt-2">
+            <p class="text-sm font-semibold text-indigo-600 mt-3">
               {{ service.priceFrom }} - {{ service.priceTo || '...' }} {{ service.currency }}
             </p>
           </div>
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 flex-shrink-0">
             <UBadge color="success" variant="subtle">{{ $t('providerDashboard.active') }}</UBadge>
             <UButton variant="ghost" size="xs" icon="i-heroicons-pencil-square" />
             <UButton variant="ghost" size="xs" icon="i-heroicons-trash" color="error" />
@@ -31,11 +31,10 @@
       :description="$t('providerDashboard.noServicesDesc')"
     />
 
-    <!-- Add Service Modal -->
     <UModal v-model:open="modalOpen">
       <template #content>
         <div class="p-6">
-          <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ $t('providerDashboard.addServiceModal') }}</h3>
+          <h3 class="text-lg font-bold text-gray-900 mb-6">{{ $t('providerDashboard.addServiceModal') }}</h3>
           <form class="space-y-4" @submit.prevent="addService">
             <UFormField :label="$t('providerDashboard.serviceName')">
               <UInput v-model="newService.name" :placeholder="$t('providerDashboard.serviceNamePlaceholder')" />
@@ -51,9 +50,9 @@
                 <UInput v-model.number="newService.priceTo" type="number" />
               </UFormField>
             </div>
-            <div class="flex justify-end gap-3">
+            <div class="flex justify-end gap-3 pt-2">
               <UButton variant="ghost" color="neutral" @click="modalOpen = false">{{ $t('providerDashboard.cancel') }}</UButton>
-              <UButton type="submit" color="primary">{{ $t('providerDashboard.add') }}</UButton>
+              <UButton type="submit" color="primary" class="bg-indigo-600 hover:bg-indigo-700">{{ $t('providerDashboard.add') }}</UButton>
             </div>
           </form>
         </div>

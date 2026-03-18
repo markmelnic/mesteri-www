@@ -1,105 +1,94 @@
 <template>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-    <UBreadcrumb :items="[{ label: $t('breadcrumb.home'), to: '/' }, { label: $t('breadcrumb.contact') }]" class="mb-6" />
-
-    <h1 class="text-3xl font-bold text-gray-900 mb-8">
-      {{ $t('contact.title') }}
-    </h1>
-
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <!-- Contact Form -->
-      <div class="lg:col-span-2">
-        <div class="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
-          <form class="space-y-5" @submit.prevent="submitForm">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <UFormField :label="$t('contact.name')">
-                <UInput v-model="form.name" :placeholder="$t('contact.namePlaceholder')" />
-              </UFormField>
-              <UFormField :label="$t('contact.email')">
-                <UInput v-model="form.email" type="email" :placeholder="$t('contact.emailPlaceholder')" />
-              </UFormField>
-            </div>
-            <UFormField :label="$t('contact.subject')">
-              <UInput v-model="form.subject" :placeholder="$t('contact.subjectPlaceholder')" />
-            </UFormField>
-            <UFormField :label="$t('contact.message')">
-              <UTextarea v-model="form.message" :placeholder="$t('contact.messagePlaceholder')" :rows="6" />
-            </UFormField>
-            <UButton type="submit" color="primary" size="lg">
-              {{ $t('contact.send') }}
-            </UButton>
-          </form>
-        </div>
+  <div>
+    <!-- Hero -->
+    <section class="relative overflow-hidden py-16 lg:py-20" style="background: var(--gradient-dark-section)">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-0 right-1/4 w-[400px] h-[300px] bg-violet-600/10 rounded-full blur-[120px]" />
       </div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="animate-fade-up text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
+          {{ $t('contact.title') }}
+        </h1>
+        <p class="animate-fade-up delay-100 text-lg text-indigo-200/60 max-w-xl mx-auto">
+          {{ $t('contact.subtitle') }}
+        </p>
+      </div>
+    </section>
 
-      <!-- Contact Info -->
-      <div class="space-y-6">
-        <div class="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
-          <h3 class="font-semibold text-gray-900 mb-4">{{ $t('contact.contactInfo') }}</h3>
-          <div class="space-y-4">
-            <div class="flex items-start gap-3">
-              <UIcon name="i-heroicons-map-pin" class="w-5 h-5 text-blue-600 mt-0.5" />
-              <div>
-                <p class="text-sm font-medium text-gray-900">{{ $t('contact.address') }}</p>
-                <p class="text-sm text-gray-500">{{ $t('contact.addressValue') }}</p>
+    <!-- Content -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Form -->
+        <div class="lg:col-span-2">
+          <div class="animate-fade-up p-8 rounded-2xl bg-white border border-gray-100 shadow-sm">
+            <h2 class="text-xl font-bold text-gray-900 mb-6">{{ $t('contact.formTitle') }}</h2>
+            <form class="space-y-5" @submit.prevent="submitForm">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <UFormField :label="$t('contact.name')">
+                  <UInput v-model="form.name" :placeholder="$t('contact.namePlaceholder')" />
+                </UFormField>
+                <UFormField :label="$t('contact.email')">
+                  <UInput v-model="form.email" type="email" :placeholder="$t('contact.emailPlaceholder')" />
+                </UFormField>
               </div>
-            </div>
-            <div class="flex items-start gap-3">
-              <UIcon name="i-heroicons-phone" class="w-5 h-5 text-blue-600 mt-0.5" />
-              <div>
-                <p class="text-sm font-medium text-gray-900">{{ $t('contact.phone') }}</p>
-                <p class="text-sm text-gray-500">+373 22 123 456</p>
-              </div>
-            </div>
-            <div class="flex items-start gap-3">
-              <UIcon name="i-heroicons-envelope" class="w-5 h-5 text-blue-600 mt-0.5" />
-              <div>
-                <p class="text-sm font-medium text-gray-900">{{ $t('contact.emailLabel') }}</p>
-                <p class="text-sm text-gray-500">contact@mesteri.md</p>
-              </div>
-            </div>
+              <UFormField :label="$t('contact.subject')">
+                <UInput v-model="form.subject" :placeholder="$t('contact.subjectPlaceholder')" />
+              </UFormField>
+              <UFormField :label="$t('contact.message')">
+                <UTextarea v-model="form.message" :rows="5" :placeholder="$t('contact.messagePlaceholder')" />
+              </UFormField>
+              <UButton type="submit" color="primary" size="lg" class="font-semibold bg-indigo-600 hover:bg-indigo-700" trailing-icon="i-heroicons-paper-airplane">
+                {{ $t('contact.send') }}
+              </UButton>
+            </form>
           </div>
         </div>
 
-        <div class="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
-          <h3 class="font-semibold text-gray-900 mb-4">{{ $t('contact.workingHours') }}</h3>
-          <div class="space-y-2 text-sm">
-            <div class="flex justify-between">
-              <span class="text-gray-500">{{ $t('contact.monFri') }}</span>
-              <span class="text-gray-900 font-medium">09:00 - 18:00</span>
+        <!-- Contact info -->
+        <div class="space-y-4">
+          <div
+            v-for="(info, i) in contactInfo"
+            :key="i"
+            class="animate-fade-up p-6 rounded-2xl bg-white border border-gray-100 shadow-sm"
+            :style="{ animationDelay: `${i * 0.1}s` }"
+          >
+            <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-4">
+              <UIcon :name="info.icon" class="w-5 h-5" />
             </div>
-            <div class="flex justify-between">
-              <span class="text-gray-500">{{ $t('contact.saturday') }}</span>
-              <span class="text-gray-900 font-medium">10:00 - 14:00</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-gray-500">{{ $t('contact.sunday') }}</span>
-              <span class="text-gray-900 font-medium">{{ $t('contact.closed') }}</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Map placeholder -->
-        <div class="bg-gray-200 rounded-xl h-48 flex items-center justify-center">
-          <div class="text-center text-gray-500">
-            <UIcon name="i-heroicons-map" class="w-8 h-8 mb-2 mx-auto" />
-            <p class="text-sm">{{ $t('contact.interactiveMap') }}</p>
+            <h3 class="font-bold text-gray-900 text-sm mb-1">{{ info.title }}</h3>
+            <p class="text-sm text-gray-500">{{ info.value }}</p>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 const { t } = useI18n()
-useHead({ title: t('contact.pageTitle') })
-
+useHead({ title: `${t('contact.title')} — mesteri.md` })
 const toast = useToast()
-const form = reactive({ name: '', email: '', subject: '', message: '' })
+
+const form = reactive({
+  name: '',
+  email: '',
+  subject: '',
+  message: ''
+})
+
+const contactInfo = computed(() => [
+  { icon: 'i-heroicons-map-pin', title: t('contact.addressLabel'), value: t('contact.address') },
+  { icon: 'i-heroicons-phone', title: t('contact.phoneLabel'), value: t('contact.phone') },
+  { icon: 'i-heroicons-envelope', title: t('contact.emailLabel'), value: t('contact.emailAddress') }
+])
 
 function submitForm() {
-  toast.add({ title: t('contact.sent'), description: t('contact.sentDesc'), icon: 'i-heroicons-check-circle', color: 'success' })
+  toast.add({
+    title: t('contact.sent'),
+    description: t('contact.sentDesc'),
+    icon: 'i-heroicons-check-circle',
+    color: 'success'
+  })
   Object.assign(form, { name: '', email: '', subject: '', message: '' })
 }
 </script>

@@ -1,21 +1,19 @@
 <template>
   <Transition
-    enter-active-class="transition-opacity duration-200"
-    enter-from-class="opacity-0"
-    enter-to-class="opacity-100"
-    leave-active-class="transition-opacity duration-200"
-    leave-from-class="opacity-100"
-    leave-to-class="opacity-0"
+    enter-active-class="transition-all duration-300 ease-out"
+    enter-from-class="opacity-0 translate-y-4"
+    enter-to-class="opacity-100 translate-y-0"
+    leave-active-class="transition-all duration-200 ease-in"
+    leave-from-class="opacity-100 translate-y-0"
+    leave-to-class="opacity-0 translate-y-4"
   >
-    <UButton
+    <button
       v-if="visible"
-      icon="i-heroicons-arrow-up"
-      color="neutral"
-      variant="solid"
-      size="lg"
-      class="fixed bottom-6 right-6 z-40 shadow-lg rounded-full"
+      class="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-xl bg-white border border-gray-200 shadow-lg hover:shadow-xl flex items-center justify-center text-gray-600 hover:text-indigo-600 transition-all duration-200 hover:-translate-y-0.5"
       @click="scrollToTop"
-    />
+    >
+      <UIcon name="i-heroicons-arrow-up" class="w-5 h-5" />
+    </button>
   </Transition>
 </template>
 

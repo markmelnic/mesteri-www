@@ -1,12 +1,12 @@
 <template>
   <div>
     <HomeHeroSection />
+    <HomeStatsBar />
     <HomeCategoriesGrid />
     <HomeHowItWorks />
     <HomeFeaturedProviders />
     <HomeRecentReviews />
     <HomeCtaBanner />
-    <HomeStatsBar />
     <SharedBackToTop />
   </div>
 </template>
