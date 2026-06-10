@@ -1,20 +1,19 @@
 <template>
-  <div>
-    <h1 class="text-2xl font-bold text-white tracking-tight mb-8">{{ $t('clientReviews.title') }}</h1>
+  <div class="max-w-4xl">
+    <h1 class="font-display text-2xl font-bold text-stone-900 tracking-tight mb-8">{{ $t('clientReviews.title') }}</h1>
 
     <div v-if="myReviews.length > 0" class="space-y-4">
-      <div v-for="review in myReviews" :key="review.id" class="p-6 rounded-xl bg-[#141416] border border-white/[0.06]">
-        <div class="flex items-start justify-between mb-3">
+      <div v-for="review in myReviews" :key="review.id" class="p-6 rounded-2xl bg-white border border-stone-200">
+        <div class="flex items-start justify-between gap-3 mb-3">
           <div>
-            <p class="font-semibold text-white">{{ getProviderName(review.providerId) }}</p>
+            <NuxtLink :to="localePath(`/mesteri/${review.providerId}`)" class="font-display font-semibold text-stone-900 hover:text-orange-700 transition-colors">
+              {{ getProviderName(review.providerId) }}
+            </NuxtLink>
             <SharedRatingStars :rating="review.rating" class="mt-1" />
           </div>
-          <div class="flex items-center gap-3">
-            <span class="text-sm text-[#63636E]">{{ formatDate(review.date) }}</span>
-            <UButton variant="ghost" size="xs" icon="i-heroicons-pencil-square" class="text-[#0D9373]">{{ $t('clientReviews.editReview') }}</UButton>
-          </div>
+          <span class="text-sm text-stone-400 shrink-0">{{ formatDate(review.date) }}</span>
         </div>
-        <p class="text-sm text-[#A1A1AA] leading-relaxed">{{ review.text }}</p>
+        <p class="text-sm text-stone-600 leading-relaxed">{{ review.text }}</p>
       </div>
     </div>
 
@@ -32,6 +31,7 @@ import { reviews } from '~/data/reviews'
 import { providers } from '~/data/providers'
 
 const { t, locale } = useI18n()
+const localePath = useLocalePath()
 definePageMeta({ layout: 'dashboard', middleware: ['role'] })
 useHead({ title: t('clientReviews.pageTitle') })
 

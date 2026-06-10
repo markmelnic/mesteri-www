@@ -1,74 +1,75 @@
 <template>
-  <div class="min-h-[calc(100vh-64px)] flex items-center justify-center py-12 px-4 bg-[#0A0A0A] relative">
-    <!-- Accent glow -->
-    <div class="absolute top-1/3 right-1/3 w-[400px] h-[300px] bg-[#0D9373]/[0.06] rounded-full blur-[140px] pointer-events-none" />
+  <div class="min-h-[calc(100vh-64px)] flex items-center justify-center py-12 px-4 bg-stone-50 relative overflow-hidden">
+    <div class="absolute inset-0 dot-grid opacity-40 [mask-image:radial-gradient(ellipse_60%_60%_at_50%_40%,black,transparent)]" />
 
     <div class="relative w-full max-w-lg animate-fade-up">
-      <div class="p-8 rounded-xl bg-[#141416] border border-white/[0.06]">
-        <!-- Logo -->
+      <div class="p-8 rounded-3xl bg-white border border-stone-200 shadow-xl shadow-stone-900/5">
+        <!-- Heading -->
         <div class="text-center mb-8">
-          <SharedAppLogo :width="150" :height="34" class="mx-auto" />
-          <p class="text-sm text-[#A1A1AA] mt-3">{{ $t('auth.registerSubtitle') }}</p>
+          <h1 class="font-display text-2xl font-bold text-stone-900 tracking-tight">{{ $t('auth.registerTitle') }}</h1>
+          <p class="text-sm text-stone-500 mt-2">{{ $t('auth.registerSubtitle') }}</p>
         </div>
 
         <!-- Form -->
         <form class="space-y-5" @submit.prevent="handleRegister">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <UFormField :label="$t('auth.fullName')">
-              <UInput v-model="form.name" :placeholder="$t('auth.namePlaceholder')" />
-            </UFormField>
-            <UFormField :label="$t('auth.phone')">
-              <UInput v-model="form.phone" type="tel" :placeholder="$t('auth.phonePlaceholder')" />
-            </UFormField>
-          </div>
-          <UFormField :label="$t('auth.email')">
-            <UInput v-model="form.email" type="email" :placeholder="$t('auth.emailPlaceholder')" />
-          </UFormField>
-          <UFormField :label="$t('auth.city')">
-            <USelect v-model="form.city" :items="cities" :placeholder="$t('auth.cityPlaceholder')" />
-          </UFormField>
-          <UFormField :label="$t('auth.password')">
-            <UInput v-model="form.password" type="password" :placeholder="$t('auth.passwordPlaceholder')" />
-          </UFormField>
-
-          <!-- Role selection -->
+          <!-- Role selection first: it frames the rest -->
           <UFormField :label="$t('auth.roleLabel')">
             <div class="grid grid-cols-2 gap-3">
               <button
                 type="button"
-                class="p-4 rounded-lg border text-center transition-all duration-150"
-                :class="form.role === 'client' ? 'border-[#0D9373] bg-[#0D9373]/10' : 'border-white/[0.06] hover:border-white/[0.12]'"
+                class="p-4 rounded-xl border text-center transition-all"
+                :class="form.role === 'client' ? 'border-orange-500 bg-orange-50 ring-2 ring-orange-500/20' : 'border-stone-200 hover:border-stone-300'"
                 @click="form.role = 'client'"
               >
-                <UIcon name="i-heroicons-user" class="w-5 h-5 mx-auto mb-2" :class="form.role === 'client' ? 'text-[#0D9373]' : 'text-[#63636E]'" />
-                <p class="text-sm font-semibold" :class="form.role === 'client' ? 'text-[#2AB673]' : 'text-white'">{{ $t('auth.clientRole') }}</p>
-                <p class="text-xs text-[#63636E] mt-1">{{ $t('auth.clientDesc') }}</p>
+                <UIcon name="i-heroicons-home" class="w-5 h-5 mx-auto mb-2" :class="form.role === 'client' ? 'text-orange-600' : 'text-stone-400'" />
+                <p class="text-sm font-semibold" :class="form.role === 'client' ? 'text-orange-800' : 'text-stone-700'">{{ $t('auth.clientRole') }}</p>
+                <p class="text-xs text-stone-400 mt-1">{{ $t('auth.clientDesc') }}</p>
               </button>
               <button
                 type="button"
-                class="p-4 rounded-lg border text-center transition-all duration-150"
-                :class="form.role === 'provider' ? 'border-[#0D9373] bg-[#0D9373]/10' : 'border-white/[0.06] hover:border-white/[0.12]'"
+                class="p-4 rounded-xl border text-center transition-all"
+                :class="form.role === 'provider' ? 'border-orange-500 bg-orange-50 ring-2 ring-orange-500/20' : 'border-stone-200 hover:border-stone-300'"
                 @click="form.role = 'provider'"
               >
-                <UIcon name="i-heroicons-wrench-screwdriver" class="w-5 h-5 mx-auto mb-2" :class="form.role === 'provider' ? 'text-[#0D9373]' : 'text-[#63636E]'" />
-                <p class="text-sm font-semibold" :class="form.role === 'provider' ? 'text-[#2AB673]' : 'text-white'">{{ $t('auth.providerRole') }}</p>
-                <p class="text-xs text-[#63636E] mt-1">{{ $t('auth.providerDesc') }}</p>
+                <UIcon name="i-heroicons-wrench-screwdriver" class="w-5 h-5 mx-auto mb-2" :class="form.role === 'provider' ? 'text-orange-600' : 'text-stone-400'" />
+                <p class="text-sm font-semibold" :class="form.role === 'provider' ? 'text-orange-800' : 'text-stone-700'">{{ $t('auth.providerRole') }}</p>
+                <p class="text-xs text-stone-400 mt-1">{{ $t('auth.providerDesc') }}</p>
               </button>
             </div>
           </UFormField>
 
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <UFormField :label="$t('auth.fullName')">
+              <UInput v-model="form.name" :placeholder="$t('auth.namePlaceholder')" class="w-full" />
+            </UFormField>
+            <UFormField :label="$t('auth.phone')">
+              <UInput v-model="form.phone" type="tel" :placeholder="$t('auth.phonePlaceholder')" class="w-full" />
+            </UFormField>
+          </div>
+          <UFormField :label="$t('auth.email')">
+            <UInput v-model="form.email" type="email" :placeholder="$t('auth.emailPlaceholder')" class="w-full" />
+          </UFormField>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <UFormField :label="$t('auth.city')">
+              <USelect v-model="form.city" :items="cities" :placeholder="$t('auth.cityPlaceholder')" class="w-full" />
+            </UFormField>
+            <UFormField :label="$t('auth.password')">
+              <UInput v-model="form.password" type="password" :placeholder="$t('auth.passwordPlaceholder')" class="w-full" />
+            </UFormField>
+          </div>
+
           <button
             type="submit"
-            class="w-full px-4 py-3 text-sm font-semibold text-white bg-[#0D9373] hover:bg-[#0FAA84] rounded-lg transition-colors duration-150"
+            class="w-full px-4 py-3 text-sm font-semibold text-white bg-orange-600 hover:bg-orange-700 rounded-xl transition-colors shadow-lg shadow-orange-600/20"
           >
             {{ $t('auth.registerButton') }}
           </button>
         </form>
 
         <!-- Login link -->
-        <p class="text-center text-sm text-[#A1A1AA] mt-6">
+        <p class="text-center text-sm text-stone-500 mt-6">
           {{ $t('auth.hasAccount') }}
-          <NuxtLink to="/autentificare" class="text-[#0D9373] font-semibold hover:text-[#2AB673]">
+          <NuxtLink :to="localePath('/autentificare')" class="text-orange-600 font-semibold hover:text-orange-700">
             {{ $t('auth.loginLink') }}
           </NuxtLink>
         </p>
@@ -80,6 +81,7 @@
 <script setup lang="ts">
 const { t } = useI18n()
 const router = useRouter()
+const localePath = useLocalePath()
 const { register } = useAuth()
 const toast = useToast()
 
@@ -91,7 +93,7 @@ const form = reactive({
   phone: '',
   city: '',
   password: '',
-  role: 'client'
+  role: 'client' as 'client' | 'provider'
 })
 
 const cities = ['Chișinău', 'Bălți', 'Cahul', 'Comrat', 'Orhei', 'Soroca', 'Ungheni']
@@ -101,8 +103,12 @@ function handleRegister() {
     toast.add({ title: t('auth.fillFields'), icon: 'i-heroicons-exclamation-triangle', color: 'warning' })
     return
   }
-  register(form)
+  const result = register({ ...form })
+  if (!result.success) {
+    toast.add({ title: t('auth.emailTaken'), icon: 'i-heroicons-exclamation-triangle', color: 'error' })
+    return
+  }
   toast.add({ title: t('auth.registerSuccess'), icon: 'i-heroicons-check-circle', color: 'success' })
-  router.push('/')
+  router.push(localePath('/'))
 }
 </script>

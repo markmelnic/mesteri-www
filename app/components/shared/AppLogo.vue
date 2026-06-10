@@ -1,12 +1,10 @@
 <template>
-  <svg :width="width" :height="height" viewBox="0 0 180 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- M monogram icon -->
-    <rect x="1" y="7" width="4" height="26" rx="2" :fill="iconColor" />
-    <rect x="27" y="7" width="4" height="26" rx="2" :fill="iconColor" />
-    <path d="M5 10L16 22.5L27 10" :stroke="iconColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+  <svg :width="width" :height="height" viewBox="0 0 180 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="mesteri.md">
+    <!-- M monogram in rounded tile -->
+    <rect x="0" y="2" width="36" height="36" rx="10" fill="#EA580C" />
+    <path d="M9 28V13.5L18 22.5L27 13.5V28" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
     <!-- Wordmark -->
-    <text x="38" y="28" :fill="textColor" font-family="'Inter', sans-serif" font-weight="700" font-size="22" letter-spacing="-0.5">mesteri</text>
-    <text x="131" y="28" :fill="accentColor" font-family="'Inter', sans-serif" font-weight="700" font-size="22" letter-spacing="-0.5">.md</text>
+    <text x="44" y="28" :fill="textColor" font-family="'Bricolage Grotesque', 'Inter', sans-serif" font-weight="700" font-size="21" letter-spacing="-0.5">mesteri<tspan fill="#EA580C">.md</tspan></text>
   </svg>
 </template>
 
@@ -16,12 +14,10 @@ const props = withDefaults(defineProps<{
   height?: number
   variant?: 'default' | 'white'
 }>(), {
-  width: 180,
+  width: 168,
   height: 40,
   variant: 'default'
 })
 
-const iconColor = computed(() => '#0D9373')
-const textColor = computed(() => props.variant === 'white' ? '#ffffff' : '#EDEDEF')
-const accentColor = computed(() => '#0D9373')
+const textColor = computed(() => props.variant === 'white' ? '#FFFFFF' : '#1C1917')
 </script>

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" fill="none">
   <!-- Apple touch icon 180x180 -->
-  <rect width="180" height="180" fill="#2563EB"/>
+  <rect width="180" height="180" fill="#EA580C"/>
   <rect x="28" y="36" width="18" height="108" rx="9" fill="white"/>
   <rect x="134" y="36" width="18" height="108" rx="9" fill="white"/>
   <path d="M46 50L90 102L134 50" stroke="white" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" fill="none"/>

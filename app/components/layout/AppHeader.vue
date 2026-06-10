@@ -1,13 +1,13 @@
 <template>
   <header
-    class="sticky top-0 z-50 transition-all duration-200"
-    :class="scrolled ? 'bg-[#0A0A0A]/80 backdrop-blur-xl border-b border-white/[0.06]' : 'bg-transparent'"
+    class="sticky top-0 z-50 bg-white/90 backdrop-blur-xl transition-shadow duration-200"
+    :class="scrolled ? 'shadow-sm border-b border-stone-200' : 'border-b border-transparent'"
   >
-    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
-        <NuxtLink to="/" class="flex items-center gap-2 group">
-          <SharedAppLogo />
+        <NuxtLink :to="localePath('/')" class="flex items-center shrink-0" aria-label="mesteri.md">
+          <SharedAppLogo :width="150" :height="36" />
         </NuxtLink>
 
         <!-- Desktop Nav -->
@@ -15,33 +15,36 @@
           <NuxtLink
             v-for="item in navItems"
             :key="item.key"
-            :to="item.to"
-            class="px-3.5 py-2 text-sm font-medium text-[#A1A1AA] hover:text-white rounded-lg transition-all duration-150 hover:bg-white/[0.06]"
-            active-class="!text-white !bg-white/[0.06]"
+            :to="localePath(item.to)"
+            class="px-3.5 py-2 text-sm font-medium text-stone-600 hover:text-stone-900 rounded-lg transition-colors hover:bg-stone-100"
+            active-class="!text-orange-700 !bg-orange-50"
           >
             {{ item.label }}
           </NuxtLink>
         </nav>
 
         <!-- Auth / User + Language -->
-        <div class="hidden md:flex items-center gap-3">
+        <div class="hidden md:flex items-center gap-2">
           <SharedLanguageSwitcher />
           <template v-if="isAuthenticated">
-            <UDropdownMenu :items="userMenuItems">
-              <UButton variant="ghost" color="neutral" class="flex items-center gap-2 text-[#A1A1AA] hover:text-white">
-                <UAvatar :src="user?.avatar" :alt="user?.name" size="xs" />
-                <span class="text-sm font-medium">{{ user?.name }}</span>
-                <UIcon name="i-heroicons-chevron-down-20-solid" class="w-4 h-4" />
-              </UButton>
+            <UDropdownMenu :items="userMenuItems" :content="{ align: 'end' }">
+              <button type="button" class="flex items-center gap-2 pl-1.5 pr-2.5 py-1.5 rounded-full border border-stone-200 hover:border-stone-300 hover:bg-stone-50 transition-colors">
+                <UAvatar :src="user?.avatar" :alt="user?.name" size="2xs" />
+                <span class="text-sm font-medium text-stone-700 max-w-[120px] truncate">{{ user?.name }}</span>
+                <UIcon name="i-heroicons-chevron-down-20-solid" class="w-4 h-4 text-stone-400" />
+              </button>
             </UDropdownMenu>
           </template>
           <template v-else>
-            <UButton to="/autentificare" variant="ghost" color="neutral" size="sm" class="font-medium text-[#A1A1AA] hover:text-white">
-              {{ $t('nav.login') }}
-            </UButton>
             <NuxtLink
-              to="/inregistrare"
-              class="inline-flex items-center px-4 py-2 text-sm font-semibold text-white bg-[#0D9373] hover:bg-[#0FAA84] rounded-lg transition-colors duration-150"
+              :to="localePath('/autentificare')"
+              class="px-3.5 py-2 text-sm font-medium text-stone-600 hover:text-stone-900 rounded-lg transition-colors hover:bg-stone-100"
+            >
+              {{ $t('nav.login') }}
+            </NuxtLink>
+            <NuxtLink
+              :to="localePath('/inregistrare')"
+              class="inline-flex items-center px-4 py-2 text-sm font-semibold text-white bg-stone-900 hover:bg-stone-700 rounded-xl transition-colors"
             >
               {{ $t('nav.register') }}
             </NuxtLink>
@@ -49,13 +52,14 @@
         </div>
 
         <!-- Mobile Menu Button -->
-        <UButton
-          class="md:hidden"
-          variant="ghost"
-          color="neutral"
-          :icon="mobileOpen ? 'i-heroicons-x-mark-20-solid' : 'i-heroicons-bars-3-20-solid'"
+        <button
+          type="button"
+          class="md:hidden w-10 h-10 rounded-lg flex items-center justify-center text-stone-600 hover:bg-stone-100 transition-colors"
+          :aria-label="mobileOpen ? 'Close menu' : 'Open menu'"
           @click="mobileOpen = !mobileOpen"
-        />
+        >
+          <UIcon :name="mobileOpen ? 'i-heroicons-x-mark-20-solid' : 'i-heroicons-bars-3-20-solid'" class="w-5 h-5" />
+        </button>
       </div>
     </div>
 
@@ -68,14 +72,14 @@
       leave-from-class="opacity-100 translate-y-0"
       leave-to-class="opacity-0 -translate-y-2"
     >
-      <div v-if="mobileOpen" class="md:hidden border-t border-white/[0.06] bg-[#0A0A0A]/95 backdrop-blur-xl pb-4">
+      <div v-if="mobileOpen" class="md:hidden border-t border-stone-200 bg-white pb-4 shadow-lg">
         <nav class="px-4 pt-3 space-y-1">
           <NuxtLink
             v-for="item in navItems"
             :key="item.key"
-            :to="item.to"
-            class="block px-4 py-2.5 text-sm font-medium text-[#A1A1AA] hover:text-white hover:bg-white/[0.06] rounded-lg"
-            active-class="!text-white !bg-white/[0.06]"
+            :to="localePath(item.to)"
+            class="block px-4 py-2.5 text-sm font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-100 rounded-lg"
+            active-class="!text-orange-700 !bg-orange-50"
             @click="mobileOpen = false"
           >
             {{ item.label }}
@@ -87,30 +91,34 @@
         <div class="px-4 pt-3 flex flex-col gap-2">
           <template v-if="isAuthenticated">
             <NuxtLink
-              :to="dashboardLink"
-              class="block w-full text-center px-4 py-2.5 text-sm font-semibold text-white bg-[#0D9373] hover:bg-[#0FAA84] rounded-lg transition-colors"
+              :to="localePath(dashboardLink)"
+              class="block w-full text-center px-4 py-2.5 text-sm font-semibold text-white bg-stone-900 hover:bg-stone-700 rounded-xl transition-colors"
               @click="mobileOpen = false"
             >
               {{ $t('nav.myAccount') }}
             </NuxtLink>
-            <UButton variant="ghost" color="neutral" block @click="handleLogout">
+            <button
+              type="button"
+              class="block w-full text-center px-4 py-2.5 text-sm font-medium text-stone-600 border border-stone-200 hover:bg-stone-50 rounded-xl transition-colors"
+              @click="handleLogout"
+            >
               {{ $t('nav.logout') }}
-            </UButton>
+            </button>
           </template>
           <template v-else>
             <NuxtLink
-              to="/autentificare"
-              class="block w-full text-center px-4 py-2.5 text-sm font-semibold text-white bg-[#0D9373] hover:bg-[#0FAA84] rounded-lg transition-colors"
-              @click="mobileOpen = false"
-            >
-              {{ $t('nav.login') }}
-            </NuxtLink>
-            <NuxtLink
-              to="/inregistrare"
-              class="block w-full text-center px-4 py-2.5 text-sm font-medium text-[#A1A1AA] border border-white/[0.06] hover:border-white/[0.12] rounded-lg transition-colors"
+              :to="localePath('/inregistrare')"
+              class="block w-full text-center px-4 py-2.5 text-sm font-semibold text-white bg-stone-900 hover:bg-stone-700 rounded-xl transition-colors"
               @click="mobileOpen = false"
             >
               {{ $t('nav.register') }}
+            </NuxtLink>
+            <NuxtLink
+              :to="localePath('/autentificare')"
+              class="block w-full text-center px-4 py-2.5 text-sm font-medium text-stone-600 border border-stone-200 hover:bg-stone-50 rounded-xl transition-colors"
+              @click="mobileOpen = false"
+            >
+              {{ $t('nav.login') }}
             </NuxtLink>
           </template>
         </div>
@@ -121,16 +129,18 @@
 
 <script setup lang="ts">
 const { t } = useI18n()
+const localePath = useLocalePath()
 const { user, isAuthenticated, isProvider, logout } = useAuth()
 const router = useRouter()
 const mobileOpen = ref(false)
 const scrolled = ref(false)
 
-onMounted(() => {
-  window.addEventListener('scroll', () => {
-    scrolled.value = window.scrollY > 10
-  })
-})
+function onScroll() {
+  scrolled.value = window.scrollY > 10
+}
+
+onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
+onUnmounted(() => window.removeEventListener('scroll', onScroll))
 
 const navItems = computed(() => [
   { key: 'services', label: t('nav.services'), to: '/servicii' },
@@ -147,18 +157,18 @@ const userMenuItems = computed(() => [
   [{
     label: t('nav.myAccount'),
     icon: 'i-heroicons-user-circle',
-    to: dashboardLink.value
+    onSelect: () => router.push(localePath(dashboardLink.value))
   }],
   [{
     label: t('nav.logout'),
     icon: 'i-heroicons-arrow-right-on-rectangle',
-    click: handleLogout
+    onSelect: handleLogout
   }]
 ])
 
 function handleLogout() {
   logout()
   mobileOpen.value = false
-  router.push('/')
+  router.push(localePath('/'))
 }
 </script>

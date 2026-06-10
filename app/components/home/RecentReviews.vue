@@ -1,16 +1,16 @@
 <template>
-  <section class="relative py-20 lg:py-28 bg-[#111113]">
-    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="py-20 lg:py-28 bg-stone-50 border-y border-stone-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section header -->
       <div class="text-center max-w-2xl mx-auto mb-14">
-        <p class="text-sm font-semibold text-[#0D9373] uppercase tracking-wider mb-4">
-          {{ $t('reviews.badge') || 'Recenzii' }}
+        <p class="text-sm font-semibold text-orange-600 uppercase tracking-wider mb-3">
+          {{ $t('reviews.badge') }}
         </p>
-        <h2 class="text-[30px] sm:text-[36px] font-bold text-white tracking-tight mb-4">
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-stone-900 tracking-tight mb-4">
           {{ $t('reviews.title') }}
         </h2>
-        <p class="text-[#A1A1AA] leading-relaxed">
-          {{ $t('reviews.subtitle') || 'Ce spun clientii nostri despre mesteri.' }}
+        <p class="text-stone-500 leading-relaxed">
+          {{ $t('reviews.subtitle') }}
         </p>
       </div>
 
@@ -20,35 +20,33 @@
           v-for="(review, i) in topReviews"
           :key="review.id"
           class="animate-fade-up"
-          :style="{ animationDelay: `${i * 0.1}s` }"
+          :style="{ animationDelay: `${i * 0.08}s` }"
         >
-          <div class="relative h-full p-6 rounded-xl bg-[#141416] border border-white/[0.06] hover:border-white/[0.12] transition-all duration-150">
-            <!-- Decorative quote mark -->
-            <div class="absolute top-4 right-4 text-[48px] font-serif text-white/[0.04] leading-none pointer-events-none">"</div>
-
+          <figure class="relative h-full flex flex-col p-7 rounded-2xl bg-white border border-stone-200 shadow-sm">
             <!-- Stars -->
-            <div class="flex items-center gap-1 mb-4">
+            <div class="flex items-center gap-0.5 mb-4">
               <UIcon v-for="s in 5" :key="s" name="i-heroicons-star-solid" class="w-4 h-4 text-amber-400" />
             </div>
 
             <!-- Quote -->
-            <p class="text-[#EDEDEF] leading-relaxed mb-6 text-sm">
-              "{{ review.text }}"
-            </p>
+            <blockquote class="text-stone-700 leading-relaxed mb-6 text-[15px] flex-1">
+              „{{ review.text }}"
+            </blockquote>
 
             <!-- Author -->
-            <div class="flex items-center gap-3 pt-4 border-t border-white/[0.06]">
+            <figcaption class="flex items-center gap-3 pt-5 border-t border-stone-100">
               <img
                 :src="review.reviewerAvatar"
                 :alt="review.reviewerName"
                 class="w-10 h-10 rounded-full object-cover"
+                loading="lazy"
               />
               <div>
-                <p class="text-sm font-semibold text-white">{{ review.reviewerName }}</p>
-                <p class="text-xs text-[#63636E]">{{ getCategoryName(review.category) }}</p>
+                <p class="text-sm font-semibold text-stone-900">{{ review.reviewerName }}</p>
+                <p class="text-xs text-stone-400">{{ getCategoryName(review.category) }}</p>
               </div>
-            </div>
-          </div>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </div>

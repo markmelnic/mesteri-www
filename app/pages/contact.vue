@@ -1,43 +1,42 @@
 <template>
-  <div>
-    <!-- Hero -->
-    <section class="relative overflow-hidden py-16 lg:py-20 bg-[#0A0A0A]">
-      <div class="absolute top-0 right-1/4 w-[400px] h-[300px] bg-[#0D9373]/[0.06] rounded-full blur-[140px] pointer-events-none" />
-      <div class="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="animate-fade-up text-[32px] sm:text-[40px] lg:text-[48px] font-bold text-white tracking-tight mb-4">
+  <div class="bg-stone-50 min-h-screen">
+    <!-- Header -->
+    <section class="bg-white border-b border-stone-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14 text-center">
+        <h1 class="animate-fade-up font-display text-3xl sm:text-4xl font-bold text-stone-900 tracking-tight mb-3">
           {{ $t('contact.title') }}
         </h1>
-        <p class="animate-fade-up delay-100 text-lg text-[#A1A1AA] max-w-xl mx-auto">
+        <p class="animate-fade-up delay-100 text-lg text-stone-500 max-w-xl mx-auto">
           {{ $t('contact.subtitle') }}
         </p>
       </div>
     </section>
 
     <!-- Content -->
-    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <!-- Form -->
         <div class="lg:col-span-2">
-          <div class="animate-fade-up p-8 rounded-xl bg-[#141416] border border-white/[0.06]">
-            <h2 class="text-xl font-semibold text-white mb-6">{{ $t('contact.formTitle') }}</h2>
+          <div class="animate-fade-up p-6 sm:p-8 rounded-2xl bg-white border border-stone-200">
+            <h2 class="font-display text-xl font-semibold text-stone-900 mb-6">{{ $t('contact.formTitle') }}</h2>
             <form class="space-y-5" @submit.prevent="submitForm">
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <UFormField :label="$t('contact.name')">
-                  <UInput v-model="form.name" :placeholder="$t('contact.namePlaceholder')" />
+                  <UInput v-model="form.name" :placeholder="$t('contact.namePlaceholder')" class="w-full" />
                 </UFormField>
                 <UFormField :label="$t('contact.email')">
-                  <UInput v-model="form.email" type="email" :placeholder="$t('contact.emailPlaceholder')" />
+                  <UInput v-model="form.email" type="email" :placeholder="$t('contact.emailPlaceholder')" class="w-full" />
                 </UFormField>
               </div>
               <UFormField :label="$t('contact.subject')">
-                <UInput v-model="form.subject" :placeholder="$t('contact.subjectPlaceholder')" />
+                <UInput v-model="form.subject" :placeholder="$t('contact.subjectPlaceholder')" class="w-full" />
               </UFormField>
               <UFormField :label="$t('contact.message')">
-                <UTextarea v-model="form.message" :rows="5" :placeholder="$t('contact.messagePlaceholder')" />
+                <UTextarea v-model="form.message" :rows="5" :placeholder="$t('contact.messagePlaceholder')" class="w-full" />
               </UFormField>
               <button
                 type="submit"
-                class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-[#0D9373] hover:bg-[#0FAA84] rounded-lg transition-colors duration-150"
+                class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-orange-600 hover:bg-orange-700 rounded-xl transition-colors"
               >
                 {{ $t('contact.send') }}
                 <UIcon name="i-heroicons-paper-airplane" class="w-4 h-4" />
@@ -51,14 +50,25 @@
           <div
             v-for="(info, i) in contactInfo"
             :key="i"
-            class="animate-fade-up p-6 rounded-xl bg-[#141416] border border-white/[0.06]"
-            :style="{ animationDelay: `${i * 0.1}s` }"
+            class="animate-fade-up p-6 rounded-2xl bg-white border border-stone-200"
+            :style="{ animationDelay: `${i * 0.08}s` }"
           >
-            <div class="w-9 h-9 rounded-lg bg-[#0D9373]/10 text-[#0D9373] flex items-center justify-center mb-4">
+            <div class="w-10 h-10 rounded-xl bg-orange-50 border border-orange-100 text-orange-600 flex items-center justify-center mb-4">
               <UIcon :name="info.icon" class="w-4 h-4" />
             </div>
-            <h3 class="font-semibold text-white text-sm mb-1">{{ info.title }}</h3>
-            <p class="text-sm text-[#A1A1AA]">{{ info.value }}</p>
+            <h3 class="font-semibold text-stone-900 text-sm mb-1">{{ info.title }}</h3>
+            <p class="text-sm text-stone-500">{{ info.value }}</p>
+          </div>
+
+          <div class="animate-fade-up p-6 rounded-2xl bg-white border border-stone-200" style="animation-delay: 0.24s">
+            <div class="w-10 h-10 rounded-xl bg-orange-50 border border-orange-100 text-orange-600 flex items-center justify-center mb-4">
+              <UIcon name="i-heroicons-clock" class="w-4 h-4" />
+            </div>
+            <h3 class="font-semibold text-stone-900 text-sm mb-2">{{ $t('contact.workingHours') }}</h3>
+            <div class="space-y-1 text-sm text-stone-500">
+              <p>{{ $t('contact.monFri') }}</p>
+              <p>{{ $t('contact.saturday') }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -80,8 +90,8 @@ const form = reactive({
 
 const contactInfo = computed(() => [
   { icon: 'i-heroicons-map-pin', title: t('contact.addressLabel'), value: t('contact.address') },
-  { icon: 'i-heroicons-phone', title: t('contact.phoneLabel'), value: t('contact.phone') },
-  { icon: 'i-heroicons-envelope', title: t('contact.emailLabel'), value: t('contact.emailAddress') }
+  { icon: 'i-heroicons-phone', title: t('contact.phoneLabel'), value: '+373 22 123 456' },
+  { icon: 'i-heroicons-envelope', title: t('contact.emailLabel'), value: 'contact@mesteri.md' }
 ])
 
 function submitForm() {

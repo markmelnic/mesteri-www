@@ -9,7 +9,9 @@
   >
     <button
       v-if="visible"
-      class="fixed bottom-6 right-6 z-40 w-10 h-10 rounded-lg bg-[#141416] border border-white/[0.06] hover:border-white/[0.12] flex items-center justify-center text-[#A1A1AA] hover:text-white transition-all duration-150"
+      type="button"
+      aria-label="Back to top"
+      class="fixed bottom-6 right-6 z-40 w-10 h-10 rounded-xl bg-white border border-stone-200 shadow-lg shadow-stone-900/5 flex items-center justify-center text-stone-500 hover:text-stone-900 hover:border-stone-300 transition-all duration-150"
       @click="scrollToTop"
     >
       <UIcon name="i-heroicons-arrow-up" class="w-4 h-4" />
@@ -24,10 +26,10 @@ function onScroll() {
   visible.value = window.scrollY > 400
 }
 
+onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
+onUnmounted(() => window.removeEventListener('scroll', onScroll))
+
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
-
-onMounted(() => window.addEventListener('scroll', onScroll))
-onUnmounted(() => window.removeEventListener('scroll', onScroll))
 </script>

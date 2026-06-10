@@ -1,16 +1,16 @@
 <template>
-  <section class="relative py-20 lg:py-28 bg-[#0A0A0A]">
-    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section header -->
       <div class="text-center max-w-2xl mx-auto mb-14">
-        <p class="text-sm font-semibold text-[#0D9373] uppercase tracking-wider mb-4">
-          {{ $t('categories.badge') || 'Categorii' }}
+        <p class="text-sm font-semibold text-orange-600 uppercase tracking-wider mb-3">
+          {{ $t('categories.badge') }}
         </p>
-        <h2 class="text-[30px] sm:text-[36px] font-bold text-white tracking-tight mb-4">
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-stone-900 tracking-tight mb-4">
           {{ $t('categories.title') }}
         </h2>
-        <p class="text-[#A1A1AA] leading-relaxed">
-          {{ $t('categories.subtitle') || 'Gaseste exact serviciul de care ai nevoie din gama noastra larga de categorii.' }}
+        <p class="text-stone-500 leading-relaxed">
+          {{ $t('categories.subtitle') }}
         </p>
       </div>
 
@@ -21,14 +21,14 @@
           :key="cat.id"
           :category="cat"
           class="animate-fade-up"
-          :style="{ animationDelay: `${i * 0.04}s` }"
+          :style="{ animationDelay: `${Math.min(i * 0.04, 0.4)}s` }"
         />
       </div>
 
       <div class="text-center mt-10">
         <NuxtLink
-          to="/servicii"
-          class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-[#A1A1AA] border border-white/[0.06] hover:border-white/[0.12] hover:text-white rounded-lg transition-all duration-150"
+          :to="localePath('/servicii')"
+          class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-stone-700 bg-white border border-stone-200 hover:border-stone-300 hover:bg-stone-50 rounded-xl transition-colors"
         >
           {{ $t('categories.viewAll') }}
           <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
@@ -41,5 +41,6 @@
 <script setup lang="ts">
 import { categories } from '~/data/categories'
 
+const localePath = useLocalePath()
 const displayCategories = categories.slice(0, 12)
 </script>

@@ -1,44 +1,51 @@
 <template>
   <div>
     <!-- Desktop Sidebar -->
-    <aside class="hidden lg:flex flex-col w-64 border-r border-white/[0.06] bg-[#111113] min-h-[calc(100vh-64px)]">
-      <div class="p-6">
-        <div class="flex items-center gap-3 mb-8 p-3 rounded-xl bg-white/[0.04] border border-white/[0.06]">
+    <aside class="hidden lg:flex flex-col w-64 border-r border-stone-200 bg-white min-h-[calc(100vh-64px)]">
+      <div class="p-5">
+        <div class="flex items-center gap-3 mb-6 p-3 rounded-2xl bg-stone-50 border border-stone-200">
           <UAvatar :src="user?.avatar" :alt="user?.name" size="lg" />
           <div class="min-w-0">
-            <p class="font-semibold text-white truncate">{{ user?.name }}</p>
-            <p class="text-xs text-[#63636E] font-medium">{{ isProvider ? $t('dashboard.provider') : $t('dashboard.client') }}</p>
+            <p class="font-semibold text-stone-900 truncate">{{ user?.name }}</p>
+            <p class="text-xs font-medium" :class="isProvider ? 'text-orange-600' : 'text-stone-500'">
+              {{ isProvider ? $t('dashboard.provider') : $t('dashboard.client') }}
+            </p>
           </div>
         </div>
         <nav class="space-y-1">
           <NuxtLink
             v-for="item in menuItems"
             :key="item.to"
-            :to="item.to"
-            class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-[#A1A1AA] hover:text-white hover:bg-white/[0.06] rounded-xl transition-all duration-150"
-            active-class="!text-[#2AB673] !bg-[#0D9373]/10"
+            :to="localePath(item.to)"
+            class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-100 rounded-xl transition-colors"
+            active-class="!text-orange-700 !bg-orange-50"
           >
             <UIcon :name="item.icon" class="w-5 h-5" />
             {{ item.label }}
           </NuxtLink>
         </nav>
       </div>
-      <div class="mt-auto p-6 border-t border-white/[0.06]">
-        <UButton variant="ghost" color="neutral" block class="justify-start text-[#A1A1AA] hover:text-white" icon="i-heroicons-arrow-right-on-rectangle" @click="handleLogout">
+      <div class="mt-auto p-5 border-t border-stone-200">
+        <button
+          type="button"
+          class="flex items-center gap-3 w-full px-3 py-2.5 text-sm font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-100 rounded-xl transition-colors"
+          @click="handleLogout"
+        >
+          <UIcon name="i-heroicons-arrow-right-on-rectangle" class="w-5 h-5" />
           {{ $t('nav.logout') }}
-        </UButton>
+        </button>
       </div>
     </aside>
 
     <!-- Mobile Bottom Tabs -->
-    <nav class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#0A0A0A]/90 backdrop-blur-xl border-t border-white/[0.06] px-2 pb-safe">
+    <nav class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-t border-stone-200 px-2 pb-safe">
       <div class="flex items-center justify-around">
         <NuxtLink
           v-for="item in menuItems.slice(0, 5)"
           :key="item.to"
-          :to="item.to"
-          class="flex flex-col items-center gap-1 py-2 px-3 text-[#63636E]"
-          active-class="!text-[#2AB673]"
+          :to="localePath(item.to)"
+          class="flex flex-col items-center gap-1 py-2 px-3 text-stone-400"
+          active-class="!text-orange-600"
         >
           <UIcon :name="item.icon" class="w-5 h-5" />
           <span class="text-[10px] font-medium">{{ item.shortLabel || item.label }}</span>
@@ -50,6 +57,7 @@
 
 <script setup lang="ts">
 const { t } = useI18n()
+const localePath = useLocalePath()
 const { user, isProvider, logout } = useAuth()
 const router = useRouter()
 
@@ -72,6 +80,6 @@ const menuItems = computed(() => isProvider.value ? providerMenu.value : clientM
 
 function handleLogout() {
   logout()
-  router.push('/')
+  router.push(localePath('/'))
 }
 </script>

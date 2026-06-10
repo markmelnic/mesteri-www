@@ -11,20 +11,20 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'mesteri.md — Platforma ta de servicii profesionale',
+      title: 'mesteri.md — Găsește meșterul potrivit',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Găsește meșteri verificați pentru orice serviciu de care ai nevoie. Platforma ta de servicii profesionale din Moldova.' },
-        { name: 'theme-color', content: '#0A0A0A' },
+        { name: 'description', content: 'Găsește meșteri verificați pentru orice lucrare: instalații, renovări, curățenie și multe altele. Platforma serviciilor din Moldova.' },
+        { name: 'theme-color', content: '#FFFFFF' },
         { property: 'og:type', content: 'website' },
-        { property: 'og:title', content: 'mesteri.md — Platforma ta de servicii profesionale' },
-        { property: 'og:description', content: 'Găsește meșteri verificați pentru orice serviciu de care ai nevoie.' },
+        { property: 'og:title', content: 'mesteri.md — Găsește meșterul potrivit' },
+        { property: 'og:description', content: 'Meșteri verificați, oferte transparente, recenzii reale. Platforma serviciilor din Moldova.' },
         { property: 'og:image', content: '/og-image.png' },
         { property: 'og:site_name', content: 'mesteri.md' },
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'mesteri.md — Platforma ta de servicii profesionale' },
-        { name: 'twitter:description', content: 'Găsește meșteri verificați pentru orice serviciu de care ai nevoie.' },
+        { name: 'twitter:title', content: 'mesteri.md — Găsește meșterul potrivit' },
+        { name: 'twitter:description', content: 'Meșteri verificați, oferte transparente, recenzii reale.' },
         { name: 'twitter:image', content: '/og-image.png' }
       ],
       link: [
@@ -36,7 +36,7 @@ export default defineNuxtConfig({
         { rel: 'manifest', href: '/site.webmanifest' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap' }
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&display=swap' }
       ]
     },
     pageTransition: { name: 'page', mode: 'out-in' }

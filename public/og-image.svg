@@ -1,47 +1,47 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
-  <!-- Open Graph image 1200x630 -->
-  <rect width="1200" height="630" fill="#F8FAFC"/>
+  <!-- Open Graph image 1200x630 — warm craft brand -->
+  <rect width="1200" height="630" fill="#FAFAF9"/>
 
-  <!-- Decorative background pattern -->
-  <rect x="0" y="0" width="1200" height="8" fill="#2563EB"/>
+  <!-- Dot texture -->
+  <g fill="#D6D3D1" opacity="0.5">
+    <circle cx="60" cy="60" r="2"/><circle cx="140" cy="60" r="2"/><circle cx="220" cy="60" r="2"/><circle cx="1060" cy="60" r="2"/><circle cx="1140" cy="60" r="2"/>
+    <circle cx="60" cy="140" r="2"/><circle cx="140" cy="140" r="2"/><circle cx="1140" cy="140" r="2"/>
+    <circle cx="60" cy="490" r="2"/><circle cx="1140" cy="490" r="2"/>
+    <circle cx="60" cy="570" r="2"/><circle cx="140" cy="570" r="2"/><circle cx="1060" cy="570" r="2"/><circle cx="1140" cy="570" r="2"/>
+  </g>
 
-  <!-- M monogram icon -->
-  <rect x="460" y="120" width="64" height="64" rx="14" fill="#2563EB"/>
-  <rect x="472" y="128" width="6" height="48" rx="3" fill="white"/>
-  <rect x="506" y="128" width="6" height="48" rx="3" fill="white"/>
-  <path d="M478 133L484 148L490 133" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Top accent bar -->
+  <rect x="0" y="0" width="1200" height="8" fill="#EA580C"/>
+
+  <!-- M monogram tile -->
+  <rect x="468" y="130" width="72" height="72" rx="20" fill="#EA580C"/>
+  <path d="M486 182V153L504 171L522 153V182" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
 
   <!-- Wordmark -->
-  <text x="540" y="168" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="700" font-size="48" fill="#111827" letter-spacing="-1">mesteri</text>
-  <text x="778" y="168" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="700" font-size="48" fill="#2563EB" letter-spacing="-1">.md</text>
+  <text x="556" y="184" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="700" font-size="52" fill="#1C1917" letter-spacing="-1.5">mesteri<tspan fill="#EA580C">.md</tspan></text>
 
   <!-- Tagline -->
-  <text x="600" y="260" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="500" font-size="32" fill="#64748B" text-anchor="middle">Platforma ta de servicii profesionale</text>
+  <text x="600" y="278" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="500" font-size="32" fill="#78716C" text-anchor="middle">Găsește meșterul potrivit pentru orice lucrare</text>
 
   <!-- Service icons row -->
-  <!-- Wrench icon -->
-  <rect x="300" y="340" width="80" height="80" rx="16" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="2"/>
-  <text x="340" y="392" font-family="system-ui" font-size="36" text-anchor="middle" fill="#2563EB">&#x1F527;</text>
+  <rect x="300" y="350" width="80" height="80" rx="20" fill="#FFF7ED" stroke="#FED7AA" stroke-width="2"/>
+  <text x="340" y="402" font-family="system-ui" font-size="36" text-anchor="middle">&#x1F527;</text>
 
-  <!-- Home icon -->
-  <rect x="420" y="340" width="80" height="80" rx="16" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="2"/>
-  <text x="460" y="392" font-family="system-ui" font-size="36" text-anchor="middle" fill="#2563EB">&#x1F3E0;</text>
+  <rect x="420" y="350" width="80" height="80" rx="20" fill="#FFF7ED" stroke="#FED7AA" stroke-width="2"/>
+  <text x="460" y="402" font-family="system-ui" font-size="36" text-anchor="middle">&#x1F3E0;</text>
 
-  <!-- Electrical icon -->
-  <rect x="540" y="340" width="80" height="80" rx="16" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="2"/>
-  <text x="580" y="392" font-family="system-ui" font-size="36" text-anchor="middle" fill="#2563EB">&#x26A1;</text>
+  <rect x="540" y="350" width="80" height="80" rx="20" fill="#FFF7ED" stroke="#FED7AA" stroke-width="2"/>
+  <text x="580" y="402" font-family="system-ui" font-size="36" text-anchor="middle">&#x26A1;</text>
 
-  <!-- Paint icon -->
-  <rect x="660" y="340" width="80" height="80" rx="16" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="2"/>
-  <text x="700" y="392" font-family="system-ui" font-size="36" text-anchor="middle" fill="#2563EB">&#x1F3A8;</text>
+  <rect x="660" y="350" width="80" height="80" rx="20" fill="#FFF7ED" stroke="#FED7AA" stroke-width="2"/>
+  <text x="700" y="402" font-family="system-ui" font-size="36" text-anchor="middle">&#x1F3A8;</text>
 
-  <!-- Garden icon -->
-  <rect x="780" y="340" width="80" height="80" rx="16" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="2"/>
-  <text x="820" y="392" font-family="system-ui" font-size="36" text-anchor="middle" fill="#2563EB">&#x1F33F;</text>
+  <rect x="780" y="350" width="80" height="80" rx="20" fill="#FFF7ED" stroke="#FED7AA" stroke-width="2"/>
+  <text x="820" y="402" font-family="system-ui" font-size="36" text-anchor="middle">&#x1F33F;</text>
 
   <!-- Bottom text -->
-  <text x="600" y="520" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="400" font-size="22" fill="#94A3B8" text-anchor="middle">mesteri.md</text>
+  <text x="600" y="520" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="500" font-size="24" fill="#A8A29E" text-anchor="middle">Meșteri verificați &#8226; Oferte transparente &#8226; Recenzii reale</text>
 
   <!-- Bottom accent line -->
-  <rect x="0" y="622" width="1200" height="8" fill="#2563EB"/>
+  <rect x="0" y="622" width="1200" height="8" fill="#EA580C"/>
 </svg>

@@ -1,32 +1,32 @@
 <template>
-  <section class="relative py-20 lg:py-28 bg-[#0A0A0A] overflow-hidden">
-    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section header -->
       <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
         <div>
-          <p class="text-sm font-semibold text-[#0D9373] uppercase tracking-wider mb-4">
-            {{ $t('featuredProviders.badge') || 'Top mesteri' }}
+          <p class="text-sm font-semibold text-orange-600 uppercase tracking-wider mb-3">
+            {{ $t('featuredProviders.badge') }}
           </p>
-          <h2 class="text-[30px] sm:text-[36px] font-bold text-white tracking-tight">
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-stone-900 tracking-tight">
             {{ $t('featuredProviders.title') }}
           </h2>
         </div>
         <NuxtLink
-          to="/mesteri"
-          class="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#A1A1AA] border border-white/[0.06] hover:border-white/[0.12] hover:text-white rounded-lg transition-all duration-150"
+          :to="localePath('/mesteri')"
+          class="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-stone-700 bg-white border border-stone-200 hover:border-stone-300 hover:bg-stone-50 rounded-xl transition-colors shrink-0"
         >
           {{ $t('featuredProviders.viewAll') }}
           <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
         </NuxtLink>
       </div>
 
-      <!-- Provider cards horizontal scroll -->
-      <div class="flex gap-6 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide">
+      <!-- Provider cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div
           v-for="(provider, i) in featuredProviders"
           :key="provider.id"
-          class="min-w-[300px] max-w-[340px] snap-start flex-shrink-0 animate-fade-up"
-          :style="{ animationDelay: `${i * 0.08}s` }"
+          class="animate-fade-up"
+          :style="{ animationDelay: `${i * 0.06}s` }"
         >
           <ProvidersProviderCard :provider="provider" />
         </div>
@@ -34,8 +34,8 @@
 
       <div class="text-center mt-8 sm:hidden">
         <NuxtLink
-          to="/mesteri"
-          class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#A1A1AA] border border-white/[0.06] hover:border-white/[0.12] hover:text-white rounded-lg transition-all duration-150"
+          :to="localePath('/mesteri')"
+          class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-stone-700 bg-white border border-stone-200 hover:bg-stone-50 rounded-xl transition-colors"
         >
           {{ $t('featuredProviders.viewAll') }}
           <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
@@ -48,5 +48,11 @@
 <script setup lang="ts">
 import { providers } from '~/data/providers'
 
-const featuredProviders = providers.filter(p => p.verified).slice(0, 6)
+const localePath = useLocalePath()
+
+const featuredProviders = providers
+  .filter(p => p.verified)
+  .slice()
+  .sort((a, b) => b.rating - a.rating)
+  .slice(0, 6)
 </script>

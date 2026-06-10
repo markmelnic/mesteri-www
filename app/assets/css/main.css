@@ -2,131 +2,54 @@
 @import "@nuxt/ui";
 
 /* ============================================================
-   mesteri.md — Mintlify-Inspired Dark Design System
-   Dark-mode-first, luminous, precise
+   mesteri.md — Warm Craft Design System
+   Light-first, trustworthy, human
    ============================================================ */
 
+@theme static {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: 'Bricolage Grotesque', 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
 :root {
-  --font-heading: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-body: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
-  color-scheme: dark;
-
-  /* Dark surfaces */
-  --surface-0: #0A0A0A;
-  --surface-1: #111113;
-  --surface-2: #141416;
-  --surface-3: #1A1A1E;
-  --surface-4: #222228;
-
-  /* Text */
-  --text-primary: #FFFFFF;
-  --text-secondary: #EDEDEF;
-  --text-muted: #A1A1AA;
-  --text-dimmed: #63636E;
-
-  /* Accent — Emerald/Teal */
-  --accent: #0D9373;
-  --accent-light: #2AB673;
-  --accent-hover: #0FAA84;
-  --accent-glow: rgba(13, 147, 115, 0.08);
-  --accent-glow-strong: rgba(13, 147, 115, 0.12);
-
-  /* Borders */
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-hover: rgba(255, 255, 255, 0.12);
-  --border-accent: rgba(13, 147, 115, 0.3);
+  color-scheme: light;
+  --ui-bg: var(--color-white);
+  --ui-border: var(--color-stone-200);
+  --ui-text: var(--color-stone-600);
+  --ui-text-highlighted: var(--color-stone-900);
+  --ui-text-muted: var(--color-stone-500);
+  --ui-text-dimmed: var(--color-stone-400);
+  --ui-bg-muted: var(--color-stone-50);
+  --ui-bg-elevated: var(--color-stone-100);
+  --ui-radius: 0.5rem;
 }
 
-/* Force dark theme across Nuxt UI */
-:root,
-:root.dark,
-.dark,
-[data-theme="dark"] {
-  --ui-bg: var(--surface-0);
-  --ui-foreground: var(--text-secondary);
-  --ui-border: var(--border-subtle);
-  --ui-bg-elevated: var(--surface-2);
-  --ui-bg-accented: var(--surface-3);
-  --ui-bg-inverted: var(--text-primary);
-  --ui-text-dimmed: var(--text-dimmed);
-  --ui-text-muted: var(--text-muted);
-  --ui-text-toned: var(--text-secondary);
-  --ui-text-highlighted: var(--text-primary);
-}
-
-body {
-  font-family: var(--font-body);
-  color: var(--text-secondary);
-  background-color: var(--surface-0);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+html {
   scroll-behavior: smooth;
 }
 
-/* ============================================================
-   Typography
-   ============================================================ */
+body {
+  font-family: var(--font-sans);
+  color: var(--color-stone-700);
+  background-color: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  letter-spacing: -0.03em;
-  font-weight: 700;
-  color: var(--text-primary);
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--color-stone-900);
 }
 
-h1 { letter-spacing: -0.04em; }
-p { line-height: 1.7; }
-
-/* ============================================================
-   Dark Card System
-   ============================================================ */
-
-.dark-card {
-  background: var(--surface-2);
-  border: 1px solid var(--border-subtle);
-  border-radius: 12px;
-  transition: border-color 180ms ease, box-shadow 180ms ease;
+p {
+  line-height: 1.65;
 }
 
-.dark-card:hover {
-  border-color: var(--border-hover);
-}
-
-.dark-card-glow:hover {
-  border-color: var(--border-accent);
-  box-shadow: 0 0 20px var(--accent-glow);
-}
-
-/* ============================================================
-   Accent Glows
-   ============================================================ */
-
-.glow-accent {
-  position: relative;
-}
-
-.glow-accent::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, var(--accent-glow-strong) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ============================================================
-   Dot Pattern (subtle texture)
-   ============================================================ */
-
-.dot-pattern {
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 24px 24px;
+::selection {
+  background-color: var(--color-orange-100);
+  color: var(--color-orange-900);
 }
 
 /* ============================================================
@@ -134,7 +57,7 @@ p { line-height: 1.7; }
    ============================================================ */
 
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -144,89 +67,33 @@ p { line-height: 1.7; }
 }
 
 .animate-fade-up {
-  animation: fade-up 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation: fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .animate-fade-in {
   animation: fade-in 0.4s ease both;
 }
 
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-.delay-400 { animation-delay: 0.4s; }
-.delay-500 { animation-delay: 0.5s; }
+.delay-100 { animation-delay: 0.08s; }
+.delay-200 { animation-delay: 0.16s; }
+.delay-300 { animation-delay: 0.24s; }
+.delay-400 { animation-delay: 0.32s; }
+.delay-500 { animation-delay: 0.4s; }
 
-/* ============================================================
-   Form Elements — Dark Mode
-   ============================================================ */
-
-input,
-select,
-textarea,
-[role="combobox"],
-[role="listbox"],
-[data-part="input"],
-[data-part="control"],
-[data-part="trigger"] {
-  color-scheme: dark !important;
-}
-
-input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="submit"]):not([type="button"]),
-select,
-textarea,
-[class*="UInput"] input,
-[class*="USelect"] button,
-[class*="UTextarea"] textarea {
-  background-color: var(--surface-2) !important;
-  color: var(--text-secondary) !important;
-  border-color: var(--border-subtle) !important;
-}
-
-input::placeholder,
-textarea::placeholder {
-  color: var(--text-dimmed) !important;
-}
-
-[role="listbox"],
-[role="option"],
-[data-part="content"],
-[data-part="item"] {
-  background-color: var(--surface-3) !important;
-  color: var(--text-secondary) !important;
-}
-
-[role="option"]:hover,
-[data-part="item"]:hover,
-[data-highlighted] {
-  background-color: var(--surface-4) !important;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-  border-color: var(--accent) !important;
-  box-shadow: 0 0 0 3px var(--accent-glow) !important;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color-scheme: dark;
-    --ui-bg: var(--surface-0);
-    --ui-foreground: var(--text-secondary);
-    --ui-border: var(--border-subtle);
-    --ui-bg-elevated: var(--surface-2);
-    --ui-bg-accented: var(--surface-3);
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-in {
+    animation: none;
   }
 }
 
 /* ============================================================
-   Page Transitions
+   Page transitions
    ============================================================ */
 
 .page-enter-active,
 .page-leave-active {
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.18s ease, transform 0.18s ease;
 }
 .page-enter-from {
   opacity: 0;
@@ -238,84 +105,19 @@ textarea:focus {
 }
 
 /* ============================================================
-   Scrollbar
+   Helpers
    ============================================================ */
 
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* Custom dark scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--surface-0);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--surface-4);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--text-dimmed);
+/* Warm dotted texture for hero/CTA surfaces */
+.dot-grid {
+  background-image: radial-gradient(circle, var(--color-stone-300) 1px, transparent 1px);
+  background-size: 22px 22px;
 }
 
-/* ============================================================
-   Nuxt UI Overrides for Dark Theme
-   ============================================================ */
-
-/* Breadcrumb */
-.ui-breadcrumb a {
-  color: var(--text-dimmed) !important;
-}
-.ui-breadcrumb a:hover {
-  color: var(--text-muted) !important;
-}
-
-/* Modal */
-[data-part="backdrop"] {
-  background-color: rgba(0, 0, 0, 0.7) !important;
-  backdrop-filter: blur(4px);
-}
-
-[data-part="positioner"] [data-part="content"],
-.ui-modal [data-part="content"] {
-  background-color: var(--surface-2) !important;
-  border: 1px solid var(--border-subtle) !important;
-  color: var(--text-secondary) !important;
-}
-
-/* Accordion */
-[data-part="item-trigger"] {
-  color: var(--text-primary) !important;
-}
-[data-part="item-content"] {
-  color: var(--text-muted) !important;
-}
-
-/* Badge */
-.badge-accent {
-  background-color: rgba(13, 147, 115, 0.1);
-  color: var(--accent-light);
-  border: 1px solid rgba(13, 147, 115, 0.2);
-}
-
-/* Toast overrides */
-[data-sonner-toast] {
-  background-color: var(--surface-3) !important;
-  border-color: var(--border-subtle) !important;
-  color: var(--text-secondary) !important;
-}
-
-/* Dropdown menu */
-[role="menu"] {
-  background-color: var(--surface-3) !important;
-  border: 1px solid var(--border-subtle) !important;
-}
-
-[role="menuitem"] {
-  color: var(--text-secondary) !important;
-}
-
-[role="menuitem"]:hover {
-  background-color: var(--surface-4) !important;
+.dot-grid-dark {
+  background-image: radial-gradient(circle, rgb(255 255 255 / 0.14) 1px, transparent 1px);
+  background-size: 22px 22px;
 }
