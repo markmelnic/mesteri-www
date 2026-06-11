@@ -1,52 +1,38 @@
 <template>
-  <section class="relative overflow-hidden min-h-[90vh] flex items-center bg-[#0A0A0A]">
-    <!-- Accent glow behind hero -->
-    <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#0D9373]/[0.08] rounded-full blur-[150px] pointer-events-none" />
+  <section class="relative overflow-hidden bg-gradient-to-b from-orange-50/70 via-white to-white">
+    <!-- Dot texture -->
+    <div class="absolute inset-0 dot-grid opacity-40 [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,black,transparent)]" />
 
-    <!-- Dot pattern overlay -->
-    <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 32px 32px;" />
-
-    <div class="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 w-full">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-24 lg:pb-28">
       <div class="text-center max-w-3xl mx-auto">
         <!-- Badge -->
-        <div class="animate-fade-up inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.06] text-[#A1A1AA] text-sm font-medium mb-8">
-          <span class="w-2 h-2 rounded-full bg-[#0D9373]" />
-          {{ $t('hero.badge') || '500+ mesteri verificati' }}
+        <div class="animate-fade-up inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-stone-200 shadow-sm text-stone-600 text-sm font-medium mb-8">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+          </span>
+          {{ $t('hero.badge') }}
         </div>
 
         <!-- Headline -->
-        <h1 class="animate-fade-up delay-100 text-[40px] sm:text-[48px] md:text-[56px] font-bold text-white leading-[1.1] mb-6" style="letter-spacing: -0.03em;">
+        <h1 class="animate-fade-up delay-100 font-display text-4xl sm:text-5xl lg:text-[56px] font-bold text-stone-900 leading-[1.08] tracking-tight mb-6">
           {{ $t('hero.title') }}
-          <span class="block mt-1 text-[#0D9373]">
-            {{ $t('hero.titleLine2') }}
+          <span class="relative inline-block text-orange-600">
+            {{ $t('hero.titleHighlight') }}
+            <svg class="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 9" fill="none" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M2 7C50 2 150 2 198 6" stroke="#FDBA74" stroke-width="4" stroke-linecap="round" />
+            </svg>
           </span>
         </h1>
 
         <!-- Subtitle -->
-        <p class="animate-fade-up delay-200 text-lg sm:text-xl text-[#A1A1AA] max-w-2xl mx-auto mb-10 leading-relaxed">
+        <p class="animate-fade-up delay-200 text-lg sm:text-xl text-stone-500 max-w-2xl mx-auto mb-10 leading-relaxed">
           {{ $t('hero.subtitle') }}
         </p>
 
-        <!-- CTA Buttons -->
-        <div class="animate-fade-up delay-300 flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-          <NuxtLink
-            to="/cerere-noua"
-            class="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-[#0D9373] hover:bg-[#0FAA84] rounded-[10px] transition-colors duration-150"
-          >
-            {{ $t('cta.button') }}
-            <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
-          </NuxtLink>
-          <NuxtLink
-            to="/cum-functioneaza"
-            class="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-[#A1A1AA] border border-white/[0.06] hover:border-white/[0.12] hover:text-white rounded-[10px] transition-all duration-150"
-          >
-            {{ $t('cta.learnMore') || 'Afla mai multe' }}
-          </NuxtLink>
-        </div>
-
-        <!-- Search bar -->
-        <div class="animate-fade-up delay-400 flex justify-center">
-          <div class="w-full max-w-2xl bg-[#141416] rounded-xl p-2 border border-white/[0.06]">
+        <!-- Search card -->
+        <div class="animate-fade-up delay-300 max-w-2xl mx-auto">
+          <div class="bg-white rounded-2xl p-2.5 border border-stone-200 shadow-xl shadow-stone-900/5">
             <SharedSearchBar
               v-model="searchQuery"
               :placeholder="$t('hero.searchPlaceholder')"
@@ -56,19 +42,50 @@
           </div>
         </div>
 
-        <!-- Trust indicators -->
-        <div class="animate-fade-up delay-500 mt-10 flex flex-wrap items-center justify-center gap-8 text-sm text-[#63636E]">
-          <div class="flex items-center gap-2">
-            <UIcon name="i-heroicons-shield-check-solid" class="w-4 h-4 text-[#0D9373]/70" />
-            <span>{{ $t('hero.verified') || 'Mesteri verificati' }}</span>
+        <!-- Popular categories quick chips -->
+        <div class="animate-fade-up delay-400 mt-6 flex flex-wrap items-center justify-center gap-2">
+          <span class="text-sm text-stone-400 mr-1">{{ $t('hero.popular') }}:</span>
+          <NuxtLink
+            v-for="chip in popularChips"
+            :key="chip.slug"
+            :to="localePath(`/servicii/${chip.slug}`)"
+            class="px-3 py-1.5 rounded-full bg-white border border-stone-200 text-sm font-medium text-stone-600 hover:border-orange-300 hover:text-orange-700 hover:bg-orange-50 transition-colors"
+          >
+            {{ chip.icon }} {{ chip.name }}
+          </NuxtLink>
+        </div>
+
+        <!-- Trust strip -->
+        <div class="animate-fade-up delay-500 mt-12 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
+          <div class="flex items-center gap-3">
+            <div class="flex -space-x-2.5">
+              <img
+                v-for="(avatar, i) in trustAvatars"
+                :key="i"
+                :src="avatar"
+                alt=""
+                class="w-9 h-9 rounded-full ring-2 ring-white object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div class="text-left">
+              <p class="text-sm font-semibold text-stone-900">500+ {{ $t('hero.verifiedShort') }}</p>
+              <div class="flex items-center gap-1">
+                <UIcon v-for="s in 5" :key="s" name="i-heroicons-star-solid" class="w-3.5 h-3.5 text-amber-400" />
+                <span class="text-xs text-stone-500 ml-1">4.8 / 5</span>
+              </div>
+            </div>
           </div>
-          <div class="flex items-center gap-2">
-            <UIcon name="i-heroicons-star-solid" class="w-4 h-4 text-[#0D9373]/70" />
-            <span>{{ $t('hero.avgRating') || '4.8 rating mediu' }}</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <UIcon name="i-heroicons-bolt-solid" class="w-4 h-4 text-[#0D9373]/70" />
-            <span>{{ $t('hero.fast') || 'Raspuns rapid' }}</span>
+          <div class="hidden sm:block w-px h-10 bg-stone-200" />
+          <div class="flex items-center gap-6 text-sm text-stone-500">
+            <span class="flex items-center gap-1.5">
+              <UIcon name="i-heroicons-shield-check-solid" class="w-4 h-4 text-emerald-500" />
+              {{ $t('hero.verified') }}
+            </span>
+            <span class="flex items-center gap-1.5">
+              <UIcon name="i-heroicons-bolt-solid" class="w-4 h-4 text-orange-500" />
+              {{ $t('hero.fast') }}
+            </span>
           </div>
         </div>
       </div>
@@ -77,14 +94,33 @@
 </template>
 
 <script setup lang="ts">
-const { t } = useI18n()
+import { categories } from '~/data/categories'
+
 const router = useRouter()
+const localePath = useLocalePath()
 const searchQuery = ref('')
+
+const popularChips = computed(() =>
+  categories
+    .slice()
+    .sort((a, b) => b.providerCount - a.providerCount)
+    .slice(0, 4)
+    .map(c => ({ slug: c.slug, name: c.name, icon: c.icon }))
+)
+
+const trustAvatars = [
+  'https://i.pravatar.cc/72?img=1',
+  'https://i.pravatar.cc/72?img=5',
+  'https://i.pravatar.cc/72?img=12',
+  'https://i.pravatar.cc/72?img=16',
+  'https://i.pravatar.cc/72?img=13'
+]
 
 function handleSearch(query: string, city: string) {
   const params = new URLSearchParams()
   if (query) params.set('q', query)
-  if (city && city !== t('search.allCities')) params.set('city', city)
-  router.push(`/servicii?${params.toString()}`)
+  if (city) params.set('city', city)
+  const qs = params.toString()
+  router.push(localePath(`/mesteri${qs ? `?${qs}` : ''}`))
 }
 </script>

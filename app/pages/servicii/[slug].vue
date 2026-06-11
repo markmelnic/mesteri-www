@@ -1,34 +1,44 @@
 <template>
-  <div v-if="category">
+  <div v-if="category" class="bg-stone-50 min-h-screen">
     <!-- Category header -->
-    <section class="relative overflow-hidden py-16 lg:py-20 bg-[#0A0A0A]">
-      <div class="absolute top-0 right-1/4 w-[400px] h-[300px] bg-[#0D9373]/[0.06] rounded-full blur-[140px] pointer-events-none" />
-      <div class="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-        <UBreadcrumb :items="breadcrumbs" class="mb-6" />
-        <div class="flex items-center gap-4 mb-4">
-          <span class="text-4xl animate-fade-up">{{ category.icon }}</span>
+    <section class="bg-white border-b border-stone-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+        <UBreadcrumb :items="breadcrumbs" class="mb-8" />
+        <div class="flex items-start gap-5">
+          <div class="animate-fade-up flex items-center justify-center w-16 h-16 rounded-2xl bg-orange-50 border border-orange-100 text-3xl shrink-0">
+            {{ category.icon }}
+          </div>
           <div>
-            <h1 class="animate-fade-up delay-100 text-[30px] sm:text-[36px] font-bold text-white tracking-tight">
+            <h1 class="animate-fade-up delay-100 font-display text-3xl sm:text-4xl font-bold text-stone-900 tracking-tight mb-2">
               {{ category.name }}
             </h1>
-            <p class="animate-fade-up delay-200 text-[#A1A1AA] mt-2 max-w-2xl">{{ category.description }}</p>
+            <p class="animate-fade-up delay-200 text-stone-500 max-w-2xl">{{ category.description }}</p>
+            <div class="animate-fade-up delay-300 flex flex-wrap items-center gap-3 mt-4">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-stone-100 border border-stone-200 text-stone-600 text-sm font-medium">
+                <UIcon name="i-heroicons-user-group" class="w-4 h-4" />
+                {{ categoryProviders.length }} {{ $t('categories.providers') }}
+              </span>
+              <NuxtLink
+                :to="localePath(`/cerere-noua?category=${category.slug}`)"
+                class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-600 text-white text-sm font-semibold hover:bg-orange-700 transition-colors"
+              >
+                {{ $t('categories.requestInCategory') }}
+                <UIcon name="i-heroicons-arrow-right" class="w-3.5 h-3.5" />
+              </NuxtLink>
+            </div>
           </div>
         </div>
-        <span class="animate-fade-up delay-300 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.06] text-[#A1A1AA] text-sm font-medium mt-4">
-          <UIcon name="i-heroicons-user-group" class="w-4 h-4" />
-          {{ categoryProviders.length }} {{ $t('categories.providers') || 'mesteri' }}
-        </span>
       </div>
     </section>
 
     <!-- Providers grid -->
-    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-      <div v-if="categoryProviders.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+      <div v-if="categoryProviders.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         <div
           v-for="(provider, i) in categoryProviders"
           :key="provider.id"
           class="animate-fade-up"
-          :style="{ animationDelay: `${i * 0.06}s` }"
+          :style="{ animationDelay: `${Math.min(i * 0.06, 0.4)}s` }"
         >
           <ProvidersProviderCard :provider="provider" />
         </div>
@@ -54,22 +64,25 @@ import { providers } from '~/data/providers'
 
 const { t } = useI18n()
 const route = useRoute()
+const localePath = useLocalePath()
 
 const category = categories.find(c => c.slug === route.params.slug)
 
 if (!category) {
-  navigateTo('/servicii', { replace: true })
+  navigateTo(localePath('/servicii'), { replace: true })
 }
 
 useHead({ title: category ? `${category.name} — mesteri.md` : '' })
 
 const categoryProviders = computed(() =>
-  providers.filter(p => p.categories.includes(route.params.slug as string))
+  providers
+    .filter(p => p.categories.includes(route.params.slug as string))
+    .sort((a, b) => b.rating - a.rating)
 )
 
 const breadcrumbs = computed(() => [
-  { label: t('breadcrumb.home'), to: '/' },
-  { label: t('breadcrumb.services'), to: '/servicii' },
+  { label: t('breadcrumb.home'), to: localePath('/') },
+  { label: t('breadcrumb.services'), to: localePath('/servicii') },
   { label: category?.name || '' }
 ])
 </script>

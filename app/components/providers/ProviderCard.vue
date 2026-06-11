@@ -1,59 +1,50 @@
 <template>
   <NuxtLink
-    :to="`/mesteri/${provider.id}`"
-    class="group block rounded-xl bg-[#141416] border border-white/[0.06] hover:border-white/[0.12] overflow-hidden transition-all duration-150"
+    :to="localePath(`/mesteri/${provider.id}`)"
+    class="group relative block h-full rounded-2xl bg-white border border-stone-200 hover:border-orange-200 hover:shadow-lg hover:shadow-stone-900/5 p-5 transition-all duration-200 hover:-translate-y-0.5"
   >
-    <!-- Header with accent gradient -->
-    <div class="relative h-16 bg-gradient-to-r from-[#0D9373]/20 to-[#0D9373]/5">
-      <!-- Favorite button -->
-      <div class="absolute top-3 right-3 z-10">
-        <SharedFavoriteButton :provider-id="provider.id" />
+    <!-- Favorite button -->
+    <div class="absolute top-4 right-4 z-10">
+      <SharedFavoriteButton :provider-id="provider.id" />
+    </div>
+
+    <!-- Avatar + identity -->
+    <div class="flex items-start gap-4 mb-4">
+      <img
+        :src="provider.avatar"
+        :alt="provider.name"
+        class="w-14 h-14 rounded-2xl object-cover ring-1 ring-stone-200"
+        loading="lazy"
+      />
+      <div class="min-w-0 pr-8">
+        <h3 class="font-display font-semibold text-stone-900 truncate group-hover:text-orange-700 transition-colors">
+          {{ provider.name }}
+        </h3>
+        <p class="text-sm text-stone-500 truncate">{{ provider.specialty }}</p>
+        <div class="flex items-center gap-1 mt-1.5 text-sm">
+          <UIcon name="i-heroicons-star-solid" class="w-4 h-4 text-amber-400" />
+          <span class="font-semibold text-stone-900">{{ provider.rating.toFixed(1) }}</span>
+          <span class="text-stone-400">({{ provider.reviewCount }})</span>
+        </div>
       </div>
     </div>
 
-    <div class="relative px-5 pb-5">
-      <!-- Avatar overlapping header -->
-      <div class="-mt-7 mb-3">
-        <img
-          :src="provider.avatar"
-          :alt="provider.name"
-          class="w-14 h-14 rounded-xl object-cover ring-2 ring-[#141416]"
-        />
-      </div>
+    <!-- Meta row -->
+    <div class="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm text-stone-500 mb-4">
+      <span class="flex items-center gap-1">
+        <UIcon name="i-heroicons-map-pin" class="w-4 h-4 text-stone-400" />
+        {{ provider.city }}
+      </span>
+      <span class="flex items-center gap-1">
+        <UIcon name="i-heroicons-briefcase" class="w-4 h-4 text-stone-400" />
+        {{ provider.completedJobs }} {{ $t('provider.jobs') }}
+      </span>
+    </div>
 
-      <!-- Name & specialty -->
-      <div class="flex items-start justify-between gap-2 mb-2">
-        <div class="min-w-0">
-          <div class="flex items-center gap-2">
-            <h3 class="font-semibold text-white truncate group-hover:text-[#2AB673] transition-colors duration-150">{{ provider.name }}</h3>
-            <SharedVerifiedBadge v-if="provider.verified" />
-          </div>
-          <p class="text-sm text-[#A1A1AA] truncate">{{ provider.specialty }}</p>
-        </div>
-      </div>
-
-      <!-- Rating & Location -->
-      <div class="flex items-center gap-4 text-sm text-[#A1A1AA] mb-4">
-        <div class="flex items-center gap-1">
-          <UIcon name="i-heroicons-star-solid" class="w-4 h-4 text-amber-400" />
-          <span class="font-semibold text-white">{{ provider.rating.toFixed(1) }}</span>
-          <span class="text-[#63636E]">({{ provider.reviewCount }})</span>
-        </div>
-        <div class="flex items-center gap-1 text-[#63636E]">
-          <UIcon name="i-heroicons-map-pin" class="w-3.5 h-3.5" />
-          {{ provider.city }}
-        </div>
-      </div>
-
-      <!-- Tags -->
-      <div class="flex items-center gap-2">
-        <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-white/[0.04] text-xs font-medium text-[#A1A1AA]">
-          {{ provider.completedJobs }} {{ $t('provider.jobs') || 'lucrari' }}
-        </span>
-        <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-[#0D9373]/10 text-xs font-medium text-[#2AB673]">
-          {{ provider.priceRange }}
-        </span>
-      </div>
+    <!-- Footer -->
+    <div class="flex items-center justify-between pt-4 border-t border-stone-100">
+      <span class="text-sm font-semibold text-stone-900">{{ provider.priceRange }}</span>
+      <SharedVerifiedBadge v-if="provider.verified" />
     </div>
   </NuxtLink>
 </template>
@@ -64,4 +55,6 @@ import type { Provider } from '~/data/providers'
 defineProps<{
   provider: Provider
 }>()
+
+const localePath = useLocalePath()
 </script>

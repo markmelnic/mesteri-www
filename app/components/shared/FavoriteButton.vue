@@ -1,11 +1,15 @@
 <template>
-  <UButton
-    :icon="isFav ? 'i-heroicons-heart-solid' : 'i-heroicons-heart'"
-    :color="isFav ? 'red' : 'neutral'"
-    :variant="isFav ? 'soft' : 'ghost'"
-    size="sm"
+  <button
+    type="button"
+    class="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-150 border"
+    :class="isFav
+      ? 'bg-red-50 border-red-200 text-red-500'
+      : 'bg-white/90 backdrop-blur border-stone-200 text-stone-400 hover:text-red-500 hover:border-red-200'"
+    :aria-label="isFav ? $t('favorites.removed') : $t('favorites.added')"
     @click.prevent.stop="toggle"
-  />
+  >
+    <UIcon :name="isFav ? 'i-heroicons-heart-solid' : 'i-heroicons-heart'" class="w-4.5 h-4.5" />
+  </button>
 </template>
 
 <script setup lang="ts">
